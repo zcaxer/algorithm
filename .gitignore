@@ -2,7 +2,6 @@ x64/
 debug/
 .idea/
 .vscode/
-*.vcxproj*
 .vs/
 .vscode/
 .idea/
