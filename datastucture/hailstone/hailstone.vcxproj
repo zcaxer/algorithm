@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{4ff12206-ae87-472d-8883-df90b3cc1986}</ProjectGuid>
-    <RootNamespace>dataStructure</RootNamespace>
+    <ProjectGuid>{044617c2-41f4-4b70-a17f-5d1995057148}</ProjectGuid>
+    <RootNamespace>hailstone</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="dataStructure.cpp" />
+    <ClCompile Include="hailstone.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

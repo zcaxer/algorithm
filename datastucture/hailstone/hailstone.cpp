@@ -1,4 +1,4 @@
-// dataStructure.cpp : This file contains the 'main' function. Program execution begins and ends there.
+﻿// dataStructure.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
 #include <iostream>
@@ -16,20 +16,20 @@ int haliston(int n) {
 	return i;
 }
 
-int main(int argc,char *argv[])
-{	
+int main(int argc, char* argv[])
+{
 	clock_t start, end;
 	start = clock();
 	vector<int> v(100);
 	for (int i = 1; i < 10000; i++)
-	{	
+	{
 		int j = haliston(i);
 		v.push_back(j);
 		std::cout << j << ",";
-		
+
 	}
 	end = clock();
-	cout <<"coast:" << end - start;
+	cout << "coast:" << end - start;
 }
 
 
