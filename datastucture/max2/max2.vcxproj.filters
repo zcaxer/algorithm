@@ -18,8 +18,13 @@
     <ClCompile Include="max2.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="max2_1.cpp">
+    <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="max2.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

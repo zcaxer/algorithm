@@ -139,8 +139,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="max2.cpp" />
-    <ClCompile Include="max2_1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="max2.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
