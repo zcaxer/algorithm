@@ -26,7 +26,7 @@ void max2_0(int list[],int lo,int hi,int & x1,int & x2) {
 			if (list[x2] < list[i]) x2 = i;			
 		}
 	}
-	cout <<"max2_0:" << l<<'\n';
+	cout <<"max2_0比较次数:" << l<<'\n';
 }
 /*一次遍历得到list中区间[lo,hi)中的最大值点x1和x2，要求hi-lo>2
 * 复杂度最优Θ(1+n-2)，最差Θ[1+2(n-2)]=Θ(2n-3)
@@ -42,12 +42,13 @@ void max2_1(int list[], int lo, int hi, int& x1, int& x2) {
 			if (list[x1] < list[x2 = i])swap(x1, x2);
 		}
 	}
-	cout << "max2_1:" << l<<'\n';
+	cout << "max2_1:比较次数" << l<<'\n';
 }
 
 
 /*二分法得到list中区间[lo,hi)中的最大值点x1和x2，要求hi-lo>2
-* 复杂度最优Θ(1+n-2)，最差Θ[1+2(n-2)]=Θ(2n-3)
+* 复杂度最优Θ(3/2n-2)，最差Θ[2/3n-2+1/6n]=Θ(5/3n-3)
+* 精确比较次数为{2^FLOOR.MATH(LOG(n,2)-1)-ABS(n-3*2^FLOOR.MATH(LOG(n,2)-1)))/6+3/2*n-2}
 */
 void max2_2(int list[], int lo, int hi, int& x1, int& x2,int& l) {
 	if (hi - lo == 2) {
@@ -57,10 +58,10 @@ void max2_2(int list[], int lo, int hi, int& x1, int& x2,int& l) {
 	}
 	else if (hi-lo==3)
 	{
-		l += 3;
+		l += 2;
 		if (list[x1 = lo] < list[x2 = lo + 1])swap(x1, x2);
 		if (list[x2] < list[lo + 2]) {
-			x2 = lo + 2;
+			x2 = lo + 2; l++;
 			if (list[x1] < list[x2])swap(x1, x2);
 		}
 		return;
