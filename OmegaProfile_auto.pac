@@ -1,7185 +1,5931 @@
-var FindProxyForURL = function(init, profiles) {
-    return function(url, host) {
-        "use strict";
-        var result = init, scheme = url.substr(0, url.indexOf(":"));
-        do {
-            result = profiles[result];
-            if (typeof result === "function") result = result(url, host, scheme);
-        } while (typeof result !== "string" || result.charCodeAt(0) === 43);
-        return result;
-    };
-}("+auto", {
-    "+auto": function(url, host, scheme) {
-        "use strict";
-        if (/(?:^|\.)googlevideo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ytimg\.com$/.test(host)) return "+ss";
-        return "+__ruleListOf_auto";
-    },
-    "+__ruleListOf_auto": function(url, host, scheme) {
-        "use strict";
-        if (/(?:^|\.)cn\.noxinfluencer\.com$/.test(host)) return "DIRECT";
-        if (/^http:\/\/blog\.ontrac\.com/.test(url)) return "DIRECT";
-        if (/^http:\/\/store\.sprite\.org/.test(url)) return "DIRECT";
-        if (/^http:\/\/xx\.wwwhost\.biz/.test(url)) return "DIRECT";
-        if (/(?:^|\.)v6\.facebook\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ip6\.static\.sl-reverse\.com$/.test(host)) return "DIRECT";
-        if (/^https:\/\/www\.ampproject\.org/.test(url)) return "DIRECT";
-        if (/^https:\/\/cdn\.ampproject\.org/.test(url)) return "DIRECT";
-        if (/(?:^|\.)redirector\.gvt1\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)aftygh\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)aide\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)tpde\.aide\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)arte\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)chukuang\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)cwb\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)cycab\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)dbnsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)df\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)eastcoast-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)erv-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)grb\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)gysd\.nyc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)hchcc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)hsinchu-cc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)iner\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)klsio\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)kmseh\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)lungtanhr\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)maolin-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)matsu-news\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)matsu-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)matsucc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)moe\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)mvdis\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nankan\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ncree\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)necoast-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)siraya-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)cromotc\.nat\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)tax\.nat\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)necoast-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ner\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nmmba\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nmp\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nmvttc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)northguan-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)npm\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nstm\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ntdmh\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ntl\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ntsec\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ntuh\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)nvri\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)penghu-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)post\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)siraya-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)stdtime\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)sunmoonlake\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)taitung-house\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)taoyuan\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)tphcc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)trimt-nsa\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)vghtpe\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)vghks\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)vghtc\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)wanfang\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)yatsen\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)yda\.gov\.tw$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)bianlei\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)jpush\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)www\.exblog\.jp$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)site\.locql\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)download\.syniumsoftware\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)haygo\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)hiwifi\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)myvlog\.im\.tv$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)music\.jwmusic\.org$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)www\.kodingen\.com$/.test(host)) return "DIRECT";
-        if (/^https:\/\/www\.lightnovel\.cn/.test(url)) return "DIRECT";
-        if (/(?:^|\.)openwrt\.org\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)simplecd\.me$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)static\.soup\.io$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)www\.typepad\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)static\.typepad\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)vpser\.net$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)wallproxy\.com\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)aliyun\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)baidu\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)chinaso\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)chinaz\.com$/.test(host)) return "DIRECT";
-        if (/^http:\/\/nrch\.culture\.tw\//.test(url)) return "DIRECT";
-        if (/(?:^|\.)adservice\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)dl\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)kh\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm0\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm1\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm2\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm3\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khmdb\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)tools\.google\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)clientservices\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)fonts\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm0\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm1\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm2\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khm3\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)khmdb\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)storage\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)translate\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)update\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)safebrowsing\.googleapis\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)cn\.gravatar\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)connectivitycheck\.gstatic\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)csi\.gstatic\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)fonts\.gstatic\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ssl\.gstatic\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)haosou\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)ip\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)jike\.com$/.test(host)) return "DIRECT";
-        if (/^http:\/\/translate\.google\.cn/.test(url)) return "DIRECT";
-        if (/^http:\/\/www\.google\.cn\/maps/.test(url)) return "DIRECT";
-        if (/(?:^|\.)http2\.golang\.org$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)gov\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)qq\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)sina\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)sina\.com\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)sogou\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)so\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)soso\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)uluai\.com\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)weibo\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)yahoo\.cn$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)youdao\.com$/.test(host)) return "DIRECT";
-        if (/(?:^|\.)zhongsou\.com$/.test(host)) return "DIRECT";
-        if (/^http:\/\/ime\.baidu\.jp/.test(url)) return "DIRECT";
-        if (/^http:\/\/85\.17\.73\.31\//.test(url)) return "+ss";
-        if (/(?:^|\.)afreecatv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)agnesb\.fr$/.test(host)) return "+ss";
-        if (/(?:^|\.)akiba-web\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)altrec\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)angela-merkel\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)angola\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)apartmentratings\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)apartments\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)arena\.taipei$/.test(host)) return "+ss";
-        if (/(?:^|\.)asianspiss\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)assimp\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)athenaeizou\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)azubu\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)bankmobilevibe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)banorte\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)beeg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)global\.bing\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)booktopia\.com\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)boysmaster\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bynet\.co\.il$/.test(host)) return "+ss";
-        if (/(?:^|\.)carfax\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".casinobellini.com") >= 0) return "+ss";
-        if (/(?:^|\.)casinobellini\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)centauro\.com\.br$/.test(host)) return "+ss";
-        if (/(?:^|\.)chobit\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)clearsurance\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)images\.comico\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)static\.comico\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)counter\.social$/.test(host)) return "+ss";
-        if (/(?:^|\.)costco\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)crossfire\.co\.kr$/.test(host)) return "+ss";
-        if (/(?:^|\.)crunchyroll\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)d2pass\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)darpa\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)dawangidc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)deezer\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)desipro\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)dingchin\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)discord\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)discord\.gg$/.test(host)) return "+ss";
-        if (/(?:^|\.)discordapp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)discordapp\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)dish\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/img\.dlsite\.jp\//.test(url)) return "+ss";
-        if (/(?:^|\.)dm530\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("share.dmhy.org") >= 0) return "+ss";
-        if (/(?:^|\.)dmhy\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)dmm\.co\.jp$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.dmm\.com\/netgame/.test(url)) return "+ss";
-        if (/(?:^|\.)dnvod\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)dubox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dvdpac\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)eesti\.ee$/.test(host)) return "+ss";
-        if (/(?:^|\.)esurance\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".expekt.com") >= 0) return "+ss";
-        if (/(?:^|\.)expekt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".extmatrix.com") >= 0) return "+ss";
-        if (/(?:^|\.)extmatrix\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fakku\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)fastpic\.ru$/.test(host)) return "+ss";
-        if (/(?:^|\.)filesor\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)financetwitter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)flipboard\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)flitto\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fnac\.be$/.test(host)) return "+ss";
-        if (/(?:^|\.)fnac\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)funkyimg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fxnetworks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)g-area\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)gettyimages\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)getuploader\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ghidra-sre\.org$/.test(host)) return "+ss";
-        if (/^https:\/\/raw\.githubusercontent\.com\/programthink\/zhao/.test(url)) return "+ss";
-        if (/(?:^|\.)glass8\.eu$/.test(host)) return "+ss";
-        if (/(?:^|\.)glype\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)go141\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)guo\.media$/.test(host)) return "+ss";
-        if (/(?:^|\.)hautelook\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hautelookcdn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wego\.here\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gamer-cds\.cdn\.hinet\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)gamer2-cds\.cdn\.hinet\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)hmvdigital\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)hmvdigital\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)homedepot\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hoovers\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hulu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)huluim\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/secure\.hustler\.com/.test(url)) return "+ss";
-        if (/^http:\/\/hustlercash\.com/.test(url)) return "+ss";
-        if (/^http:\/\/www\.hustlercash\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)hybrid-analysis\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn.*\.i-scmp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ilbe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ilovelongtoes\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/imgmega\.com\/.*\.gif\.html/.test(url)) return "+ss";
-        if (/^http:\/\/imgmega\.com\/.*\.jpg\.html/.test(url)) return "+ss";
-        if (/^http:\/\/imgmega\.com\/.*\.jpeg\.html/.test(url)) return "+ss";
-        if (/^http:\/\/imgmega\.com\/.*\.png\.html/.test(url)) return "+ss";
-        if (/(?:^|\.)imlive\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tw\.iqiyi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)javhub\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)javhuge\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javlibrary.com") >= 0) return "+ss";
-        if (/(?:^|\.)javlibrary\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jcpenney\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jims\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)tv\.jtbc\.joins\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jukujo-club\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)juliepost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kawaiikawaii\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)kendatire\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)khatrimaza\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)kkbox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)leisurepro\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lifemiles\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)longtoes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lovetvshow\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.m-sport\.co\.uk/.test(url)) return "+ss";
-        if (/(?:^|\.)macgamestore\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)madonna-av\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mangafox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mangafox\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)manta\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)matome-plus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)matome-plus\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)mattwilcox\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)metarthunter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mfxmedia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mojim\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kb\.monitorware\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)monster\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)moodyz\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)moonbingo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mos\.ru$/.test(host)) return "+ss";
-        if (/(?:^|\.)msha\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)muzu\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)mvg\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mybet.com") >= 0) return "+ss";
-        if (/(?:^|\.)mybet\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nationwide\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.nbc\.com\/live/.test(url)) return "+ss";
-        if (/(?:^|\.)neo-miracle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)netflix\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)netflix\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nflximg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nflximg\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nflxext\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nflxso\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nflxvideo\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nic\.gov$/.test(host)) return "+ss";
-        if (/^http:\/\/mo\.nightlife141\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)purpose\.nike\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)noxinfluencer\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nordstrom\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nordstromimage\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nordstromrack\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nottinghampost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)npsboost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntdtv\.cz$/.test(host)) return "+ss";
-        if (/(?:^|\.)s1\.nudezz\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nusatrip\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nuuvem\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)omni7\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)onapp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ontrac\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pandora\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pandora.tv") >= 0) return "+ss";
-        if (/(?:^|\.)parkansky\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)phmsociety\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/.*\.pimg\.tw\//.test(url)) return "+ss";
-        if (/(?:^|\.)pure18\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pytorch\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)qq\.co\.za$/.test(host)) return "+ss";
-        if (/(?:^|\.)r18\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/radiko\.jp/.test(url)) return "+ss";
-        if (/(?:^|\.)ramcity\.com\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)rateyourmusic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rd\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rdio\.com$/.test(host)) return "+ss";
-        if (/^https:\/\/riseup\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)sadistic-v\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)isc\.sans\.edu$/.test(host)) return "+ss";
-        if (/^http:\/\/cdn.*\.search\.xxx\//.test(url)) return "+ss";
-        if (/(?:^|\.)shiksha\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)slacker\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sm-miracle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)softnology\.biz$/.test(host)) return "+ss";
-        if (/(?:^|\.)soylentnews\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)spotify\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)spreadshirt\.es$/.test(host)) return "+ss";
-        if (/(?:^|\.)springboardplatform\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sprite\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)superokayama\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)superpages\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)swagbucks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)switch1\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)tapanwap\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gsp\.target\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)login\.target\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rcam\.target\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)technews\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)thinkgeek\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)thebodyshop-usa\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tma\.co\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)tracfone\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tryheart\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)turntable\.fm$/.test(host)) return "+ss";
-        if (/(?:^|\.)twerkingbutt\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ulop\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)uukanshu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vegasred\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vevo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vip-enterprise\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/viu\.tv\/ch\//.test(url)) return "+ss";
-        if (/^http:\/\/viu\.tv\/encore\//.test(url)) return "+ss";
-        if (/(?:^|\.)vmpsoft\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/ecsm\.vs\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)wanz-factory\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ssl\.webpack\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)wheretowatch\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wingamestore\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wizcrafts\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)vod\.wwe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xfinity\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youwin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ytn\.co\.kr$/.test(host)) return "+ss";
-        if (/(?:^|\.)zattoo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zim\.vn$/.test(host)) return "+ss";
-        if (/(?:^|\.)zozotown\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("14.102.250.18") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("14.102.250.19") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("50.7.31.230:8898") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("174.142.105.153") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("69.65.19.160") >= 0) return "+ss";
-        if (/(?:^|\.)xn--4gq171p\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xn--czq75pvv1aj5c\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)xn--i2ru8q2qg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xn--oiq\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)xn--p8j9a0d9c9a\.xn--q9jyb4c$/.test(host)) return "+ss";
-        if (/(?:^|\.)abebooks\.com$/.test(host)) return "+ss";
-        if (/^https:\/\/.*\.s3\.amazonaws\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)s3-ap-southeast-2\.amazonaws\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)43110\.cf$/.test(host)) return "+ss";
-        if (/(?:^|\.)9cache\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)9gag\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)agro\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)share\.america\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)apkmirror\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)arte\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)artstation\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bangdream\.space$/.test(host)) return "+ss";
-        if (/(?:^|\.)behance\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)bird\.so$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitterwinter\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)bnn\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)businessinsider\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)boomssr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bwgyhw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)castbox\.fm$/.test(host)) return "+ss";
-        if (/(?:^|\.)chinatimes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)clyp\.it$/.test(host)) return "+ss";
-        if (/(?:^|\.)cmcn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cmx\.im$/.test(host)) return "+ss";
-        if (/(?:^|\.)dailyview\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)daum\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)depositphotos\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)disconnect\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)documentingreality\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)doubibackup\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)doubmirror\.cf$/.test(host)) return "+ss";
-        if (/(?:^|\.)encyclopedia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fangeqiang\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fanqiangdang\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)feedly\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)feedx\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)flyzy2005\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)foreignpolicy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)free-ss\.site$/.test(host)) return "+ss";
-        if (/(?:^|\.)freehongkong\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.fuckgfw233\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)g0v\.social$/.test(host)) return "+ss";
-        if (/(?:^|\.)globalvoices\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)glorystar\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)goregrish\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)guangnianvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hanime\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)hbo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)spaces\.hightail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkgalden\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkgolden\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hudson\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ipfs\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)japantimes\.co\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)jiji\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jintian\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)jinx\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)joinmastodon\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)liangzhichuanmei\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lighti\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)lightyearvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lihkg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)line-scdn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)i\.lithium\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cloud\.mail\.ru$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn-images\.mailchimp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mastodon\.cloud$/.test(host)) return "+ss";
-        if (/(?:^|\.)mastodon\.host$/.test(host)) return "+ss";
-        if (/(?:^|\.)mastodon\.social$/.test(host)) return "+ss";
-        if (/(?:^|\.)mastodon\.xyz$/.test(host)) return "+ss";
-        if (/(?:^|\.)matters\.news$/.test(host)) return "+ss";
-        if (/(?:^|\.)me\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)metart\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mohu\.club$/.test(host)) return "+ss";
-        if (/(?:^|\.)mohu\.ml$/.test(host)) return "+ss";
-        if (/(?:^|\.)motiyun\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)msa-it\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)dictionary\.goo\.ne\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)go\.nesnode\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)international-news\.newsmagazine\.asia$/.test(host)) return "+ss";
-        if (/(?:^|\.)nikkei\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nitter\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)nitter\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)niu\.moe$/.test(host)) return "+ss";
-        if (/(?:^|\.)nofile\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)now\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)openvpn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)onejav\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)paste\.ee$/.test(host)) return "+ss";
-        if (/(?:^|\.)my\.pcloud\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)picacomic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pincong\.rocks$/.test(host)) return "+ss";
-        if (/(?:^|\.)pixiv\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)potato\.im$/.test(host)) return "+ss";
-        if (/(?:^|\.)premproxy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)prism-break\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)protonvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)api\.pureapk\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)quora\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)quoracdn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)qz\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn\.seatguru\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)secure\.raxcdn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)redd\.it$/.test(host)) return "+ss";
-        if (/(?:^|\.)reddit\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".redditlist.com") >= 0) return "+ss";
-        if (/^http:\/\/redditlist\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)redditmedia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)redditstatic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rixcloud\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rixcloud\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)rsdlmonitor\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)shadowsocks\.be$/.test(host)) return "+ss";
-        if (/(?:^|\.)shadowsocks9\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tn1\.shemalez\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tn2\.shemalez\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tn3\.shemalez\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)static\.shemalez\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)six-degrees\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)softfamous\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)softsmirror\.cf$/.test(host)) return "+ss";
-        if (/(?:^|\.)sosreader\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sspanel\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)sulian\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)supchina\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)teddysun\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)textnow\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)tineye\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)top10vpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tubepornclassic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)uku\.im$/.test(host)) return "+ss";
-        if (/(?:^|\.)unseen\.is$/.test(host)) return "+ss";
-        if (/(?:^|\.)cn\.uptodown\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)uraban\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)vrsmash\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vultryhw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)scache\.vzw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)scache1\.vzw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)scache2\.vzw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ss7\.vzw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ssr\.tools$/.test(host)) return "+ss";
-        if (/(?:^|\.)steemit\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)taiwanjustice\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)tinc-vpn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)u15\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)washingtonpost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wenzhao\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)whatsonweibo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wire\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.workflow\.is$/.test(host)) return "+ss";
-        if (/(?:^|\.)xm\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xuehua\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)yes-news\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yigeni\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)you-get\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)zzcloud\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)aex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)allcoin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)adcex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bcex\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)bibox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)big\.one$/.test(host)) return "+ss";
-        if (/(?:^|\.)bigone\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)binance\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bit-z\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitz\.ai$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitbay\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitcoinworld\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitfinex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bithumb\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitinka\.com\.ar$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitmex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)btc98\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)btcbank\.bank$/.test(host)) return "+ss";
-        if (/(?:^|\.)btctrade\.im$/.test(host)) return "+ss";
-        if (/(?:^|\.)c2cx\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chaoex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cobinhood\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coin2co\.in$/.test(host)) return "+ss";
-        if (/(?:^|\.)coinbene\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".coinegg.com") >= 0) return "+ss";
-        if (/(?:^|\.)coinegg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coinex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coingi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coinrail\.co\.kr$/.test(host)) return "+ss";
-        if (/(?:^|\.)cointiger\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cointobe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coinut\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)discoins\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dragonex\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)ebtcbank\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)etherdelta\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)etherscan\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)exmo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)exrates\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)exx\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fatbtc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gate\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)gatecoin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hbg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hitbtc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobi\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobi\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobi\.pro$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobi\.sc$/.test(host)) return "+ss";
-        if (/(?:^|\.)huobipro\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bx\.in\.th$/.test(host)) return "+ss";
-        if (/(?:^|\.)jex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kspcoin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kucoin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lbank\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)livecoin\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)localbitcoins\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mercatox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)oex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)okex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)otcbtc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)paxful\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rightbtc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)topbtc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xbtce\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yobit\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)zb\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)read01\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kknews\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("china-mmm.jp.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsxszzg.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".china-mmm.net") >= 0) return "+ss";
-        if (/(?:^|\.)china-mmm\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("china-mmm.sa.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".allowed.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".now.im") >= 0) return "+ss";
-        if (/(?:^|\.)amazon\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".amazon.com/Dalai-Lama") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("amazon.com/Prisoner-State-Secret-Journal-Premier") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("s3-ap-northeast-1.amazonaws.com") >= 0) return "+ss";
-        if (/(?:^|\.)aolchannels\.aol\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("video.aol.ca/video-detail") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("video.aol.co.uk/video-detail") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("video.aol.com") >= 0) return "+ss";
-        if (/(?:^|\.)video\.aol\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)search\.aol\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("www.aolnews.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".avmo.pw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".avmoo.com") >= 0) return "+ss";
-        if (/^http:\/\/avmoo\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avmoo.net") >= 0) return "+ss";
-        if (/^http:\/\/avmoo\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)avmoo\.pw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javmoo.xyz") >= 0) return "+ss";
-        if (/^http:\/\/javmoo\.xyz/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javtag.com") >= 0) return "+ss";
-        if (/^http:\/\/javtag\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javzoo.com") >= 0) return "+ss";
-        if (/^http:\/\/javzoo\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tellme.pw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbc.com") >= 0) return "+ss";
-        if (/(?:^|\.)bbc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbc.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)bbc\.co\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)bbci\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbcchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)bbcchinese\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/bbc\.in/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bloomberg.cn") >= 0) return "+ss";
-        if (/(?:^|\.)bloomberg\.cn$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bloomberg.com") >= 0) return "+ss";
-        if (/(?:^|\.)bloomberg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bloomberg.de") >= 0) return "+ss";
-        if (/(?:^|\.)bloomberg\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)bloombergview\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessweek.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1dumb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".25u.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".2waky.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".3-a.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".4dq.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".4mydomain.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".4pu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".acmetoy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".almostmy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".americanunfinished.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".authorizeddns.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".authorizeddns.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".authorizeddns.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bigmoney.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".changeip.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".changeip.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".changeip.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cleansite.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cleansite.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cleansite.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".compress.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.me.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.mobi") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.ms") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dhcp.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns-dns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns-stuff.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns04.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns05.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns1.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dns2.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dnset.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dnsrd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dsmtp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dumb1.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynamic-dns.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynamicdns.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynamicdns.co.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynamicdns.me.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynamicdns.org.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dyndns.pro") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynssl.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".edns.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".epac.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".esmtp.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ezua.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".faqserv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fartit.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeddns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freetcp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freewww.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freewww.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ftp1.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ftpserver.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gettrials.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".got-game.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gr8domain.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gr8name.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".https443.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".https443.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ikwb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".instanthq.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".iownyour.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".iownyour.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".isasecret.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".itemdb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".itsaol.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jetos.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jkub.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jungleheart.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".justdied.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lflink.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lflinkup.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lflinkup.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lflinkup.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".longmusic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mefound.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".moneyhome.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mrbasic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mrbonus.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mrface.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mrslove.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".my03.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mydad.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myddns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myftp.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myftp.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mylftv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mymom.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mynetav.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mynetav.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mynumber.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mypicture.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mypop3.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mypop3.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mysecondarydns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mywww.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myz.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ninth.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns01.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns01.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns01.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns02.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns02.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns02.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns1.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns2.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ns3.name") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ocry.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onedumb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onmypc.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onmypc.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onmypc.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onmypc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onmypc.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".organiccrap.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".otzo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ourhobby.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pcanywhere.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".port25.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxydns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qhigh.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qpoe.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rebatesrule.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sellclassics.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sendsmtp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".serveuser.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".serveusers.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexidude.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexxxy.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sixth.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".squirly.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ssl443.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".toh.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".toythieves.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".trickip.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".trickip.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vizvaz.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wha.la") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wikaba.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".www1.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wwwhost.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".x24hr.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxuz.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxxy.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxxy.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ygto.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".youdontcare.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yourtrap.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zyns.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zzux.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("d1b183sg0nvnuh.cloudfront.net") >= 0) return "+ss";
-        if (/^https:\/\/d1b183sg0nvnuh\.cloudfront\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("d1c37gjwa26taa.cloudfront.net") >= 0) return "+ss";
-        if (/^https:\/\/d1c37gjwa26taa\.cloudfront\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("d3c33hcgiwev3.cloudfront.net") >= 0) return "+ss";
-        if (/^https:\/\/d3c33hcgiwev3\.cloudfront\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)d3rhr7kgmtrq1v\.cloudfront\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".3d-game.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".4irc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".b0ne.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chatnook.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".darktech.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".deaftone.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dtdns.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".effers.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".etowns.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".etowns.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".flnet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gotgeeks.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".scieron.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".slyip.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".slyip.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".suroot.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogdns.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dyndns.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dyndns-ip.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dyndns-pics.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".from-sd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".from-pr.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".is-a-hunter.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynu.com") >= 0) return "+ss";
-        if (/(?:^|\.)dynu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dynu.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeddns.org") >= 0) return "+ss";
-        if (/(?:^|\.)accountkit\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cdninstagram.com") >= 0) return "+ss";
-        if (/(?:^|\.)cdninstagram\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)f8\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.br$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".facebook.com") >= 0) return "+ss";
-        if (/(?:^|\.)facebook\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.design$/.test(host)) return "+ss";
-        if (/(?:^|\.)connect\.facebook\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.hu$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.in$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.nl$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebook\.se$/.test(host)) return "+ss";
-        if (/(?:^|\.)facebookmail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fb\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fb\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)fb\.watch$/.test(host)) return "+ss";
-        if (/(?:^|\.)fbcdn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)fbsbx\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fbaddins\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fbworkmail\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".instagram.com") >= 0) return "+ss";
-        if (/(?:^|\.)instagram\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)m\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)messenger\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)oculus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)oculuscdn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rocksdb\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)parse\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)thefacebook\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)whatsapp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)whatsapp\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)auntology\.fandom\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hongkong\.fandom\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ftchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)ftchinese\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)1e100\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)466453\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)abc\.xyz$/.test(host)) return "+ss";
-        if (/(?:^|\.)about\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)admob\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)adsense\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)advertisercommunity\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)agoogleaday\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ai\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)ampproject\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)android\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)androidify\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)androidtv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)api\.ai$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".appspot.com") >= 0) return "+ss";
-        if (/(?:^|\.)appspot\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)autodraw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)blogblog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blogspot.com") >= 0) return "+ss";
-        if (/^https?:\/\/[^\/]+blogspot\.(.*)/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogspot.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogspot.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogspot.tw") >= 0) return "+ss";
-        if (/(?:^|\.)certificate-transparency\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)chrome\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromecast\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromeenterprise\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromeexperiments\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromercise\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromestatus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chromium\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)com\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)crbug\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)creativelab5\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)crisisresponse\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)crrev\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)data-vocabulary\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)debug\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)deepmind\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)deja\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)design\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)digisfera\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dns\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)domains\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)duck\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)environment\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)feedburner\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)firebaseio\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)g\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)gcr\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)get\.app$/.test(host)) return "+ss";
-        if (/(?:^|\.)get\.dev$/.test(host)) return "+ss";
-        if (/(?:^|\.)get\.how$/.test(host)) return "+ss";
-        if (/(?:^|\.)get\.page$/.test(host)) return "+ss";
-        if (/(?:^|\.)getmdl\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)getoutline\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ggpht\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gmail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gmodules\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)godoc\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)golang\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)goo\.gl$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ae") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.as") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.am") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.at") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.az") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ba") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.be") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.bg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.cd") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ci") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.co.id") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.co.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.co.kr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.co.ma") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.co.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.de") >= 0) return "+ss";
-        if (/(?:^|\.)google\.dev$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.dj") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.dk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.es") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.fi") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.fm") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.gg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.gl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.gr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ie") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.is") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.it") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.jo") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.kz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.lv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.mn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ms") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.nl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.nu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.no") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ro") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.rw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.sc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.sh") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.sk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.sm") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.sn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.tk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.tm") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.tt") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.vu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".google.ws") >= 0) return "+ss";
-        if (/^https?:\/\/([^\/]+\.)*google\.(ac|ad|ae|af|ai|al|am|as|at|az|ba|be|bf|bg|bi|bj|bs|bt|by|ca|cat|cd|cf|cg|ch|ci|cl|cm|co.ao|co.bw|co.ck|co.cr|co.id|co.il|co.in|co.jp|co.ke|co.kr|co.ls|co.ma|com|com.af|com.ag|com.ai|com.ar|com.au|com.bd|com.bh|com.bn|com.bo|com.br|com.bz|com.co|com.cu|com.cy|com.do|com.ec|com.eg|com.et|com.fj|com.gh|com.gi|com.gt|com.hk|com.jm|com.kh|com.kw|com.lb|com.ly|com.mm|com.mt|com.mx|com.my|com.na|com.nf|com.ng|com.ni|com.np|com.om|com.pa|com.pe|com.pg|com.ph|com.pk|com.pr|com.py|com.qa|com.sa|com.sb|com.sg|com.sl|com.sv|com.tj|com.tr|com.tw|com.ua|com.uy|com.vc|com.vn|co.mz|co.nz|co.th|co.tz|co.ug|co.uk|co.uz|co.ve|co.vi|co.za|co.zm|co.zw|cv|cz|de|dj|dk|dm|dz|ee|es|eu|fi|fm|fr|ga|ge|gg|gl|gm|gp|gr|gy|hk|hn|hr|ht|hu|ie|im|iq|is|it|it.ao|je|jo|kg|ki|kz|la|li|lk|lt|lu|lv|md|me|mg|mk|ml|mn|ms|mu|mv|mw|mx|ne|nl|no|nr|nu|org|pl|pn|ps|pt|ro|rs|ru|rw|sc|se|sh|si|sk|sm|sn|so|sr|st|td|tg|tk|tl|tm|tn|to|tt|us|vg|vn|vu|ws)\/.*/.test(url)) return "+ss";
-        if (/(?:^|\.)googleapis\.cn$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleapis\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleapps\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleartproject\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleblog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlebot\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlechinawebmaster\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlecode\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlecommerce\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googledomains\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlearth\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleearth\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googledrive\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlefiber\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlegroups\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlehosted\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleideas\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleinsidesearch\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlelabs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlemail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlemashups\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlepagecreator\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleplay\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleplus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlescholar\.comUSA$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlesource\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleusercontent\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".googlevideo.com") >= 0) return "+ss";
-        if (/(?:^|\.)googlevideo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googleweblight\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)googlezip\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)groups\.google\.cn$/.test(host)) return "+ss";
-        if (/(?:^|\.)grow\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)gstatic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gvt0\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gvt1\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gvt3\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gwtproject\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)html5rocks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)iam\.soy$/.test(host)) return "+ss";
-        if (/(?:^|\.)igoogle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)itasoftware\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lers\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)like\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)madewithcode\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)material\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)nic\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)on2\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)opensource\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)panoramio\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)picasaweb\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pki\.goog$/.test(host)) return "+ss";
-        if (/(?:^|\.)plus\.codes$/.test(host)) return "+ss";
-        if (/(?:^|\.)polymer-project\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)pride\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)questvisual\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)admin\.recaptcha\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)api\.recaptcha\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)api-secure\.recaptcha\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)api-verify\.recaptcha\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)redhotlabs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)registry\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)research\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)safety\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)savethedate\.foo$/.test(host)) return "+ss";
-        if (/(?:^|\.)schema\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)shattered\.io$/.test(host)) return "+ss";
-        if (/^http:\/\/sipml5\.org\//.test(url)) return "+ss";
-        if (/(?:^|\.)stories\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)sustainability\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)synergyse\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)teachparentstech\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)tensorflow\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)tfhub\.dev$/.test(host)) return "+ss";
-        if (/(?:^|\.)thinkwithgoogle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tiltbrush\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)translate\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)tv\.google$/.test(host)) return "+ss";
-        if (/(?:^|\.)urchin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)waveprotocol\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)waymo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)web\.dev$/.test(host)) return "+ss";
-        if (/(?:^|\.)webmproject\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)webrtc\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)whatbrowser\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)widevine\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)withgoogle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)withyoutube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)x\.company$/.test(host)) return "+ss";
-        if (/(?:^|\.)xn--ngstr-lra8j\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youtu\.be$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youtube.com") >= 0) return "+ss";
-        if (/(?:^|\.)youtube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youtube-nocookie\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youtubeeducation\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youtubegaming\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youtubekids\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yt\.be$/.test(host)) return "+ss";
-        if (/(?:^|\.)ytimg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zynamics\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)naughtyamerica\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("static01.nyt.com") >= 0) return "+ss";
-        if (/(?:^|\.)nyt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("nytchina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nytcn.me") >= 0) return "+ss";
-        if (/(?:^|\.)nytcn\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)nytco\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/nyti\.ms\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nytimes.com") >= 0) return "+ss";
-        if (/(?:^|\.)nytimes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nytimg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("userapi.nytlog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.nytstyle.com") >= 0) return "+ss";
-        if (/(?:^|\.)nytstyle\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".steamcommunity.com") >= 0) return "+ss";
-        if (/(?:^|\.)steamcommunity\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/store\.steampowered\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)t\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)updates\.tdesktop\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)telegram\.dog$/.test(host)) return "+ss";
-        if (/(?:^|\.)telegram\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)telegram\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".telegramdownload.com") >= 0) return "+ss";
-        if (/(?:^|\.)telesco\.pe$/.test(host)) return "+ss";
-        if (/(?:^|\.)jtvnw\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)ttvnw\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitch\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitchcdn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)periscope\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pscp.tv") >= 0) return "+ss";
-        if (/(?:^|\.)pscp\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".t.co") >= 0) return "+ss";
-        if (/(?:^|\.)t\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweetdeck.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweetdeck\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twimg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitpic.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitpic\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitter.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitter\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)vine\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)gov\.taipei$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gov.tw") >= 0) return "+ss";
-        if (/^https:\/\/aiss\.anws\.gov\.tw/.test(url)) return "+ss";
-        if (/(?:^|\.)archives\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)tacc\.cwb\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)data\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)epa\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)fa\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)fda\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)hpa\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)immigration\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)itaiwan\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)mjib\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)moeaic\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)mofa\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)mol\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)mvdis\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)nat\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)nhi\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)npa\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)nsc\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntbk\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntbna\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntbt\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntsna\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)pcc\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)stat\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)taipei\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)taiwanjobs\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)thb\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)tipo\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)wda\.gov\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)teco-hk\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)teco-mo\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)kinmen\.org\.tw$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.americorps\.gov/.test(url)) return "+ss";
-        if (/(?:^|\.)jpl\.nasa\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)pds\.nasa\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)solarsystem\.nasa\.gov$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("iipdigital.usembassy.gov") >= 0) return "+ss";
-        if (/(?:^|\.)usfk\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)usmc\.mil$/.test(host)) return "+ss";
-        if (/^http:\/\/tarr\.uspto\.gov\//.test(url)) return "+ss";
-        if (/(?:^|\.)tsdr\.uspto\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)v2ex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.voa.mobi") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.voa.mobi") >= 0) return "+ss";
-        if (/(?:^|\.)voacambodia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voachineseblog.com") >= 0) return "+ss";
-        if (/(?:^|\.)voachineseblog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voacantonese.com") >= 0) return "+ss";
-        if (/(?:^|\.)voacantonese\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("voachinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)voachinese\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("voagd.com") >= 0) return "+ss";
-        if (/(?:^|\.)voaindonesia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voanews.com") >= 0) return "+ss";
-        if (/(?:^|\.)voanews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("voatibetan.com") >= 0) return "+ss";
-        if (/(?:^|\.)voatibetan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voatibetanenglish.com") >= 0) return "+ss";
-        if (/(?:^|\.)voatibetanenglish\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zh\.ecdm\.wikia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)evchk\.wikia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fq.wikia.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zh.pttpedia.wikia.com/wiki/%E7%BF%92%E5%8C%85%E5%AD%90%E4%B9%8B%E4%BA%82") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.uncyclopedia.wikia.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zh.uncyclopedia.wikia.com") >= 0) return "+ss";
-        if (/(?:^|\.)wikimedia\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/zh\.wikisource\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)zh\.wikiquote\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)zh\.wikinews\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ja\.wikipedia\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikipedia\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)data\.flurry\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("page.bid.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.bid.yahoo.com") >= 0) return "+ss";
-        if (/^https:\/\/tw\.bid\.yahoo\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("blogs.yahoo.co.jp") >= 0) return "+ss";
-        if (/(?:^|\.)search\.yahoo\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("buy.yahoo.com.tw/gdsale") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.knowledge.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.money.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.myblog.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.yahoo.com/china-blocks-bbc") >= 0) return "+ss";
-        if (/(?:^|\.)hk\.news\.yahoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.rd.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.search.yahoo.com/search") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.video.news.yahoo.com/video") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("meme.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.answers.yahoo.com") >= 0) return "+ss";
-        if (/^https:\/\/tw\.answers\.yahoo\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)tw\.knowledge\.yahoo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tw\.mall\.yahoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.yahoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)tw\.mobi\.yahoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.myblog.yahoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)tw\.news\.yahoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("pulse.yahoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)search\.yahoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("upcoming.yahoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("video.yahoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)yahoo\.com\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)duckduckgo-owned-server\.yahoo\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)000webhost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".030buy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".0rz.tw") >= 0) return "+ss";
-        if (/^http:\/\/0rz\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("1-apple.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)1-apple\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".10.tt") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".100ke.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1000giri.net") >= 0) return "+ss";
-        if (/(?:^|\.)1000giri\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)10beasts\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".10conditionsoflove.com") >= 0) return "+ss";
-        if (/(?:^|\.)10musume\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("123rf.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".12bet.com") >= 0) return "+ss";
-        if (/(?:^|\.)12bet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".12vpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".12vpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)12vpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)12vpn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)1337x\.to$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".138.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("141hongkong.com/forum") >= 0) return "+ss";
-        if (/(?:^|\.)141jj\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".141tube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1688.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".173ng.com") >= 0) return "+ss";
-        if (/(?:^|\.)173ng\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".177pic.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".17t17p.com") >= 0) return "+ss";
-        if (/(?:^|\.)18board\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)18board\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("18onlygirls.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".18p2p.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".18virginsex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1949er.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zhao.1984.city") >= 0) return "+ss";
-        if (/(?:^|\.)zhao\.1984\.city$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("1984bbs.com") >= 0) return "+ss";
-        if (/(?:^|\.)1984bbs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".1984bbs.org") >= 0) return "+ss";
-        if (/(?:^|\.)1984bbs\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".1991way.com") >= 0) return "+ss";
-        if (/(?:^|\.)1991way\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".1998cdp.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1bao.org") >= 0) return "+ss";
-        if (/^http:\/\/1bao\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".1eew.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".1mobile.com") >= 0) return "+ss";
-        if (/^http:\/\/.*\.1mobile\.tw/.test(url)) return "+ss";
-        if (/(?:^|\.)1pondo\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".2-hand.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".2000fun.com/bbs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".2008xianzhang.info") >= 0) return "+ss";
-        if (/(?:^|\.)2008xianzhang\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)2017\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)2047\.name$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("21andy.com/blog") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".21join.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".21pron.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("21sextury.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".228.net.tw") >= 0) return "+ss";
-        if (/(?:^|\.)233abc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)24hrs\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("24smile.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("2lipstube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".2shared.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("30boxes.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".315lz.com") >= 0) return "+ss";
-        if (/(?:^|\.)32red\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)36rain\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".3a5a.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("3arabtv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".3boys2girls.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".3proxy.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".3ren.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".3tui.net") >= 0) return "+ss";
-        if (/(?:^|\.)404museum\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)4bluestones\.biz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".4chan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".4everproxy.com") >= 0) return "+ss";
-        if (/(?:^|\.)4everproxy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)4rbtv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)4shared\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwannation.50webs.com") >= 0) return "+ss";
-        if (/(?:^|\.)51\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)51jav\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".51luoben.com") >= 0) return "+ss";
-        if (/(?:^|\.)51luoben\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".5278.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".5299.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("5aimiku.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("5i01.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".5isotoi5.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".5maodang.com") >= 0) return "+ss";
-        if (/(?:^|\.)63i\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".64museum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("64tianwang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("64wiki.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".66.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("666kb.com") >= 0) return "+ss";
-        if (/(?:^|\.)6do\.news$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".6park.com") >= 0) return "+ss";
-        if (/(?:^|\.)6park\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)6parkbbs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)6parker\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)6parknews\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)7capture\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".7cow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".8-d.com") >= 0) return "+ss";
-        if (/^http:\/\/8-d\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("85cc.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".85cc.us") >= 0) return "+ss";
-        if (/^http:\/\/85cc\.us/.test(url)) return "+ss";
-        if (/^http:\/\/85st\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".881903.com/page/zh-tw/") >= 0) return "+ss";
-        if (/(?:^|\.)881903\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".888.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".888poker.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("89.64.charter.constitutionalism.solutions") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("89-64.org") >= 0) return "+ss";
-        if (/(?:^|\.)89-64\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)8964museum\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".8news.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".8z1.net") >= 0) return "+ss";
-        if (/(?:^|\.)8z1\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".9001700.com") >= 0) return "+ss";
-        if (/^http:\/\/908taiwan\.org\//.test(url)) return "+ss";
-        if (/(?:^|\.)91porn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)91vps\.club$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".92ccav.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".991.com") >= 0) return "+ss";
-        if (/^http:\/\/991\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".99btgc01.com") >= 0) return "+ss";
-        if (/(?:^|\.)99btgc01\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".99cn.info") >= 0) return "+ss";
-        if (/^http:\/\/99cn\.info/.test(url)) return "+ss";
-        if (/(?:^|\.)9bis\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)9bis\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)9news\.com\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.a.se") >= 0) return "+ss";
-        if (/^http:\/\/tibet\.a\.se/.test(url)) return "+ss";
-        if (/(?:^|\.)a-normal-day\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("a5.com.ru") >= 0) return "+ss";
-        if (/^http:\/\/aamacau\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".abc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".abc.net.au") >= 0) return "+ss";
-        if (/(?:^|\.)abc\.net\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".abchinese.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("abclite.net") >= 0) return "+ss";
-        if (/^https:\/\/www\.abclite\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ablwang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".aboluowang.com") >= 0) return "+ss";
-        if (/(?:^|\.)aboluowang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aboutgfw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".abs.edu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".accim.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".aceros-de-hispania.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".acevpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)acevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".acg18.me") >= 0) return "+ss";
-        if (/^http:\/\/acg18\.me/.test(url)) return "+ss";
-        if (/(?:^|\.)acgbox\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)acgkj\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)acgnx\.se$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".acmedia365.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".acnw.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("actfortibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("actimes.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("activpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)activpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)aculo\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)addictedtocoffee\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)addyoutube\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".adelaidebbs.com/bbs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".adpl.org.hk") >= 0) return "+ss";
-        if (/^http:\/\/adpl\.org\.hk/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".adult-sex-games.com") >= 0) return "+ss";
-        if (/(?:^|\.)adult-sex-games\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("adultfriendfinder.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("adultkeep.net/peepshow/members/main.htm") >= 0) return "+ss";
-        if (/(?:^|\.)advanscene\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)advertfan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ae.org") >= 0) return "+ss";
-        if (/(?:^|\.)aenhancers\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)af\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".afantibbs.com") >= 0) return "+ss";
-        if (/^http:\/\/afantibbs\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)afr\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ai-kan.net") >= 0) return "+ss";
-        if (/(?:^|\.)ai-kan\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ai-wen.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".aiph.net") >= 0) return "+ss";
-        if (/(?:^|\.)aiph\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".airasia.com") >= 0) return "+ss";
-        if (/(?:^|\.)airconsole\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/download\.aircrack-ng\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".airvpn.org") >= 0) return "+ss";
-        if (/(?:^|\.)airvpn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aisex.com") >= 0) return "+ss";
-        if (/(?:^|\.)ait\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("aiweiwei.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".aiweiweiblog.com") >= 0) return "+ss";
-        if (/(?:^|\.)aiweiweiblog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)www\.ajsands\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("a248.e.akamai.net") >= 0) return "+ss";
-        if (/(?:^|\.)a248\.e\.akamai\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("rfalive1.akacast.akamaistream.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("voa-11.akacast.akamaistream.net") >= 0) return "+ss";
-        if (/(?:^|\.)abematv\.akamaized\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)linear-abematv\.akamaized\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)vod-abematv\.akamaized\.net$/.test(host)) return "+ss";
-        if (/^https:\/\/fbcdn.*\.akamaihd\.net\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("rthklive2-lh.akamaihd.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".akademiye.org/ug") >= 0) return "+ss";
-        if (/^http:\/\/akademiye\.org\/ug/.test(url)) return "+ss";
-        if (/(?:^|\.)akiba-online\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)akow\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".al-islam.com") >= 0) return "+ss";
-        if (/(?:^|\.)al-qimmah\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)alabout\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alanhou.com") >= 0) return "+ss";
-        if (/^http:\/\/alanhou\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alarab.qa") >= 0) return "+ss";
-        if (/(?:^|\.)alasbarricadas\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("alexlur.org") >= 0) return "+ss";
-        if (/(?:^|\.)alforattv\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alhayat.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".alicejapan.co.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("aliengu.com") >= 0) return "+ss";
-        if (/(?:^|\.)alive\.bar$/.test(host)) return "+ss";
-        if (/(?:^|\.)alkasir\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)all4mom\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)allconnected\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alldrawnsex.com") >= 0) return "+ss";
-        if (/(?:^|\.)alldrawnsex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".allervpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)allfinegirls\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".allgirlmassage.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("allgirlsallowed.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".allgravure.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("alliance.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".allinfa.com") >= 0) return "+ss";
-        if (/(?:^|\.)allinfa\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alljackpotscasino.com") >= 0) return "+ss";
-        if (/(?:^|\.)allmovie\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)almasdarnews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alphaporno.com") >= 0) return "+ss";
-        if (/(?:^|\.)alternate-tools\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("alternativeto.net/software") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("alvinalexander.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("alwaysdata.com") >= 0) return "+ss";
-        if (/(?:^|\.)alwaysdata\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)alwaysdata\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".alwaysvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)alwaysvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)am730\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ameblo.jp") >= 0) return "+ss";
-        if (/(?:^|\.)ameblo\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("www1.american.edu/ted/ice/tibet") >= 0) return "+ss";
-        if (/(?:^|\.)americangreencard\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)amiblockedornot\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".amigobbs.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".amitabhafoundation.us") >= 0) return "+ss";
-        if (/^http:\/\/amitabhafoundation\.us/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".amnesty.org") >= 0) return "+ss";
-        if (/(?:^|\.)amnesty\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)amnesty\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".amnesty.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".amnestyusa.org") >= 0) return "+ss";
-        if (/(?:^|\.)amnestyusa\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".amnyemachen.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".amoiist.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".amtb-taipei.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("androidplus.co/apk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".andygod.com") >= 0) return "+ss";
-        if (/^http:\/\/andygod\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("annatam.com/chinese") >= 0) return "+ss";
-        if (/(?:^|\.)anchor\.fm$/.test(host)) return "+ss";
-        if (/(?:^|\.)anchorfree\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ancsconf\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)andfaraway\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)android-x86\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("angelfire.com/hi/hayashi") >= 0) return "+ss";
-        if (/(?:^|\.)angularjs\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("animecrazy.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("aniscartujo.com") >= 0) return "+ss";
-        if (/(?:^|\.)aniscartujo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)anobii\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("anonymise.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".anonymitynetwork.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".anonymizer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".anonymouse.org") >= 0) return "+ss";
-        if (/(?:^|\.)anonymouse\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("anontext.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".anpopo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".answering-islam.org") >= 0) return "+ss";
-        if (/^http:\/\/www\.antd\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)anthonycalzadilla\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".anti1984.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("antichristendom.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".antiwave.net") >= 0) return "+ss";
-        if (/^http:\/\/antiwave\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".anyporn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".anysex.com") >= 0) return "+ss";
-        if (/^http:\/\/anysex\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ao3.org") >= 0) return "+ss";
-        if (/(?:^|\.)ao3\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)aobo\.com\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aofriend.com") >= 0) return "+ss";
-        if (/^http:\/\/aofriend\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aofriend.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".aojiao.org") >= 0) return "+ss";
-        if (/(?:^|\.)aomiwang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("video.ap.org") >= 0) return "+ss";
-        if (/(?:^|\.)apat1989\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".apetube.com") >= 0) return "+ss";
-        if (/(?:^|\.)apiary\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".apigee.com") >= 0) return "+ss";
-        if (/(?:^|\.)apigee\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)apk\.support$/.test(host)) return "+ss";
-        if (/(?:^|\.)apk-dl\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)apkcombo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".apkmonk.com/app") >= 0) return "+ss";
-        if (/(?:^|\.)apkmonk\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)apkplz\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("apkpure.com") >= 0) return "+ss";
-        if (/(?:^|\.)apkpure\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aplusvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)appbrain\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".appdownloader.net/Android") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".appledaily.com") >= 0) return "+ss";
-        if (/(?:^|\.)appledaily\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("appledaily.com.hk") >= 0) return "+ss";
-        if (/(?:^|\.)appledaily\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("appledaily.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)appledaily\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".appshopper.com") >= 0) return "+ss";
-        if (/^http:\/\/appshopper\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)appsocks\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)appsto\.re$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".aptoide.com") >= 0) return "+ss";
-        if (/(?:^|\.)aptoide\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)archives\.gov$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".archive.fo") >= 0) return "+ss";
-        if (/(?:^|\.)archive\.fo$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".archive.is") >= 0) return "+ss";
-        if (/(?:^|\.)archive\.is$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".archive.li") >= 0) return "+ss";
-        if (/(?:^|\.)archive\.li$/.test(host)) return "+ss";
-        if (/(?:^|\.)archive\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)archive\.ph$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("archive.today") >= 0) return "+ss";
-        if (/^https:\/\/archive\.today/.test(url)) return "+ss";
-        if (/(?:^|\.)archiveofourown\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)archiveofourown\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".arctosia.com") >= 0) return "+ss";
-        if (/^http:\/\/arctosia\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)areca-backup\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".arethusa.su") >= 0) return "+ss";
-        if (/(?:^|\.)arethusa\.su$/.test(host)) return "+ss";
-        if (/(?:^|\.)arlingtoncemetery\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)army\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".art4tibet1998.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("artofpeacefoundation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("artsy.net") >= 0) return "+ss";
-        if (/(?:^|\.)asacp\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("asdfg.jp/dabr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("asg.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".asia-gaming.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".asiaharvest.org") >= 0) return "+ss";
-        if (/(?:^|\.)asiaharvest\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)asianage\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)asianews\.it$/.test(host)) return "+ss";
-        if (/^http:\/\/japanfirst\.asianfreeforum\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)asiansexdiary\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)asianwomensfilm\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".asiatgp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".asiatoday.us") >= 0) return "+ss";
-        if (/(?:^|\.)askstudent\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".askynz.net") >= 0) return "+ss";
-        if (/(?:^|\.)askynz\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)aspi\.org\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)aspistrategist\.org\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)assembla\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)astrill\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)atc\.org\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".atchinese.com") >= 0) return "+ss";
-        if (/^http:\/\/atchinese\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("atgfw.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".atlaspost.com") >= 0) return "+ss";
-        if (/(?:^|\.)atlaspost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)atdmt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".atlanta168.com") >= 0) return "+ss";
-        if (/(?:^|\.)atlanta168\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".atnext.com") >= 0) return "+ss";
-        if (/(?:^|\.)atnext\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ice.audionow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".av.com") >= 0) return "+ss";
-        if (/(?:^|\.)av\.movie$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".av-e-body.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("avaaz.org") >= 0) return "+ss";
-        if (/(?:^|\.)avaaz\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avbody.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".avcity.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".avcool.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".avdb.in") >= 0) return "+ss";
-        if (/(?:^|\.)avdb\.in$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avdb.tv") >= 0) return "+ss";
-        if (/(?:^|\.)avdb\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avfantasy.com") >= 0) return "+ss";
-        if (/(?:^|\.)avg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avgle.com") >= 0) return "+ss";
-        if (/(?:^|\.)avgle\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)avidemux\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)avoision\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".avyahoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)axios\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)axureformac\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".azerbaycan.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("azerimix.com") >= 0) return "+ss";
-        if (/^http:\/\/.*boxun.*\.azurewebsites\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)boxun.*\.azurewebsites\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)b-ok\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.baby-kingdom.com") >= 0) return "+ss";
-        if (/(?:^|\.)babylonbee\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("babynet.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("backchina.com") >= 0) return "+ss";
-        if (/(?:^|\.)backchina\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".backpackers.com.tw/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("backtotiananmen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".badiucao.com") >= 0) return "+ss";
-        if (/(?:^|\.)badiucao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".badjojo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("badoo.com") >= 0) return "+ss";
-        if (/^http:\/\/.*2\.bahamut\.com\.tw/.test(url)) return "+ss";
-        if (/(?:^|\.)baidu\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".baijie.org") >= 0) return "+ss";
-        if (/^http:\/\/baijie\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)bailandaily\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)baixing\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)bakgeekhome\.tk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".banana-vpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)banana-vpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".band.us") >= 0) return "+ss";
-        if (/(?:^|\.)bandcamp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bandwagonhost.com") >= 0) return "+ss";
-        if (/(?:^|\.)bandwagonhost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bangbrosnetwork.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bangchen.net") >= 0) return "+ss";
-        if (/^http:\/\/bangchen\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)bangkokpost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bangyoulater\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bannedbook.org") >= 0) return "+ss";
-        if (/(?:^|\.)bannedbook\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bannednews.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".baramangaonline.com") >= 0) return "+ss";
-        if (/^http:\/\/baramangaonline\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".barenakedislam.com") >= 0) return "+ss";
-        if (/(?:^|\.)barnabu\.co\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)barton\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bastillepost.com") >= 0) return "+ss";
-        if (/(?:^|\.)bastillepost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bayvoice.net") >= 0) return "+ss";
-        if (/(?:^|\.)bayvoice\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dajusha.baywords.com") >= 0) return "+ss";
-        if (/(?:^|\.)bbchat\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)bb-chat\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbg.gov") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbkz.com/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbnradio.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs-tw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbsdigest.com/thread") >= 0) return "+ss";
-        if (/(?:^|\.)bbsfeed\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbsland.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbsmo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bbsone.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbtoystore.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bcast.co.nz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bcc.com.tw/board") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bcchinese.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bcmorning.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bdsmvideos.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".beaconevents.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bebo.com") >= 0) return "+ss";
-        if (/(?:^|\.)bebo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".beevpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)beevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".behindkink.com") >= 0) return "+ss";
-        if (/(?:^|\.)beijing1989\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("beijingspring.com") >= 0) return "+ss";
-        if (/(?:^|\.)beijingspring\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".beijingzx.org") >= 0) return "+ss";
-        if (/^http:\/\/beijingzx\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".belamionline.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bell.wiki") >= 0) return "+ss";
-        if (/^http:\/\/bell\.wiki/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("bemywife.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("beric.me") >= 0) return "+ss";
-        if (/(?:^|\.)berlinerbericht\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".berlintwitterwall.com") >= 0) return "+ss";
-        if (/(?:^|\.)berlintwitterwall\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".berm.co.nz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestforchina.org") >= 0) return "+ss";
-        if (/(?:^|\.)bestforchina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestgore.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestpornstardb.com") >= 0) return "+ss";
-        if (/(?:^|\.)bestvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestvpnanalysis.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestvpnserver.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestvpnservice.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bestvpnusa.com") >= 0) return "+ss";
-        if (/(?:^|\.)bet365\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".betfair.com") >= 0) return "+ss";
-        if (/(?:^|\.)betternet\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bettervpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)bettervpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bettween.com") >= 0) return "+ss";
-        if (/(?:^|\.)bettween\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)betvictor\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bewww.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".beyondfirewall.com") >= 0) return "+ss";
-        if (/(?:^|\.)bfnn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)bfsh\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bgvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)bgvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bianlei.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("biantailajiao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("biantailajiao.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".biblesforamerica.org") >= 0) return "+ss";
-        if (/^http:\/\/biblesforamerica\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bic2011.org") >= 0) return "+ss";
-        if (/(?:^|\.)biedian\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bigfools.com") >= 0) return "+ss";
-        if (/(?:^|\.)bigjapanesesex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bignews.org") >= 0) return "+ss";
-        if (/(?:^|\.)bignews\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bigsound.org") >= 0) return "+ss";
-        if (/(?:^|\.)bild\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".biliworld.com") >= 0) return "+ss";
-        if (/^http:\/\/biliworld\.com/.test(url)) return "+ss";
-        if (/^http:\/\/billypan\.com\/wiki/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".binux.me") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ai.binwang.me/couplet") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bit.do") >= 0) return "+ss";
-        if (/^http:\/\/bit\.do/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bit.ly") >= 0) return "+ss";
-        if (/^http:\/\/bit\.ly/.test(url)) return "+ss";
-        if (/(?:^|\.)bitchute\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bitcointalk\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bitshare.com") >= 0) return "+ss";
-        if (/(?:^|\.)bitshare\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bitsnoop.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bitvise.com") >= 0) return "+ss";
-        if (/(?:^|\.)bitvise\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bizhat.com") >= 0) return "+ss";
-        if (/(?:^|\.)bl-doujinsouko\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bjnewlife.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bjs.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bjzc.org") >= 0) return "+ss";
-        if (/(?:^|\.)bjzc\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blacklogic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blackvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)blackvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blewpass.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tor.blingblingsquad.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blinkx.com") >= 0) return "+ss";
-        if (/(?:^|\.)blinkx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blinw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blip.tv") >= 0) return "+ss";
-        if (/(?:^|\.)blip\.tv\/$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blockcn.com") >= 0) return "+ss";
-        if (/(?:^|\.)blockcn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blockless\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blog.jp") >= 0) return "+ss";
-        if (/^http:\/\/blog\.jp/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogcatalog.com") >= 0) return "+ss";
-        if (/(?:^|\.)blogcatalog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blogcity\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogger.com") >= 0) return "+ss";
-        if (/(?:^|\.)blogger\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blogimg.jp") >= 0) return "+ss";
-        if (/(?:^|\.)blog\.kangye\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bloglines.com") >= 0) return "+ss";
-        if (/(?:^|\.)bloglines\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bloglovin\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("rconversation.blogs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blogtd.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".blogtd.org") >= 0) return "+ss";
-        if (/^http:\/\/blogtd\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)bloodshed\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)assets\.bwbx\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)bloomfortune\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blueangellive.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bmfinn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bnews.co") >= 0) return "+ss";
-        if (/(?:^|\.)bnews\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)bnrmetal\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("boardreader.com/thread") >= 0) return "+ss";
-        if (/(?:^|\.)boardreader\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bod.asia") >= 0) return "+ss";
-        if (/^http:\/\/bod\.asia/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bodog88.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bolehvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)bolehvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bonbonme.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bonbonsex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bonfoundation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bongacams.com") >= 0) return "+ss";
-        if (/(?:^|\.)boobstagram\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)book\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bookepub.com") >= 0) return "+ss";
-        if (/(?:^|\.)books\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)botanwang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bot.nu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".bowenpress.com") >= 0) return "+ss";
-        if (/(?:^|\.)bowenpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)app\.box\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dl.box.net") >= 0) return "+ss";
-        if (/(?:^|\.)dl\.box\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".boxpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)boxpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("boxun.com") >= 0) return "+ss";
-        if (/(?:^|\.)boxun\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".boxun.tv") >= 0) return "+ss";
-        if (/(?:^|\.)boxun\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("boxunblog.com") >= 0) return "+ss";
-        if (/(?:^|\.)boxunblog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".boxunclub.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("boyangu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".boyfriendtv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".boysfood.com") >= 0) return "+ss";
-        if (/(?:^|\.)br\.st$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".brainyquote.com/quotes/authors/d/dalai_lama") >= 0) return "+ss";
-        if (/(?:^|\.)brandonhutchinson\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)braumeister\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)brave\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bravotube.net") >= 0) return "+ss";
-        if (/(?:^|\.)bravotube\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".brazzers.com") >= 0) return "+ss";
-        if (/(?:^|\.)brazzers\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".break.com") >= 0) return "+ss";
-        if (/(?:^|\.)break\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("breakgfw.com") >= 0) return "+ss";
-        if (/(?:^|\.)breakgfw\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("breaking911.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".breakingtweets.com") >= 0) return "+ss";
-        if (/(?:^|\.)breakingtweets\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)breakwall\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("briian.com/6511/freegate") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".briefdream.com/%E7%B4%A0%E6%A3%BA") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("brizzly.com") >= 0) return "+ss";
-        if (/(?:^|\.)brizzly\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)brkmd\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("broadbook.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".broadpressinc.com") >= 0) return "+ss";
-        if (/(?:^|\.)broadpressinc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.brockbbs.com") >= 0) return "+ss";
-        if (/(?:^|\.)brookings\.edu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("brucewang.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".brutaltgp.com") >= 0) return "+ss";
-        if (/(?:^|\.)brutaltgp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bt2mag.com") >= 0) return "+ss";
-        if (/(?:^|\.)bt95\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".btaia.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".btbtav.com") >= 0) return "+ss";
-        if (/^http:\/\/btdigg\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".btku.me") >= 0) return "+ss";
-        if (/(?:^|\.)btku\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)btku\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".btspread.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".btsynckeys.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".budaedu.org") >= 0) return "+ss";
-        if (/(?:^|\.)budaedu\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".buddhanet.com.tw/zfrop/tibet") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buddhistchannel.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buffered.com") >= 0) return "+ss";
-        if (/^http:\/\/buffered\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)bullguard\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bullog.org") >= 0) return "+ss";
-        if (/(?:^|\.)bullog\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".bullogger.com") >= 0) return "+ss";
-        if (/(?:^|\.)bullogger\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bunbunhk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".busayari.com") >= 0) return "+ss";
-        if (/^http:\/\/busayari\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)business-humanrights\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/bing-could-be-censoring-search-results-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/china-banks-preparing-for-debt-implosion-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/hong-kong-activists-defy-police-tear-gas-as-protests-continue-overnight-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/internet-outages-reported-in-north-korea-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/iphone-6-is-approved-for-sale-in-china-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/nfl-announcers-surface-tablets-2014") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/panama-papers") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".businessinsider.com/umbrella-man-hong-kong-2014") >= 0) return "+ss";
-        if (/^http:\/\/www\.businessinsider\.com\.au\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".businesstoday.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)businesstoday\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".busu.org/news") >= 0) return "+ss";
-        if (/^http:\/\/busu\.org\/news/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("busytrade.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buugaa.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buzzhand.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buzzhand.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".buzzorange.com") >= 0) return "+ss";
-        if (/(?:^|\.)buzzorange\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)bwh1\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bwsj.hk") >= 0) return "+ss";
-        if (/(?:^|\.)bx\.tl$/.test(host)) return "+ss";
-        if (/(?:^|\.)bypasscensorship\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)c-span\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".c-spanvideo.org") >= 0) return "+ss";
-        if (/(?:^|\.)c-spanvideo\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)c-est-simple\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".c100tibet.org") >= 0) return "+ss";
-        if (/(?:^|\.)cablegatesearch\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cachinese.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cacnw.com") >= 0) return "+ss";
-        if (/^http:\/\/cacnw\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cactusvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)cactusvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cafepress.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cahr.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".caijinglengyan.com") >= 0) return "+ss";
-        if (/(?:^|\.)caijinglengyan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".calameo.com/books") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".calgarychinese.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".calgarychinese.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".calgarychinese.net") >= 0) return "+ss";
-        if (/^http:\/\/blog\.calibre-ebook\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("falun.caltech.edu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".its.caltech.edu/~falun/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cam4.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cam4.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cam4.sg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".camfrog.com") >= 0) return "+ss";
-        if (/(?:^|\.)camfrog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)campaignforuyghurs\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cams\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cams.org.sg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("canadameet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".canalporno.com") >= 0) return "+ss";
-        if (/^http:\/\/bbs\.cantonese\.asia\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".canyu.org") >= 0) return "+ss";
-        if (/(?:^|\.)canyu\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cao.im") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".caobian.info") >= 0) return "+ss";
-        if (/(?:^|\.)caobian\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("caochangqing.com") >= 0) return "+ss";
-        if (/(?:^|\.)caochangqing\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cap.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)cap\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".carabinasypistolas.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cardinalkungfoundation.org") >= 0) return "+ss";
-        if (/(?:^|\.)posts\.careerengine\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("carmotorshow.com") >= 0) return "+ss";
-        if (/(?:^|\.)carrd\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ss.carryzhou.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cartoonmovement.com") >= 0) return "+ss";
-        if (/(?:^|\.)cartoonmovement\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".casadeltibetbcn.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".casatibet.org.mx") >= 0) return "+ss";
-        if (/^http:\/\/casatibet\.org\.mx/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cari.com.my") >= 0) return "+ss";
-        if (/(?:^|\.)cari\.com\.my$/.test(host)) return "+ss";
-        if (/(?:^|\.)caribbeancom\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".casinoking.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".casinoriva.com") >= 0) return "+ss";
-        if (/(?:^|\.)catch22\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".catchgod.com") >= 0) return "+ss";
-        if (/^http:\/\/catchgod\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)catfightpayperview\.xxx$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".catholic.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)catholic\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("catholic.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)catholic\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cathvoice.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)cato\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cattt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cbc.ca") >= 0) return "+ss";
-        if (/(?:^|\.)cbc\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cbsnews.com/video") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cbtc.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)southpark\.cc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cccat\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)cccat\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ccdtr.org") >= 0) return "+ss";
-        if (/(?:^|\.)ccdtr\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cchere.com") >= 0) return "+ss";
-        if (/(?:^|\.)cchere\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ccim.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cclife.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cclife.org") >= 0) return "+ss";
-        if (/(?:^|\.)cclife\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cclifefl.org") >= 0) return "+ss";
-        if (/(?:^|\.)cclifefl\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ccthere.com") >= 0) return "+ss";
-        if (/(?:^|\.)ccthere\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ccthere\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cctmweb.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cctongbao.com/article/2078732") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ccue.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ccue.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ccvoice.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ccw.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cgdepot.org") >= 0) return "+ss";
-        if (/^http:\/\/cgdepot\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)cdbook\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cdcparty.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cdef.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdef\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdig\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cdjp.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdjp\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cdn-apple.com") >= 0) return "+ss";
-        if (/(?:^|\.)cdn-apple\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cdnews.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cdp1989.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cdp1998.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdp1998\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cdp2006.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdp2006\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cdpa.url.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cdpeu.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cdpusa.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cdpweb.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdpweb\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cdpwu.org") >= 0) return "+ss";
-        if (/(?:^|\.)cdpwu\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdw\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cecc.gov") >= 0) return "+ss";
-        if (/(?:^|\.)cecc\.gov$/.test(host)) return "+ss";
-        if (/(?:^|\.)cellulo\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)cenews\.eu$/.test(host)) return "+ss";
-        if (/(?:^|\.)centerforhumanreprod\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)centralnation\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".centurys.net") >= 0) return "+ss";
-        if (/^http:\/\/centurys\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cfhks.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cfos.de") >= 0) return "+ss";
-        if (/(?:^|\.)cfr\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cftfc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cgst.edu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".change.org") >= 0) return "+ss";
-        if (/(?:^|\.)change\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".changp.com") >= 0) return "+ss";
-        if (/(?:^|\.)changp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".changsa.net") >= 0) return "+ss";
-        if (/^http:\/\/changsa\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)channelnewsasia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chapm25.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chaturbate.com") >= 0) return "+ss";
-        if (/(?:^|\.)chaturbate\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chuang-yen.org") >= 0) return "+ss";
-        if (/(?:^|\.)checkgfw\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chengmingmag.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chenguangcheng.com") >= 0) return "+ss";
-        if (/(?:^|\.)chenguangcheng\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chenpokong.com") >= 0) return "+ss";
-        if (/(?:^|\.)chenpokong\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chenpokong.net") >= 0) return "+ss";
-        if (/^http:\/\/chenpokong\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)chenpokongvip\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cherrysave\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chhongbi.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chicagoncmtv.com") >= 0) return "+ss";
-        if (/^http:\/\/chicagoncmtv\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".china-week.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("china101.com") >= 0) return "+ss";
-        if (/(?:^|\.)china101\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)china18\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)china21\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("china21.org") >= 0) return "+ss";
-        if (/(?:^|\.)china21\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".china5000.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaaffairs.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinaaffairs\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)chinaaid\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaaid.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaaid.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaaid.net") >= 0) return "+ss";
-        if (/(?:^|\.)chinaaid\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinacomments.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinacomments\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinachange.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinachange\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinachannel.hk") >= 0) return "+ss";
-        if (/(?:^|\.)chinachannel\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinacitynews.be") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinadialogue.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinadigitaltimes.net") >= 0) return "+ss";
-        if (/(?:^|\.)chinadigitaltimes\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinaelections.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinaelections\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinaeweekly.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinaeweekly\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chinafreepress\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinagate.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinageeks.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinagfw.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinagfw\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinagonet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinagreenparty.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinagreenparty\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinahorizon.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinahorizon\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinahush.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinainperspective.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinainterimgov\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinalaborwatch.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinalawtranslate.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinapost.com.tw/taiwan/national/national-news") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaxchina.com/howto") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinalawandpolicy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinamule.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinamule\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinamz.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinanewscenter.com") >= 0) return "+ss";
-        if (/^https:\/\/chinanewscenter\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinapress.com.my") >= 0) return "+ss";
-        if (/(?:^|\.)chinapress\.com\.my$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".china-review.com.ua") >= 0) return "+ss";
-        if (/^http:\/\/china-review\.com\.ua/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinarightsia.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinasmile.net/forums") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinasocialdemocraticparty.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinasocialdemocraticparty\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinasoul.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinasoul\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinasucks.net") >= 0) return "+ss";
-        if (/(?:^|\.)chinatopsex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinatown.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinatweeps.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinaway.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinaworker.info") >= 0) return "+ss";
-        if (/(?:^|\.)chinaworker\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinayouth.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinayuanmin.org") >= 0) return "+ss";
-        if (/(?:^|\.)chinayuanmin\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinese-hermit.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese-leaders.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese-memorial.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesedaily.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinesedailynews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesedemocracy.com") >= 0) return "+ss";
-        if (/(?:^|\.)chinesedemocracy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chinesegay\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesen.de") >= 0) return "+ss";
-        if (/(?:^|\.)chinesen\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesenews.net.au/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesepen.org") >= 0) return "+ss";
-        if (/(?:^|\.)chineseradioseattle\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinesetalks.net/ch") >= 0) return "+ss";
-        if (/(?:^|\.)chineseupress\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chingcheong.com") >= 0) return "+ss";
-        if (/(?:^|\.)chingcheong\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chinman.net") >= 0) return "+ss";
-        if (/^http:\/\/chinman\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("chithu.org") >= 0) return "+ss";
-        if (/(?:^|\.)cnnews\.chosun\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chrdnet.com") >= 0) return "+ss";
-        if (/^http:\/\/chrdnet\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".christianfreedom.org") >= 0) return "+ss";
-        if (/(?:^|\.)christianfreedom\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("christianstudy.com") >= 0) return "+ss";
-        if (/(?:^|\.)christianstudy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("christusrex.org/www1/sdc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".chubold.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chubun.com") >= 0) return "+ss";
-        if (/(?:^|\.)christiantimes\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chrlawyers.hk") >= 0) return "+ss";
-        if (/(?:^|\.)chrlawyers\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".churchinhongkong.org/b5/index.php") >= 0) return "+ss";
-        if (/^http:\/\/churchinhongkong\.org\/b5\/index\.php/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".chushigangdrug.ch") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cienen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cineastentreff.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cipfg.org") >= 0) return "+ss";
-        if (/(?:^|\.)circlethebayfortibet\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cirosantilli\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".citizencn.com") >= 0) return "+ss";
-        if (/(?:^|\.)citizencn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)citizenlab\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)citizenlab\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)citizenscommission\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".citizenlab.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("citizensradio.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".city365.ca") >= 0) return "+ss";
-        if (/^http:\/\/city365\.ca/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("city9x.com") >= 0) return "+ss";
-        if (/(?:^|\.)citypopulation\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".citytalk.tw/event") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".civicparty.hk") >= 0) return "+ss";
-        if (/(?:^|\.)civicparty\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".civildisobediencemovement.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("civilhrfront.org") >= 0) return "+ss";
-        if (/(?:^|\.)civilhrfront\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".civiliangunner.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".civilmedia.tw") >= 0) return "+ss";
-        if (/(?:^|\.)civilmedia\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("psiphon.civisec.org") >= 0) return "+ss";
-        if (/(?:^|\.)vpn\.cjb\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ck101.com") >= 0) return "+ss";
-        if (/(?:^|\.)ck101\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".clarionproject.org/news/islamic-state-isis-isil-propaganda") >= 0) return "+ss";
-        if (/(?:^|\.)classicalguitarblog\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".clb.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("clearharmony.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("clearwisdom.net") >= 0) return "+ss";
-        if (/(?:^|\.)clinica-tibet\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".clipfish.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cloakpoint.com") >= 0) return "+ss";
-        if (/(?:^|\.)app\.cloudcone\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)club1069\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)clubhouseapi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cmi.org.tw") >= 0) return "+ss";
-        if (/^http:\/\/www\.cmoinc\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("cmp.hku.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkupop.hku.hk") >= 0) return "+ss";
-        if (/(?:^|\.)cmule\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cmule\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)cms\.gov$/.test(host)) return "+ss";
-        if (/^http:\/\/vpn\.cmu\.edu/.test(url)) return "+ss";
-        if (/^http:\/\/vpn\.sv\.cmu\.edu/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cn6.eu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cna.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)cna\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnabc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnd.org") >= 0) return "+ss";
-        if (/(?:^|\.)cnd\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("download.cnet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnex.org.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnineu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wiki.cnitter.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnn.com/video") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnpolitics.org") >= 0) return "+ss";
-        if (/(?:^|\.)cnpolitics\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cn-proxy.com") >= 0) return "+ss";
-        if (/^http:\/\/cn-proxy\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cnproxy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.cnyes.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.cnyes.com") >= 0) return "+ss";
-        if (/(?:^|\.)coat\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cochina.co") >= 0) return "+ss";
-        if (/(?:^|\.)cochina\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)cochina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".code1984.com/64") >= 0) return "+ss";
-        if (/^http:\/\/goagent\.codeplex\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)codeshare\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)codeskulptor\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)conoha\.jp$/.test(host)) return "+ss";
-        if (/^http:\/\/tosh\.comedycentral\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("comefromchina.com") >= 0) return "+ss";
-        if (/(?:^|\.)comefromchina\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".comic-mega.me") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("commandarms.com") >= 0) return "+ss";
-        if (/(?:^|\.)commentshk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".communistcrimes.org") >= 0) return "+ss";
-        if (/(?:^|\.)communistcrimes\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)communitychoicecu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)comparitech\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)compileheart\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)conoha\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".contactmagazine.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".convio.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".coobay.com") >= 0) return "+ss";
-        if (/^http:\/\/www\.cool18\.com\/bbs.*\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".coolaler.com") >= 0) return "+ss";
-        if (/(?:^|\.)coolaler\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("coolder.com") >= 0) return "+ss";
-        if (/(?:^|\.)coolder\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)coolloud\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".coolncute.com") >= 0) return "+ss";
-        if (/(?:^|\.)coolstuffinc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("corumcollege.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cos-moe.com") >= 0) return "+ss";
-        if (/^http:\/\/cos-moe\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cosplayjav.pl") >= 0) return "+ss";
-        if (/^http:\/\/cosplayjav\.pl/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cotweet.com") >= 0) return "+ss";
-        if (/(?:^|\.)cotweet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".coursehero.com") >= 0) return "+ss";
-        if (/(?:^|\.)coursehero\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cpj.org") >= 0) return "+ss";
-        if (/(?:^|\.)cpj\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cq99.us") >= 0) return "+ss";
-        if (/^http:\/\/cq99\.us/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("crackle.com") >= 0) return "+ss";
-        if (/(?:^|\.)crackle\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".crazys.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".crazyshit.com") >= 0) return "+ss";
-        if (/(?:^|\.)crazyshit\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)crchina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("crd-net.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("creaders.net") >= 0) return "+ss";
-        if (/(?:^|\.)creaders\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".creadersnet.com") >= 0) return "+ss";
-        if (/(?:^|\.)cristyli\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".crocotube.com") >= 0) return "+ss";
-        if (/^http:\/\/crocotube\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".crossthewall.net") >= 0) return "+ss";
-        if (/(?:^|\.)crossthewall\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".crossvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)crossvpn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)crucial\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.cryptographyengineering\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("csdparty.com") >= 0) return "+ss";
-        if (/(?:^|\.)csdparty\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)csis\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)csmonitor\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)csuchen\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".csw.org.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ct.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ct\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ctao.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ctfriend.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ctitv.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ctowc\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cts.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)cts\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ctwant\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/library\.usc\.cuhk\.edu\.hk\//.test(url)) return "+ss";
-        if (/^http:\/\/mjlsh\.usc\.cuhk\.edu\.hk\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cuhkacs.org/~benng") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cuihua.org") >= 0) return "+ss";
-        if (/(?:^|\.)cuihua\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cuiweiping.net") >= 0) return "+ss";
-        if (/(?:^|\.)cuiweiping\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)culture\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cumlouder.com") >= 0) return "+ss";
-        if (/(?:^|\.)cumlouder\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)curvefish\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cusp\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cusu.hk") >= 0) return "+ss";
-        if (/(?:^|\.)cusu\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cutscenes.net") >= 0) return "+ss";
-        if (/(?:^|\.)cutscenes\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".cw.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)cw\.com\.tw$/.test(host)) return "+ss";
-        if (/^http:\/\/forum\.cyberctm\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("cyberghostvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)cyberghostvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cynscribe\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cytode.us") >= 0) return "+ss";
-        if (/(?:^|\.)ifan\.cz\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)mike\.cz\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)nic\.cz\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".d-fukyu.com") >= 0) return "+ss";
-        if (/^http:\/\/d-fukyu\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("cl.d0z.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".d100.net") >= 0) return "+ss";
-        if (/(?:^|\.)d100\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".d2bay.com") >= 0) return "+ss";
-        if (/^http:\/\/d2bay\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dabr.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)dabr\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dabr.eu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dabr.mobi") >= 0) return "+ss";
-        if (/(?:^|\.)dabr\.mobi$/.test(host)) return "+ss";
-        if (/(?:^|\.)dabr\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dadazim.com") >= 0) return "+ss";
-        if (/(?:^|\.)dadazim\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dadi360.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dafabet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dafagood.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dafahao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dafoh.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".daftporn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dagelijksestandaard.nl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".daidostup.ru") >= 0) return "+ss";
-        if (/^http:\/\/daidostup\.ru/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dailidaili.com") >= 0) return "+ss";
-        if (/(?:^|\.)dailidaili\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dailymail\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dailymotion.com") >= 0) return "+ss";
-        if (/(?:^|\.)dailymotion\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dailysabah\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("daiphapinfo.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dajiyuan.com") >= 0) return "+ss";
-        if (/(?:^|\.)dajiyuan\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dajiyuan.eu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dalailama.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailama.mn") >= 0) return "+ss";
-        if (/^http:\/\/dalailama\.mn/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailama.ru") >= 0) return "+ss";
-        if (/(?:^|\.)dalailama\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dalailama80.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailama-archives.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamacenter.org") >= 0) return "+ss";
-        if (/^http:\/\/dalailamacenter\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("dalailamafellows.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamafilm.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamafoundation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamahindi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamainaustralia.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamajapanese.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamaprotesters.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamaquotes.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamatrust.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamavisit.org.nz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dalailamaworld.com") >= 0) return "+ss";
-        if (/(?:^|\.)dalailamaworld\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dalianmeng.org") >= 0) return "+ss";
-        if (/(?:^|\.)dalianmeng\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".daliulian.org") >= 0) return "+ss";
-        if (/(?:^|\.)daliulian\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".danke4china.net") >= 0) return "+ss";
-        if (/(?:^|\.)danke4china\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".danwei.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("daolan.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".daozhongxing.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("darktoy.net") >= 0) return "+ss";
-        if (/(?:^|\.)dastrassi\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)daum\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".david-kilgour.com") >= 0) return "+ss";
-        if (/^http:\/\/david-kilgour\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("daxa.cn") >= 0) return "+ss";
-        if (/(?:^|\.)daxa\.cn$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.dayabook.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".daylife.com/topic/dalai_lama") >= 0) return "+ss";
-        if (/(?:^|\.)db\.tt$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dbc.hk/main") >= 0) return "+ss";
-        if (/(?:^|\.)dbgjd\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dcard\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dcmilitary.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddc.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddhw.info") >= 0) return "+ss";
-        if (/(?:^|\.)de-sci\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".de-sci.org") >= 0) return "+ss";
-        if (/(?:^|\.)deadline\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)decodet\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".definebabe.com") >= 0) return "+ss";
-        if (/(?:^|\.)delcamp\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("delicious.com/GFWbookmark") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".democrats.org") >= 0) return "+ss";
-        if (/(?:^|\.)democrats\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".demosisto.hk") >= 0) return "+ss";
-        if (/(?:^|\.)demosisto\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)desc\.se$/.test(host)) return "+ss";
-        if (/(?:^|\.)dessci\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".destroy-china.jp") >= 0) return "+ss";
-        if (/(?:^|\.)deutsche-welle\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)deviantart\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)deviantart\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)devio\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)devpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dfas\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dfn.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dharmakara.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dharamsalanet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".diaoyuislands.org") >= 0) return "+ss";
-        if (/(?:^|\.)diaoyuislands\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".difangwenge.org") >= 0) return "+ss";
-        if (/^http:\/\/digiland\.tw\//.test(url)) return "+ss";
-        if (/(?:^|\.)digitalnomadsproject\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".diigo.com") >= 0) return "+ss";
-        if (/(?:^|\.)diigo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dilber\.se$/.test(host)) return "+ss";
-        if (/(?:^|\.)furl\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dipity.com") >= 0) return "+ss";
-        if (/(?:^|\.)directcreative\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".discuss.com.hk") >= 0) return "+ss";
-        if (/(?:^|\.)discuss\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".discuss4u.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("disp.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".disqus.com") >= 0) return "+ss";
-        if (/(?:^|\.)disqus\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dit-inc.us") >= 0) return "+ss";
-        if (/(?:^|\.)dit-inc\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dizhidizhi.com") >= 0) return "+ss";
-        if (/(?:^|\.)dizhuzhishang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("djangosnippets.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".djorz.com") >= 0) return "+ss";
-        if (/(?:^|\.)djorz\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dl-laby\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)dlive\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)dlsite\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dlyoutube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dmcdn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dnscrypt.org") >= 0) return "+ss";
-        if (/(?:^|\.)dnscrypt\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)dns2go\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dnssec\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("doctorvoice.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dogfartnetwork.com/tour") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gloryhole.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dojin.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dok-forum.net") >= 0) return "+ss";
-        if (/(?:^|\.)dolc\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)dolf\.org\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)dollf\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".domain.club.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".domaintoday.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese.donga.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dongtaiwang.com") >= 0) return "+ss";
-        if (/(?:^|\.)dongtaiwang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dongtaiwang.net") >= 0) return "+ss";
-        if (/(?:^|\.)dongtaiwang\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dongyangjing.com") >= 0) return "+ss";
-        if (/^http:\/\/danbooru\.donmai\.us/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dontfilter.us") >= 0) return "+ss";
-        if (/(?:^|\.)dontmovetochina\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dorjeshugden.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dotplane.com") >= 0) return "+ss";
-        if (/(?:^|\.)dotplane\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dotsub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dotvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)dotvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".doub.io") >= 0) return "+ss";
-        if (/(?:^|\.)doub\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)dougscripts\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)douhokanko\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)doujincafe\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dowei.org") >= 0) return "+ss";
-        if (/^https:\/\/bartender\.dowjones\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("dphk.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dpp.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)dpp\.org\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)dpr\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)dragonsprings\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dreamamateurs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".drepung.org") >= 0) return "+ss";
-        if (/(?:^|\.)drgan\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".drmingxia.org") >= 0) return "+ss";
-        if (/^http:\/\/drmingxia\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)dropbooks\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)dropbox\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)api\.dropboxapi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)notify\.dropboxapi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dropboxusercontent\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("drsunacademy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".drtuber.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dscn.info") >= 0) return "+ss";
-        if (/^http:\/\/dscn\.info/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dstk.dk") >= 0) return "+ss";
-        if (/^http:\/\/dstk\.dk/.test(url)) return "+ss";
-        if (/(?:^|\.)dtiblog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dtic\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dtwang.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".duanzhihu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".duckdns.org") >= 0) return "+ss";
-        if (/^http:\/\/duckdns\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".duckduckgo.com") >= 0) return "+ss";
-        if (/(?:^|\.)duckduckgo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".duckload.com/download") >= 0) return "+ss";
-        if (/(?:^|\.)duckmylife\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".duga.jp") >= 0) return "+ss";
-        if (/^http:\/\/duga\.jp/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".duihua.org") >= 0) return "+ss";
-        if (/(?:^|\.)duihua\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)duihuahrjournal\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dunyabulteni.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".duoweitimes.com") >= 0) return "+ss";
-        if (/(?:^|\.)duoweitimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("duping.net") >= 0) return "+ss";
-        if (/(?:^|\.)duplicati\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dupola.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dupola.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".dushi.ca") >= 0) return "+ss";
-        if (/(?:^|\.)duyaoss\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dvorak\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dw.com") >= 0) return "+ss";
-        if (/(?:^|\.)dw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dw\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dw-world.com") >= 0) return "+ss";
-        if (/(?:^|\.)dw-world\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dw-world.de") >= 0) return "+ss";
-        if (/^http:\/\/dw-world\.de/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("www.dwheeler.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dwnews.com") >= 0) return "+ss";
-        if (/(?:^|\.)dwnews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dwnews.net") >= 0) return "+ss";
-        if (/(?:^|\.)dwnews\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xys.dxiong.com") >= 0) return "+ss";
-        if (/(?:^|\.)dynawebinc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)dysfz\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".dzze.com") >= 0) return "+ss";
-        if (/(?:^|\.)e-classical\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)e-gold\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".e-gold.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".e-hentai.org") >= 0) return "+ss";
-        if (/(?:^|\.)e-hentai\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".e-hentaidb.com") >= 0) return "+ss";
-        if (/^http:\/\/e-hentaidb\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("e-info.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".e-traderland.net/board") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".e-zone.com.hk/discuz") >= 0) return "+ss";
-        if (/^http:\/\/e-zone\.com\.hk\/discuz/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".e123.hk") >= 0) return "+ss";
-        if (/(?:^|\.)e123\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".earlytibet.com") >= 0) return "+ss";
-        if (/^http:\/\/earlytibet\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".earthcam.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".earthvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)earthvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("eastern-ark.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".easternlightning.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eastturkestan.com") >= 0) return "+ss";
-        if (/^http:\/\/www\.eastturkistan\.net\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eastturkistan-gov.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eastturkistancc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eastturkistangovernmentinexile.us") >= 0) return "+ss";
-        if (/(?:^|\.)eastturkistangovernmentinexile\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".easyca.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".easypic.com") >= 0) return "+ss";
-        if (/(?:^|\.)fnc\.ebc\.net\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ebony-beauty.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ebookbrowse.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ebookee.com") >= 0) return "+ss";
-        if (/(?:^|\.)ecfa\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ushuarencity.echainhost.com") >= 0) return "+ss";
-        if (/(?:^|\.)ecimg\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ecministry.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".economist.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.ecstart.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("edgecastcdn.net") >= 0) return "+ss";
-        if (/(?:^|\.)edgecastcdn\.net$/.test(host)) return "+ss";
-        if (/twimg\.edgesuite\.net\/\/?appledaily/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("edicypages.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".edmontonchina.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".edmontonservice.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("edoors.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".edubridge.com") >= 0) return "+ss";
-        if (/(?:^|\.)edubridge\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".edupro.org") >= 0) return "+ss";
-        if (/(?:^|\.)eevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("efcc.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".efukt.com") >= 0) return "+ss";
-        if (/^http:\/\/efukt\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)eic-av\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)eireinikotaerukai\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eisbb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eksisozluk.com") >= 0) return "+ss";
-        if (/(?:^|\.)eksisozluk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("electionsmeter.com") >= 0) return "+ss";
-        if (/(?:^|\.)elgoog\.im$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ellawine.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".elpais.com") >= 0) return "+ss";
-        if (/(?:^|\.)elpais\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eltondisney.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".emaga.com/info/3407") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("emilylau.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".emanna.com/chineseTraditional") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bitc.bme.emory.edu/~lzhou/blogs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".empfil.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".emule-ed2k.com") >= 0) return "+ss";
-        if (/^http:\/\/emule-ed2k\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".emulefans.com") >= 0) return "+ss";
-        if (/^http:\/\/emulefans\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".emuparadise.me") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".enanyang.my") >= 0) return "+ss";
-        if (/(?:^|\.)encrypt\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)enewstree\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".enfal.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese.engadget.com") >= 0) return "+ss";
-        if (/(?:^|\.)engagedaily\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("englishforeveryone.org") >= 0) return "+ss";
-        if (/(?:^|\.)englishfromengland\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("englishpen.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".enlighten.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)entermap\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)app\.evozi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".episcopalchurch.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".epochhk.com") >= 0) return "+ss";
-        if (/^http:\/\/epochhk\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes-bg.com") >= 0) return "+ss";
-        if (/(?:^|\.)epochtimes-bg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes-romania.com") >= 0) return "+ss";
-        if (/(?:^|\.)epochtimes-romania\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.co.il") >= 0) return "+ss";
-        if (/(?:^|\.)epochtimes\.co\.il$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.co.kr") >= 0) return "+ss";
-        if (/(?:^|\.)epochtimes\.co\.kr$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.com") >= 0) return "+ss";
-        if (/(?:^|\.)epochtimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".epochtimes.cz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".epochtimes.ie") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".epochtimes.it") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimes.se") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("epochtimestr.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".epochweek.com") >= 0) return "+ss";
-        if (/(?:^|\.)epochweek\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)epochweekly\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eporner.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".equinenow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("erabaru.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eracom.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eraysoft.com.tr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".erepublik.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".erights.net") >= 0) return "+ss";
-        if (/(?:^|\.)erights\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".erktv.com") >= 0) return "+ss";
-        if (/^http:\/\/erktv\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)ernestmandel\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)erodaizensyu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)erodoujinlog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)erodoujinworld\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)eromanga-kingdom\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)eromangadouzin\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eromon.net") >= 0) return "+ss";
-        if (/^http:\/\/eromon\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eroprofile.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eroticsaloon.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eslite.com") >= 0) return "+ss";
-        if (/(?:^|\.)eslite\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wiki.esu.im/%E8%9B%A4%E8%9B%A4%E8%AF%AD%E5%BD%95") >= 0) return "+ss";
-        if (/(?:^|\.)esu\.dog$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".etaa.org.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".etadult.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("etaiwannews.com") >= 0) return "+ss";
-        if (/(?:^|\.)etizer\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)etokki\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)etsy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ettoday.net/news/20151216/614081") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("etvonline.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eu.org") >= 0) return "+ss";
-        if (/(?:^|\.)eu\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eucasino.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eulam.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".eurekavpt.com") >= 0) return "+ss";
-        if (/(?:^|\.)eurekavpt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".euronews.com") >= 0) return "+ss";
-        if (/(?:^|\.)euronews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("eeas.europa.eu/delegations/china/press_corner/all_news/news/2015/20150716_zh") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("eeas.europa.eu/statements-eeas/2015/151022") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".evschool.net") >= 0) return "+ss";
-        if (/^http:\/\/evschool\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)exblog\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.exblog\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".exchristian.hk") >= 0) return "+ss";
-        if (/(?:^|\.)exchristian\.hk$/.test(host)) return "+ss";
-        if (/^http:\/\/blog\.excite\.co\.jp/.test(url)) return "+ss";
-        if (/(?:^|\.)exhentai\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)exmormon\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)expatshield\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".expecthim.com") >= 0) return "+ss";
-        if (/(?:^|\.)expecthim\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("experts-univers.com") >= 0) return "+ss";
-        if (/(?:^|\.)exploader\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".expressvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)expressvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".extremetube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("eyevio.jp") >= 0) return "+ss";
-        if (/(?:^|\.)eyevio\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".eyny.com") >= 0) return "+ss";
-        if (/(?:^|\.)eyny\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ezpc.tk/category/soft") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ezpeer.com") >= 0) return "+ss";
-        if (/(?:^|\.)facebookquotes4u\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".faceless.me") >= 0) return "+ss";
-        if (/(?:^|\.)faceless\.me$/.test(host)) return "+ss";
-        if (/^http:\/\/facesoftibetanselfimmolators\.info/.test(url)) return "+ss";
-        if (/(?:^|\.)facesofnyfw\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)factpedia\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".faith100.org") >= 0) return "+ss";
-        if (/^http:\/\/faith100\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".faithfuleye.com") >= 0) return "+ss";
-        if (/(?:^|\.)faiththedog\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fakku.net") >= 0) return "+ss";
-        if (/(?:^|\.)fallenark\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".falsefire.com") >= 0) return "+ss";
-        if (/(?:^|\.)falsefire\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("falun-co.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("falunart.org") >= 0) return "+ss";
-        if (/(?:^|\.)falunasia\.info$/.test(host)) return "+ss";
-        if (/^http:\/\/falunau\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".falunaz.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("falundafa.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("falundafa-dc.org") >= 0) return "+ss";
-        if (/(?:^|\.)falundafa-florida\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)falundafa-nc\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)falundafa-pa\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)falundafa-sacramento\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("falun-ny.net") >= 0) return "+ss";
-        if (/(?:^|\.)falundafaindia\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("falundafamuseum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".falungong.club") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".falungong.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("falungong.org.uk") >= 0) return "+ss";
-        if (/(?:^|\.)falunhr\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("faluninfo.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("faluninfo.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".falunpilipinas.net") >= 0) return "+ss";
-        if (/(?:^|\.)falunworld\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("familyfed.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fangeming.com") >= 0) return "+ss";
-        if (/(?:^|\.)fanglizhi\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)fangong\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fangongheike.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fanqiang.tk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fanqianghou.com") >= 0) return "+ss";
-        if (/(?:^|\.)fanqianghou\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fanqiangzhe.com") >= 0) return "+ss";
-        if (/(?:^|\.)fanqiangzhe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fantv\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fapdu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("faproxy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fawanghuihui.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fanqiangyakexi.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fail.hk") >= 0) return "+ss";
-        if (/(?:^|\.)famunion\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fan-qiang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fangbinxing.com") >= 0) return "+ss";
-        if (/(?:^|\.)fangbinxing\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fangeming.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fangmincn.org") >= 0) return "+ss";
-        if (/(?:^|\.)fangmincn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fanhaodang.com") >= 0) return "+ss";
-        if (/(?:^|\.)fanqiang\.network$/.test(host)) return "+ss";
-        if (/(?:^|\.)fanswong\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fanyue.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".farwestchina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("en.favotter.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nytimes.map.fastly.net") >= 0) return "+ss";
-        if (/(?:^|\.)nytimes\.map\.fastly\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)fast\.wistia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fastestvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fastssh\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)faststone\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("favstar.fm") >= 0) return "+ss";
-        if (/(?:^|\.)favstar\.fm$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("faydao.com/weblog") >= 0) return "+ss";
-        if (/(?:^|\.)faz\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fc2.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fc2china.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fc2cn.com") >= 0) return "+ss";
-        if (/(?:^|\.)fc2cn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fc2blog.net") >= 0) return "+ss";
-        if (/^http:\/\/uygur\.fc2web\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("video.fdbox.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fdc64.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fdc64.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fdc89.jp") >= 0) return "+ss";
-        if (/(?:^|\.)fourface\.nodesnoop\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)feeder\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)feelssh\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("feer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".feifeiss.com") >= 0) return "+ss";
-        if (/^http:\/\/feitianacademy\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".feitian-california.org") >= 0) return "+ss";
-        if (/(?:^|\.)feixiaohao\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)feministteacher\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fengzhenghu.com") >= 0) return "+ss";
-        if (/(?:^|\.)fengzhenghu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fengzhenghu.net") >= 0) return "+ss";
-        if (/(?:^|\.)fengzhenghu\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fevernet.com") >= 0) return "+ss";
-        if (/^http:\/\/ff\.im/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("fffff.at") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fflick.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ffvpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fgmtv.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fgmtv.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fhreports.net") >= 0) return "+ss";
-        if (/^http:\/\/fhreports\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".figprayer.com") >= 0) return "+ss";
-        if (/(?:^|\.)figprayer\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fileflyer.com") >= 0) return "+ss";
-        if (/(?:^|\.)fileflyer\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/feeds\.fileforum\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".files2me.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fileserve.com/file") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fillthesquare.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("filmingfortibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".filthdump.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".finchvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)finchvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("findmespot.com") >= 0) return "+ss";
-        if (/(?:^|\.)findyoutube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)findyoutube\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fingerdaily.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("finler.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".firearmsworld.net") >= 0) return "+ss";
-        if (/^http:\/\/firearmsworld\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fireofliberty.org") >= 0) return "+ss";
-        if (/(?:^|\.)fireofliberty\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".firetweet.io") >= 0) return "+ss";
-        if (/(?:^|\.)firetweet\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)firstpost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".flagsonline.it") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fleshbot.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fleursdeslettres.com") >= 0) return "+ss";
-        if (/^http:\/\/fleursdeslettres\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)flgg\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)flgjustice\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)flickr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)staticflickr\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("flickrhivemind.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".flickriver.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fling.com") >= 0) return "+ss";
-        if (/(?:^|\.)flipkart\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)flog\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".flyvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)flyvpn\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/cn\.fmnnow\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("fofldfradio.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.foolsmountain.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".forum4hk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fangong.forums-free.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pioneer-worker.forums-free.com") >= 0) return "+ss";
-        if (/^https:\/\/ss.*\.4sqi\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("video.foxbusiness.com") >= 0) return "+ss";
-        if (/^http:\/\/foxgay\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)fringenetwork\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)flecheinthepeche\.fr$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fochk.org") >= 0) return "+ss";
-        if (/(?:^|\.)fochk\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)focustaiwan\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".focusvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)fofg\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fofg-europe.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fooooo.com") >= 0) return "+ss";
-        if (/(?:^|\.)fooooo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)foreignaffairs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fotile.me") >= 0) return "+ss";
-        if (/(?:^|\.)fourthinternational\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)foxdie\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)foxsub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("foxtang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fpmt.org") >= 0) return "+ss";
-        if (/^http:\/\/fpmt\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fpmt.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fpmt-osel.org") >= 0) return "+ss";
-        if (/(?:^|\.)fpmtmexico\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fqok.org") >= 0) return "+ss";
-        if (/(?:^|\.)fqrouter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)franklc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freakshare.com") >= 0) return "+ss";
-        if (/^http:\/\/freakshare\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)free4u\.com\.ar$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("free-gate.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".free-hada-now.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("free-proxy.cz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".free.fr/adsl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("kineox.free.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetlibre.free.fr") >= 0) return "+ss";
-        if (/(?:^|\.)freealim\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("whitebear.freebearblog.org") >= 0) return "+ss";
-        if (/(?:^|\.)freebrowser\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freechal.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freedomchina.info") >= 0) return "+ss";
-        if (/(?:^|\.)freedomchina\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freedomhouse.org") >= 0) return "+ss";
-        if (/(?:^|\.)freedomhouse\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freedomsherald.org") >= 0) return "+ss";
-        if (/(?:^|\.)freedomsherald\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freefq.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freefuckvids.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freegao.com") >= 0) return "+ss";
-        if (/(?:^|\.)freegao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("freeilhamtohti.org") >= 0) return "+ss";
-        if (/(?:^|\.)freekazakhs\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freekwonpyong.org") >= 0) return "+ss";
-        if (/(?:^|\.)saveliuxiaobo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freelotto.com") >= 0) return "+ss";
-        if (/(?:^|\.)freelotto\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("freeman2.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeopenvpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freemoren.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freemorenews.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freemuse.org/archives/789") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freenet-china.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freenewscn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.freeones.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeoz.org/bbs") >= 0) return "+ss";
-        if (/(?:^|\.)freeoz\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)freessh\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("free4u.com.ar") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".free-ssh.com") >= 0) return "+ss";
-        if (/(?:^|\.)free-ssh\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)freebeacon\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freechina.news") >= 0) return "+ss";
-        if (/(?:^|\.)freechinaforum\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)freechinaweibo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freedomcollection.org/interviews/rebiya_kadeer") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeforums.org") >= 0) return "+ss";
-        if (/(?:^|\.)freenetproject\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeoz.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freetibet.net") >= 0) return "+ss";
-        if (/(?:^|\.)freetibet\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freetibetanheroes.org") >= 0) return "+ss";
-        if (/^http:\/\/freetibetanheroes\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)freetribe\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeviewmovies.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freevpn.me") >= 0) return "+ss";
-        if (/^http:\/\/freevpn\.me/.test(url)) return "+ss";
-        if (/(?:^|\.)freewallpaper4\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freewebs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freewechat.com") >= 0) return "+ss";
-        if (/(?:^|\.)freewechat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("freeweibo.com") >= 0) return "+ss";
-        if (/(?:^|\.)freeweibo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".freexinwen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".freeyoutubeproxy.net") >= 0) return "+ss";
-        if (/(?:^|\.)freeyoutubeproxy\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("friendfeed.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("friendfeed-media.com/e99a4ebe2fb4c1985c2a58775eb4422961aa5a2e") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("friends-of-tibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".friendsoftibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freechina.net") >= 0) return "+ss";
-        if (/^http:\/\/www\.zensur\.freerk\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("freevpn.nl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freeyellow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.frienddy.com/hk") >= 0) return "+ss";
-        if (/^http:\/\/adult\.friendfinder\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fring.com") >= 0) return "+ss";
-        if (/(?:^|\.)fring\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fromchinatousa.net") >= 0) return "+ss";
-        if (/(?:^|\.)frommel\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".frontlinedefenders.org") >= 0) return "+ss";
-        if (/(?:^|\.)frontlinedefenders\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".frootvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)frootvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)fscked\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fsurf.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ftv.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ftv\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)ftvnews\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fucd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fuckcnnic.net") >= 0) return "+ss";
-        if (/(?:^|\.)fuckcnnic\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fuckgfw.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fulione.com") >= 0) return "+ss";
-        if (/^https:\/\/fulione\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)fullerconsideration\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fulue.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".funf.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("funp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fuq.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".furhhdl.org") >= 0) return "+ss";
-        if (/(?:^|\.)furinkan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".futurechinaforum.org") >= 0) return "+ss";
-        if (/(?:^|\.)futuremessage\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fux.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fuyin.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fuyindiantai.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".fuyu.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)fw\.cm$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".fxcm-chinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)fxcm-chinese\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("fzh999.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fzh999.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("fzlm.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".g6hentai.com") >= 0) return "+ss";
-        if (/^http:\/\/g6hentai\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)g-queen\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gab\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gabocorp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaeproxy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaforum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gagaoolala.com") >= 0) return "+ss";
-        if (/(?:^|\.)gagaoolala\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".galaxymacau.com") >= 0) return "+ss";
-        if (/(?:^|\.)galenwu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".galstars.net") >= 0) return "+ss";
-        if (/(?:^|\.)game735\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gamebase.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gamejolt.com") >= 0) return "+ss";
-        if (/^http:\/\/wiki\.gamerp\.jp/.test(url)) return "+ss";
-        if (/(?:^|\.)gamer\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gamer.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gamez.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)gamez\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gamousa.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaoming.net") >= 0) return "+ss";
-        if (/(?:^|\.)gaoming\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ganges.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaopi.net") >= 0) return "+ss";
-        if (/^http:\/\/gaopi\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaozhisheng.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaozhisheng.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gardennetworks.com") >= 0) return "+ss";
-        if (/(?:^|\.)gardennetworks\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("72.52.81.22") >= 0) return "+ss";
-        if (/(?:^|\.)gartlive\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gate-project\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gather\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gatherproxy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gati.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaybubble.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaycn.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gayhub.com") >= 0) return "+ss";
-        if (/(?:^|\.)gaymap\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaymenring.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaytube.com") >= 0) return "+ss";
-        if (/(?:^|\.)images-gaytube\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gaywatch.com") >= 0) return "+ss";
-        if (/^http:\/\/gaywatch\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gazotube.com") >= 0) return "+ss";
-        if (/(?:^|\.)gazotube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gcc\.org\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)gclooney\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gclubs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gcmasia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gcpnews.com") >= 0) return "+ss";
-        if (/^http:\/\/gcpnews\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gdbt.net/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gdzf.org") >= 0) return "+ss";
-        if (/(?:^|\.)geek-art\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("geekerhome.com/2010/03/xixiang-project-cross-gfw") >= 0) return "+ss";
-        if (/(?:^|\.)geekheart\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gekikame.com") >= 0) return "+ss";
-        if (/^http:\/\/gekikame\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gelbooru.com") >= 0) return "+ss";
-        if (/^http:\/\/gelbooru\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)genius\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".geocities.co.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".geocities.com/SiliconValley/Circuit/5683/download.html") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hk.geocities.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("geocities.jp") >= 0) return "+ss";
-        if (/(?:^|\.)geph\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gerefoundation.org") >= 0) return "+ss";
-        if (/(?:^|\.)getastrill\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".getchu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".getcloak.com") >= 0) return "+ss";
-        if (/(?:^|\.)getcloak\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)getfoxyproxy\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".getfreedur.com") >= 0) return "+ss";
-        if (/(?:^|\.)getgom\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".geti2p.net") >= 0) return "+ss";
-        if (/(?:^|\.)geti2p\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("getiton.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".getjetso.com/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".getlantern.org") >= 0) return "+ss";
-        if (/(?:^|\.)getlantern\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)getmalus\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".getsocialscope.com") >= 0) return "+ss";
-        if (/(?:^|\.)getsync\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gettr\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gfbv.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gfgold.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gfsale.com") >= 0) return "+ss";
-        if (/(?:^|\.)gfsale\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gfw.org.ua") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gfw.press") >= 0) return "+ss";
-        if (/(?:^|\.)gfw\.press$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ggssl.com") >= 0) return "+ss";
-        if (/(?:^|\.)ggssl\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ghostpath.com") >= 0) return "+ss";
-        if (/(?:^|\.)ghostpath\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ghut\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".giantessnight.com") >= 0) return "+ss";
-        if (/^http:\/\/giantessnight\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gifree.com") >= 0) return "+ss";
-        if (/(?:^|\.)giga-web\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.gigacircle.com") >= 0) return "+ss";
-        if (/^http:\/\/cn\.giganews\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("gigporno.ru") >= 0) return "+ss";
-        if (/(?:^|\.)girlbanker\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".git.io") >= 0) return "+ss";
-        if (/(?:^|\.)git\.io$/.test(host)) return "+ss";
-        if (/^http:\/\/softwaredownload\.gitbooks\.io/.test(url)) return "+ss";
-        if (/(?:^|\.)github\.blog$/.test(host)) return "+ss";
-        if (/(?:^|\.)github\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".github.io") >= 0) return "+ss";
-        if (/(?:^|\.)github\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)githubusercontent\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)githubassets\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gizlen.net") >= 0) return "+ss";
-        if (/(?:^|\.)gizlen\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gjczz.com") >= 0) return "+ss";
-        if (/(?:^|\.)gjczz\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("globaljihad.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("globalmediaoutreach.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("globalmuseumoncommunism.org") >= 0) return "+ss";
-        if (/(?:^|\.)globalrescue\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".globaltm.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".globalvoicesonline.org") >= 0) return "+ss";
-        if (/(?:^|\.)globalvoicesonline\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)globalvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".glock.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gluckman.com/DalaiLama") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gmbd.cn") >= 0) return "+ss";
-        if (/(?:^|\.)gmhz\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.gmiddle\.com/.test(url)) return "+ss";
-        if (/^http:\/\/www\.gmiddle\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gmll.org") >= 0) return "+ss";
-        if (/(?:^|\.)suche\.gmx\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)gnci\.org\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)gnews\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("go-pki.com") >= 0) return "+ss";
-        if (/(?:^|\.)goagent\.biz$/.test(host)) return "+ss";
-        if (/(?:^|\.)goagentplus\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gobet.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("godfootsteps.org") >= 0) return "+ss";
-        if (/(?:^|\.)godfootsteps\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("godns.work") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("godsdirectcontact.co.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".godsdirectcontact.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("godsdirectcontact.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".godsimmediatecontact.com") >= 0) return "+ss";
-        if (/(?:^|\.)gofundme\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gogotunnel.com") >= 0) return "+ss";
-        if (/(?:^|\.)gohappy\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gokbayrak.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".goldbet.com") >= 0) return "+ss";
-        if (/(?:^|\.)goldbetsports\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)golden-ages\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)goldeneyevault\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goldenfrog.com") >= 0) return "+ss";
-        if (/(?:^|\.)goldenfrog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goldjizz.com") >= 0) return "+ss";
-        if (/^http:\/\/goldjizz\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goldstep.net") >= 0) return "+ss";
-        if (/(?:^|\.)goldwave\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gongmeng.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gongm.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gongminliliang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gongwt.com") >= 0) return "+ss";
-        if (/^http:\/\/gongwt\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.goo.ne.jp/duck-tail_2009") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gooday.xyz") >= 0) return "+ss";
-        if (/^http:\/\/gooday\.xyz/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goodreads.com") >= 0) return "+ss";
-        if (/(?:^|\.)goodreads\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goodreaders.com") >= 0) return "+ss";
-        if (/(?:^|\.)goodreaders\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goodtv.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".goodtv.tv") >= 0) return "+ss";
-        if (/(?:^|\.)goofind\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".googlesile.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gopetition.com") >= 0) return "+ss";
-        if (/(?:^|\.)gopetition\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".goproxing.net") >= 0) return "+ss";
-        if (/(?:^|\.)goreforum\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gotrusted.com") >= 0) return "+ss";
-        if (/(?:^|\.)gotrusted\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gotw\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)grammaly\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("grandtrial.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".graphis.ne.jp") >= 0) return "+ss";
-        if (/(?:^|\.)graphis\.ne\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)graphql\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("greatfirewall.biz") >= 0) return "+ss";
-        if (/(?:^|\.)greatfirewallofchina\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".greatfirewallofchina.org") >= 0) return "+ss";
-        if (/(?:^|\.)greatfirewallofchina\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)greenfieldbookstore\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".greenparty.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)greenpeace\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".greenreadings.com/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("great-firewall.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("great-roc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("greatroc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("greatzhonghua.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".greenpeace.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".greenvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)greenvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".greenvpn.org") >= 0) return "+ss";
-        if (/(?:^|\.)grotty-monday\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("gs-discuss.com") >= 0) return "+ss";
-        if (/(?:^|\.)gsearch\.media$/.test(host)) return "+ss";
-        if (/(?:^|\.)gtricks\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("guancha.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("guaneryu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".guardster.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gun-world.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gunsandammo.com") >= 0) return "+ss";
-        if (/(?:^|\.)gutteruncensored\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gvm\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)gwins\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gzm.tv") >= 0) return "+ss";
-        if (/(?:^|\.)gzone-anime\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)clementine-player\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("echofon.com") >= 0) return "+ss";
-        if (/(?:^|\.)greasespot\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)www\.klip\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)stephaniered\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/ub0\.cc/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("wozy.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("gospelherald.com") >= 0) return "+ss";
-        if (/(?:^|\.)gospelherald\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/hk\.gradconnection\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)grangorz\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("greatfire.org") >= 0) return "+ss";
-        if (/(?:^|\.)greatfire\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("greatfirewallofchina.org") >= 0) return "+ss";
-        if (/(?:^|\.)greatroc\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gts-vpn.com") >= 0) return "+ss";
-        if (/^http:\/\/gts-vpn\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)gtv\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)gtv1\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gu-chu-sum.org") >= 0) return "+ss";
-        if (/^http:\/\/gu-chu-sum\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".guaguass.com") >= 0) return "+ss";
-        if (/^http:\/\/guaguass\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".guaguass.org") >= 0) return "+ss";
-        if (/^http:\/\/guaguass\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".guangming.com.my") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("guishan.org") >= 0) return "+ss";
-        if (/(?:^|\.)guishan\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gumroad.com") >= 0) return "+ss";
-        if (/(?:^|\.)gumroad\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)gunsamerica\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("guruonline.hk") >= 0) return "+ss";
-        if (/^http:\/\/gvlib\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".gyalwarinpoche.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gyatsostudio.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".h528.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".h5dm.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".h5galgame.me") >= 0) return "+ss";
-        if (/(?:^|\.)h-china\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".h-moe.com") >= 0) return "+ss";
-        if (/^http:\/\/h-moe\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("h1n1china.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacg.club") >= 0) return "+ss";
-        if (/(?:^|\.)hacg\.club$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacg.in") >= 0) return "+ss";
-        if (/^http:\/\/hacg\.in/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacg.li") >= 0) return "+ss";
-        if (/^http:\/\/hacg\.li/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacg.me") >= 0) return "+ss";
-        if (/^http:\/\/hacg\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacg.red") >= 0) return "+ss";
-        if (/^http:\/\/hacg\.red/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacken.cc/bbs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hacker.org") >= 0) return "+ss";
-        if (/(?:^|\.)hackmd\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)hackthatphone\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hahlo.com") >= 0) return "+ss";
-        if (/(?:^|\.)hakkatv\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".handcraftedsoftware.org") >= 0) return "+ss";
-        if (/^http:\/\/bbs\.hanminzu\.org\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hanunyi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hao.news/news") >= 0) return "+ss";
-        if (/^http:\/\/ae\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/ar\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/br\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/en\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/id\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/jp\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/ma\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/mx\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/sa\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/th\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/tw\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/vn\.hao123\.com/.test(url)) return "+ss";
-        if (/^http:\/\/hk\.hao123img\.com/.test(url)) return "+ss";
-        if (/^http:\/\/ld\.hao123img\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)happy-vpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".haproxy.org") >= 0) return "+ss";
-        if (/(?:^|\.)hardsextube\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".harunyahya.com") >= 0) return "+ss";
-        if (/^http:\/\/harunyahya\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.hasi.wang") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("have8.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hclips.com") >= 0) return "+ss";
-        if (/(?:^|\.)hdlt\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)hdtvb\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hdzog.com") >= 0) return "+ss";
-        if (/^http:\/\/hdzog\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)ordns\.he\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)heartyit\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".heavy-r.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hec.su") >= 0) return "+ss";
-        if (/^http:\/\/hec\.su/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hecaitou.net") >= 0) return "+ss";
-        if (/(?:^|\.)hecaitou\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hechaji.com") >= 0) return "+ss";
-        if (/(?:^|\.)hechaji\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)heeact\.edu\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hegre-art.com") >= 0) return "+ss";
-        if (/^http:\/\/hegre-art\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)cdn\.helixstudios\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)helplinfen\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)helpuyghursnow\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)helloandroid\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)helloqueer\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".helloss.pw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hellotxt.com") >= 0) return "+ss";
-        if (/(?:^|\.)hellotxt\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hentai.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hellouk.org/forum/lofiversion") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".helpeachpeople.com") >= 0) return "+ss";
-        if (/(?:^|\.)helpeachpeople\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)helpster\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".helpzhuling.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hentaitube.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hentaivideoworld.com") >= 0) return "+ss";
-        if (/(?:^|\.)id\.heroku\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("heqinglian.net") >= 0) return "+ss";
-        if (/(?:^|\.)heqinglian\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)heritage\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)heungkongdiscuss\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hexieshe.com") >= 0) return "+ss";
-        if (/(?:^|\.)hexieshe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hexieshe\.xyz$/.test(host)) return "+ss";
-        if (/(?:^|\.)hexxeh\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("app.heywire.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".heyzo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hgseav.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hhdcb3office.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hhthesakyatrizin.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hi-on.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hidden-advent.org") >= 0) return "+ss";
-        if (/(?:^|\.)hidden-advent\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hidecloud.com/blog/2008/07/29/fuck-beijing-olympics.html") >= 0) return "+ss";
-        if (/(?:^|\.)hide\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hidein.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hideipvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)hideipvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hideman.net") >= 0) return "+ss";
-        if (/(?:^|\.)hideman\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hideme.nl") >= 0) return "+ss";
-        if (/(?:^|\.)hidemy\.name$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hidemyass.com") >= 0) return "+ss";
-        if (/(?:^|\.)hidemyass\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hidemycomp.com") >= 0) return "+ss";
-        if (/(?:^|\.)hidemycomp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hihiforum.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hihistory.net") >= 0) return "+ss";
-        if (/(?:^|\.)hihistory\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".higfw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("highpeakspureearth.com") >= 0) return "+ss";
-        if (/(?:^|\.)highrockmedia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hiitch\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hikinggfw\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hilive.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".himalayan-foundation.org") >= 0) return "+ss";
-        if (/(?:^|\.)himalayan-foundation\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("himalayanglacier.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".himemix.com") >= 0) return "+ss";
-        if (/(?:^|\.)himemix\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".himemix.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("times.hinet.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hitomi.la") >= 0) return "+ss";
-        if (/^http:\/\/hitomi\.la/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hiwifi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hizbuttahrir.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hizb-ut-tahrir.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hizb-ut-tahrir.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hjclub.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hk-pub.com/forum") >= 0) return "+ss";
-        if (/^http:\/\/hk-pub\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hk01.com") >= 0) return "+ss";
-        if (/(?:^|\.)hk01\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hk32168.com") >= 0) return "+ss";
-        if (/(?:^|\.)hk32168\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkacg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkacg\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkatvnews.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkbc.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkbf.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkbookcity.com") >= 0) return "+ss";
-        if (/(?:^|\.)hkbookcity\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkchronicles\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkchurch.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkci.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkcmi.edu") >= 0) return "+ss";
-        if (/(?:^|\.)hkcnews\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkcoc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkctu\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hkday.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkdailynews.com.hk/china.php") >= 0) return "+ss";
-        if (/(?:^|\.)hkdc\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hkdf.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkej.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkepc.com/forum/viewthread.php?tid=1153322") >= 0) return "+ss";
-        if (/(?:^|\.)hket\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkfaa\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hkfreezone.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkfront.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("m.hkgalden.com") >= 0) return "+ss";
-        if (/^https:\/\/m\.hkgalden\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkgreenradio.org/home") >= 0) return "+ss";
-        if (/(?:^|\.)hkgpao\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/.*\.hkheadline\.com.*blog/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkheadline.com/instantnews") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkhkhk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkhrc.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkhrm.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)hkip\.org\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("1989report.hkja.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkjc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkjp.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hklft.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hklts.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)hklts\.org\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkmap\.live$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkopentv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkpeanut\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hkptu.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkreporter.com") >= 0) return "+ss";
-        if (/(?:^|\.)hkreporter\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/hkupop\.hku\.hk\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkusu.net") >= 0) return "+ss";
-        if (/(?:^|\.)hkusu\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkvwet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hkwcc.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)hkzone\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hmonghot.com") >= 0) return "+ss";
-        if (/^http:\/\/hmonghot\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hmv.co.jp/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hnjhj.com") >= 0) return "+ss";
-        if (/(?:^|\.)hnjhj\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hnntube.com") >= 0) return "+ss";
-        if (/(?:^|\.)hola\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hola\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("holymountaincn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("holyspiritspeaks.org") >= 0) return "+ss";
-        if (/(?:^|\.)holyspiritspeaks\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)derekhsu\.homeip\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".homeperversion.com") >= 0) return "+ss";
-        if (/^http:\/\/homeservershow\.com/.test(url)) return "+ss";
-        if (/^http:\/\/old\.honeynet\.org\/scans\/scan31\/sub\/doug_eric\/spam_translation\.html/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hongkongfp.com") >= 0) return "+ss";
-        if (/(?:^|\.)hongkongfp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hongmeimei.com") >= 0) return "+ss";
-        if (/(?:^|\.)hongzhi\.li$/.test(host)) return "+ss";
-        if (/(?:^|\.)honven\.xyz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hootsuite.com") >= 0) return "+ss";
-        if (/(?:^|\.)hootsuite\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hoover\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hopedialogue.org") >= 0) return "+ss";
-        if (/^http:\/\/hopedialogue\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hopto.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hornygamer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hornytrip.com") >= 0) return "+ss";
-        if (/^http:\/\/hornytrip\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)hotair\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hotav.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hotels.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hotfrog.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hotgoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hotpornshow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hotpot.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hotshame.com") >= 0) return "+ss";
-        if (/(?:^|\.)hotspotshield\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hottg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hotvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)hotvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hougaige\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)howtoforge\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hoxx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hqcdp.org") >= 0) return "+ss";
-        if (/(?:^|\.)hqcdp\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)hqjapanesesex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hqmovies.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrcir.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrcchina.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrea.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrichina.org") >= 0) return "+ss";
-        if (/(?:^|\.)hrichina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrtsea.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hrw.org") >= 0) return "+ss";
-        if (/(?:^|\.)hrw\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hrweb.org") >= 0) return "+ss";
-        if (/(?:^|\.)hsjp\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)hsselite\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/hst\.net\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hstern.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hstt.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".htkou.net") >= 0) return "+ss";
-        if (/(?:^|\.)htkou\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".hua-yue.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".huaglad.com") >= 0) return "+ss";
-        if (/(?:^|\.)huaglad\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".huanghuagang.org") >= 0) return "+ss";
-        if (/(?:^|\.)huanghuagang\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".huangyiyu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".huaren.us") >= 0) return "+ss";
-        if (/(?:^|\.)huaren\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".huaren4us.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".huashangnews.com") >= 0) return "+ss";
-        if (/^http:\/\/huashangnews\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.huasing.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("huaxia-news.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("huaxiabao.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("huaxin.ph") >= 0) return "+ss";
-        if (/(?:^|\.)huayuworld\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".huffingtonpost.com/rebiya-kadeer") >= 0) return "+ss";
-        if (/(?:^|\.)hugoroy\.eu$/.test(host)) return "+ss";
-        if (/(?:^|\.)huhaitai\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)huhamhire\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".huhangfei.com") >= 0) return "+ss";
-        if (/(?:^|\.)huhangfei\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("huiyi.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hulkshare.com") >= 0) return "+ss";
-        if (/(?:^|\.)hung-ya\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hungerstrikeforaids\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)huping\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hurgokbayrak.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hurriyet.com.tr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hut2.ru") >= 0) return "+ss";
-        if (/(?:^|\.)hutianyi\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hutong9.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("huyandex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".hwadzan.tw") >= 0) return "+ss";
-        if (/(?:^|\.)hwayue\.org\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)hwinfo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hxwk\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("hxwq.org") >= 0) return "+ss";
-        if (/(?:^|\.)hyperrate\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ebook.hyread.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ebook\.hyread\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)i1\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)i2p2\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)i2runner\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)i818hk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".i-cable.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".i-part.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".iamtopone.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("iask.ca") >= 0) return "+ss";
-        if (/(?:^|\.)iask\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("iask.bz") >= 0) return "+ss";
-        if (/(?:^|\.)iask\.bz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iav19.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ibiblio.org/pub/packages/ccic") >= 0) return "+ss";
-        if (/(?:^|\.)ibit\.am$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iblist.com") >= 0) return "+ss";
-        if (/(?:^|\.)iblogserv-f\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ibros.org") >= 0) return "+ss";
-        if (/^http:\/\/cn\.ibtimes\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ibvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)ibvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("icams.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blogs.icerocket.com/tag") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".icij.org") >= 0) return "+ss";
-        if (/(?:^|\.)icij\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)icl-fi\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".icoco.com") >= 0) return "+ss";
-        if (/(?:^|\.)icoco\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)furbo\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)warbler\.iconfactory\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)iconpaper\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)icu-project\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("w.idaiwan.com/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("idemocracy.asia") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".identi.ca") >= 0) return "+ss";
-        if (/(?:^|\.)identi\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)idiomconnection\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.idlcoyote\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".idouga.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".idreamx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.idsam.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".idv.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ieasy5.com") >= 0) return "+ss";
-        if (/^http:\/\/ieasy5\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ied2k.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ienergy1.com") >= 0) return "+ss";
-        if (/(?:^|\.)iepl\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)ift\.tt$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ifanqiang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ifcss.org") >= 0) return "+ss";
-        if (/(?:^|\.)ifcss\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ifjc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ift.tt") >= 0) return "+ss";
-        if (/^http:\/\/ift\.tt/.test(url)) return "+ss";
-        if (/(?:^|\.)ifreewares\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)igcd\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".igfw.net") >= 0) return "+ss";
-        if (/(?:^|\.)igfw\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".igfw.tech") >= 0) return "+ss";
-        if (/(?:^|\.)igfw\.tech$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".igmg.de") >= 0) return "+ss";
-        if (/(?:^|\.)ignitedetroit\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".igotmail.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)igvita\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ihakka\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ihao.org/dz5") >= 0) return "+ss";
-        if (/(?:^|\.)iicns\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ikstar.com") >= 0) return "+ss";
-        if (/(?:^|\.)ilhamtohtiinstitute\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)illusionfactory\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ilove80\.be$/.test(host)) return "+ss";
-        if (/(?:^|\.)im\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)im88\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imgchili.net") >= 0) return "+ss";
-        if (/^http:\/\/imgchili\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imageab.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".imagefap.com") >= 0) return "+ss";
-        if (/(?:^|\.)imagefap\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)imageflea\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("imageshack.us") >= 0) return "+ss";
-        if (/(?:^|\.)imagevenue\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)imagezilla\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imb.org") >= 0) return "+ss";
-        if (/^http:\/\/imb\.org/.test(url)) return "+ss";
-        if (/^http:\/\/www\.imdb\.com\/name\/nm0482730/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imdb.com/title/tt0819354") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".imdb.com/title/tt1540068") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".imdb.com/title/tt4908644") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".img.ly") >= 0) return "+ss";
-        if (/(?:^|\.)img\.ly$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imgur.com") >= 0) return "+ss";
-        if (/(?:^|\.)imgur\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imkev.com") >= 0) return "+ss";
-        if (/(?:^|\.)imkev\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".imlive.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".immoral.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("impact.org.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("impp.mn") >= 0) return "+ss";
-        if (/^http:\/\/tech2\.in\.com\/video\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("in99.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("in-disguise.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".incapdns.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".incloak.com") >= 0) return "+ss";
-        if (/(?:^|\.)incloak\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)incredibox\.fr$/.test(host)) return "+ss";
-        if (/(?:^|\.)independent\.co\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)indiablooms\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)indiandefensenews\.in$/.test(host)) return "+ss";
-        if (/(?:^|\.)indianarrative\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)timesofindia\.indiatimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".indiemerch.com") >= 0) return "+ss";
-        if (/(?:^|\.)indiemerch\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("info-graf.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("website.informer.com") >= 0) return "+ss";
-        if (/(?:^|\.)initiativesforchina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".inkui.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".inmediahk.net") >= 0) return "+ss";
-        if (/(?:^|\.)inmediahk\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)innermongolia\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)inoreader\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".inote.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".insecam.org") >= 0) return "+ss";
-        if (/^http:\/\/insecam\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)insidevoa\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".institut-tibetain.org") >= 0) return "+ss";
-        if (/^http:\/\/internet\.org\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("internetdefenseleague.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("internetfreedom.org") >= 0) return "+ss";
-        if (/(?:^|\.)internetpopculture\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".inthenameofconfuciusmovie.com") >= 0) return "+ss";
-        if (/(?:^|\.)inthenameofconfuciusmovie\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("inxian.com") >= 0) return "+ss";
-        if (/(?:^|\.)inxian\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ipalter.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ipfire.org") >= 0) return "+ss";
-        if (/(?:^|\.)iphone4hongkong\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)iphonehacks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)iphonetaiwan\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)iphonix\.fr$/.test(host)) return "+ss";
-        if (/(?:^|\.)ipicture\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ipjetable.net") >= 0) return "+ss";
-        if (/(?:^|\.)ipjetable\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ipobar.com/read.php?") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ipoock.com/img") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".iportal.me") >= 0) return "+ss";
-        if (/^http:\/\/iportal\.me/.test(url)) return "+ss";
-        if (/(?:^|\.)ippotv\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ipredator.se") >= 0) return "+ss";
-        if (/(?:^|\.)ipredator\.se$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iptv.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)iptvbin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ipvanish\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("iredmail.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese.irib.ir") >= 0) return "+ss";
-        if (/(?:^|\.)ironbigfools\.compython\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)ironpython\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ironsocket.com") >= 0) return "+ss";
-        if (/(?:^|\.)ironsocket\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".is.gd") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".islahhaber.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".islam.org.hk") >= 0) return "+ss";
-        if (/^http:\/\/islam\.org\.hk/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".islamawareness.net/Asia/China") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".islamhouse.com") >= 0) return "+ss";
-        if (/(?:^|\.)islamhouse\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".islamicity.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".islamicpluralism.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".islamtoday.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".isaacmao.com") >= 0) return "+ss";
-        if (/(?:^|\.)isaacmao\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)isgreat\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ismaelan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ismalltits.com") >= 0) return "+ss";
-        if (/(?:^|\.)ismprofessional\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("isohunt.com") >= 0) return "+ss";
-        if (/(?:^|\.)israbox\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".issuu.com") >= 0) return "+ss";
-        if (/(?:^|\.)issuu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".istars.co.nz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("oversea.istarshine.com") >= 0) return "+ss";
-        if (/(?:^|\.)oversea\.istarshine\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.istef.info/2007/10/21/myentunnel") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".istiqlalhewer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".istockphoto.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("isunaffairs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("isuntv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("itaboo.info") >= 0) return "+ss";
-        if (/(?:^|\.)itaboo\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".italiatibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("download.ithome.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ithelp.ithome.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)itshidden\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".itsky.it") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".itweet.net") >= 0) return "+ss";
-        if (/^http:\/\/itweet\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iu45.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".iuhrdf.org") >= 0) return "+ss";
-        if (/(?:^|\.)iuhrdf\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iuksky.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ivacy.com") >= 0) return "+ss";
-        if (/(?:^|\.)ivacy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".iverycd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ivpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)ixquick\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ixxx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("iyouport.com") >= 0) return "+ss";
-        if (/(?:^|\.)iyouport\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".izaobao.us") >= 0) return "+ss";
-        if (/(?:^|\.)gmozomg\.izihost\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".izles.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".izlesem.org") >= 0) return "+ss";
-        if (/(?:^|\.)j\.mp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.jackjia.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jamaat.org") >= 0) return "+ss";
-        if (/(?:^|\.)jamestown\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jamyangnorbu.com") >= 0) return "+ss";
-        if (/^http:\/\/jamyangnorbu\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jandyx.com") >= 0) return "+ss";
-        if (/(?:^|\.)janwongphoto\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)japan-whores\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jav.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jav101.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jav2be.com") >= 0) return "+ss";
-        if (/(?:^|\.)jav2be\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jav68.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".javakiba.org") >= 0) return "+ss";
-        if (/^http:\/\/javakiba\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javbus.com") >= 0) return "+ss";
-        if (/(?:^|\.)javbus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)javfor\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javhd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".javhip.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".javmobile.net") >= 0) return "+ss";
-        if (/^http:\/\/javmobile\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".javmoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".javseen.com") >= 0) return "+ss";
-        if (/^http:\/\/javseen\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("jbtalks.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jbtalks.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jbtalks.my") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jdwsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jeanyim.com") >= 0) return "+ss";
-        if (/(?:^|\.)jfqu36\.club$/.test(host)) return "+ss";
-        if (/(?:^|\.)jfqu37\.xyz$/.test(host)) return "+ss";
-        if (/(?:^|\.)jgoodies\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jiangweiping.com") >= 0) return "+ss";
-        if (/(?:^|\.)jiangweiping\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jiaoyou8\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jiehua.cz") >= 0) return "+ss";
-        if (/(?:^|\.)hk\.jiepang\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tw\.jiepang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("jieshibaobao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jigglegifs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("56cun04.jigsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jigong1024.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("daodu14.jigsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("specxinzl.jigsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wlcnew.jigsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jihadology.net") >= 0) return "+ss";
-        if (/^http:\/\/jihadology\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("jinbushe.org") >= 0) return "+ss";
-        if (/(?:^|\.)jinbushe\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jingsim.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zhao.jinhai.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jingpin.org") >= 0) return "+ss";
-        if (/(?:^|\.)jingpin\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("jinpianwang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jinroukong.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ac.jiruan.net") >= 0) return "+ss";
-        if (/(?:^|\.)jitouch\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jizzthis.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jjgirls.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jkb.cc") >= 0) return "+ss";
-        if (/^http:\/\/jkb\.cc/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("jkforum.net") >= 0) return "+ss";
-        if (/(?:^|\.)jma\.go\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("research.jmsc.hku.hk/social") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("weiboscope.jmsc.hku.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".jmscult.com") >= 0) return "+ss";
-        if (/^http:\/\/jmscult\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)joachims\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)jobso\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sunwinism.joinbbs.net") >= 0) return "+ss";
-        if (/(?:^|\.)joinclubhouse\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".journalchretien.net") >= 0) return "+ss";
-        if (/(?:^|\.)journalofdemocracy\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".joymiihub.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".joyourself.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jpopforum.net") >= 0) return "+ss";
-        if (/(?:^|\.)fiddle\.jshell\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jubushoushen.com") >= 0) return "+ss";
-        if (/(?:^|\.)jubushoushen\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".juhuaren.com") >= 0) return "+ss";
-        if (/(?:^|\.)juliereyc\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)junauza\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".june4commemoration.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".junefourth-20.net") >= 0) return "+ss";
-        if (/(?:^|\.)junefourth-20\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)bbs\.junglobal\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".juoaa.com") >= 0) return "+ss";
-        if (/^http:\/\/juoaa\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("justfreevpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".justicefortenzin.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("justpaste.it") >= 0) return "+ss";
-        if (/(?:^|\.)justmysocks1\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("justtristan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("juyuange.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("juziyue.com") >= 0) return "+ss";
-        if (/(?:^|\.)juziyue\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jwmusic\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".jyxf.net") >= 0) return "+ss";
-        if (/(?:^|\.)k-doujin\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)ka-wai\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kadokawa\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kagyu.org") >= 0) return "+ss";
-        if (/(?:^|\.)kagyu\.org\.za$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kagyumonlam.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kagyunews.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kagyuoffice.org") >= 0) return "+ss";
-        if (/(?:^|\.)kagyuoffice\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)kagyuoffice\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kaiyuan.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kakao.com") >= 0) return "+ss";
-        if (/(?:^|\.)kakao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kalachakralugano.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kankan.today") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kannewyork.com") >= 0) return "+ss";
-        if (/(?:^|\.)kannewyork\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kanshifang.com") >= 0) return "+ss";
-        if (/(?:^|\.)kanshifang\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kantie\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("kanzhongguo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("kanzhongguo.eu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kaotic.com") >= 0) return "+ss";
-        if (/(?:^|\.)kaotic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)karayou\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("karkhung.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".karmapa.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".karmapa-teachings.org") >= 0) return "+ss";
-        if (/(?:^|\.)kawase\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kba-tx.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kcoolonline.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kebrum.com") >= 0) return "+ss";
-        if (/(?:^|\.)kebrum\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kechara.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".keepandshare.com/visit/visit_page.php?i=688154") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".keezmovies.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kendincos.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kenengba.com") >= 0) return "+ss";
-        if (/(?:^|\.)kenengba\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)keontech\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kepard.com") >= 0) return "+ss";
-        if (/(?:^|\.)kepard\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wiki.keso.cn/Home") >= 0) return "+ss";
-        if (/(?:^|\.)keycdn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".khabdha.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".khmusic.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)kichiku-doujinko\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kik.com") >= 0) return "+ss";
-        if (/(?:^|\.)kik\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.kimy.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kindleren.com") >= 0) return "+ss";
-        if (/^http:\/\/kindleren\.com/.test(url)) return "+ss";
-        if (/^http:\/\/www\.kindleren\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kingdomsalvation.org") >= 0) return "+ss";
-        if (/(?:^|\.)kingdomsalvation\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("kinghost.com") >= 0) return "+ss";
-        if (/(?:^|\.)kingstone\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kink.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kinokuniya.com") >= 0) return "+ss";
-        if (/(?:^|\.)kinokuniya\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("killwall.com") >= 0) return "+ss";
-        if (/(?:^|\.)killwall\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kinmen\.travel$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kir.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kissbbao.cn") >= 0) return "+ss";
-        if (/^http:\/\/kiwi\.kz/.test(url)) return "+ss";
-        if (/(?:^|\.)kk-whys\.co\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kmuh.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".knowledgerush.com/kr/encyclopedia") >= 0) return "+ss";
-        if (/(?:^|\.)knowyourmeme\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kobo.com") >= 0) return "+ss";
-        if (/(?:^|\.)kobo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kobobooks.com") >= 0) return "+ss";
-        if (/(?:^|\.)kobobooks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kodingen\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)kompozer\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".konachan.com") >= 0) return "+ss";
-        if (/^http:\/\/konachan\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kone.com") >= 0) return "+ss";
-        if (/(?:^|\.)koolsolutions\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".koornk.com") >= 0) return "+ss";
-        if (/(?:^|\.)koornk\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)koranmandarin\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".korenan2.com") >= 0) return "+ss";
-        if (/(?:^|\.)kqes\.net$/.test(host)) return "+ss";
-        if (/^http:\/\/gojet\.krtco\.com\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ksdl.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ksnews.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ktzhk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kui.name/event") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("kun.im") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".kurashsultan.com") >= 0) return "+ss";
-        if (/(?:^|\.)kurtmunger\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("kusocity.com") >= 0) return "+ss";
-        if (/(?:^|\.)kwcg\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)kwok7\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kwongwah.com.my") >= 0) return "+ss";
-        if (/(?:^|\.)kwongwah\.com\.my$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kxsw.life") >= 0) return "+ss";
-        if (/(?:^|\.)kxsw\.life$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kyofun.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("kyohk.net") >= 0) return "+ss";
-        if (/(?:^|\.)kyoyue\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kyzyhello.com") >= 0) return "+ss";
-        if (/(?:^|\.)kyzyhello\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".kzeng.info") >= 0) return "+ss";
-        if (/(?:^|\.)kzeng\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("la-forum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ladbrokes.com") >= 0) return "+ss";
-        if (/(?:^|\.)labiennale\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lagranepoca.com") >= 0) return "+ss";
-        if (/(?:^|\.)lagranepoca\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lala\.im$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lalulalu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lama.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)lama\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lamayeshe.com") >= 0) return "+ss";
-        if (/^http:\/\/lamayeshe\.com/.test(url)) return "+ss";
-        if (/^http:\/\/www\.lamenhu\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lamnia.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)lamnia\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("lamrim.com") >= 0) return "+ss";
-        if (/(?:^|\.)landofhope\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lanterncn.cn") >= 0) return "+ss";
-        if (/^http:\/\/lanterncn\.cn/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lantosfoundation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".laod.cn") >= 0) return "+ss";
-        if (/^http:\/\/laod\.cn/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("laogai.org") >= 0) return "+ss";
-        if (/(?:^|\.)laogai\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)laogairesearch\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("laomiu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".laoyang.info") >= 0) return "+ss";
-        if (/^http:\/\/laoyang\.info/.test(url)) return "+ss";
-        if (/(?:^|\.)laptoplockdown\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".laqingdan.net") >= 0) return "+ss";
-        if (/(?:^|\.)laqingdan\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)larsgeorge\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lastcombat.com") >= 0) return "+ss";
-        if (/^http:\/\/lastcombat\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)lastfm\.es$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("latelinenews.com") >= 0) return "+ss";
-        if (/(?:^|\.)lausan\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)le-vpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".leafyvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)leafyvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("leeao.com.cn/bbs/forum.php") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("lefora.com") >= 0) return "+ss";
-        if (/(?:^|\.)left21\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".legalporno.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".legsjapan.com") >= 0) return "+ss";
-        if (/^http:\/\/leirentv\.ca/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("leisurecafe.ca") >= 0) return "+ss";
-        if (/(?:^|\.)lematin\.ch$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lemonde.fr") >= 0) return "+ss";
-        if (/(?:^|\.)lenwhite\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)leorockwell\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("lerosua.org") >= 0) return "+ss";
-        if (/(?:^|\.)lerosua\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.lester850.info") >= 0) return "+ss";
-        if (/(?:^|\.)lesoir\.be$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".letou.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("letscorp.net") >= 0) return "+ss";
-        if (/(?:^|\.)letscorp\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)ocsp\.int-x3\.letsencrypt\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ss\.levyhsu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn\.assets\.lfpcontent\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lhakar.org") >= 0) return "+ss";
-        if (/^http:\/\/lhakar\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lhasocialwork.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".liangyou.net") >= 0) return "+ss";
-        if (/(?:^|\.)liangyou\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lianyue.net") >= 0) return "+ss";
-        if (/(?:^|\.)liaowangxizang\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".liaowangxizang.net") >= 0) return "+ss";
-        if (/(?:^|\.)liberal\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".libertytimes.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blogs.libraryinformationtechnology.com/jxyz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lidecheng.com/blog/fucking-gfw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lighten.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lightnovel.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("limiao.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("linkuswell.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("abitno.linpie.com/use-ipv6-to-fuck-gfw") >= 0) return "+ss";
-        if (/(?:^|\.)line\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)line-apps\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".linglingfa.com") >= 0) return "+ss";
-        if (/(?:^|\.)lingvodics\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".link-o-rama.com") >= 0) return "+ss";
-        if (/^http:\/\/link-o-rama\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".linkideo.com") >= 0) return "+ss";
-        if (/(?:^|\.)api\.linksalpha\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)apidocs\.linksalpha\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)www\.linksalpha\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)help\.linksalpha\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)linux\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("linuxtoy.org/archives/installing-west-chamber-on-ubuntu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lionsroar.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lipuman.com") >= 0) return "+ss";
-        if (/(?:^|\.)liquidvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)greatfire\.us7\.list-manage\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)listennotes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)listentoyoutube\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("listorious.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".liu-xiaobo.org") >= 0) return "+ss";
-        if (/(?:^|\.)liudejun\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".liuhanyu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".liujianshu.com") >= 0) return "+ss";
-        if (/(?:^|\.)liujianshu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".liuxiaobo.net") >= 0) return "+ss";
-        if (/^http:\/\/liuxiaobo\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("liuxiaotong.com") >= 0) return "+ss";
-        if (/(?:^|\.)liuxiaotong\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".livedoor.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".liveleak.com") >= 0) return "+ss";
-        if (/(?:^|\.)liveleak\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)livemint\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".livestation.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("livestream.com") >= 0) return "+ss";
-        if (/(?:^|\.)livestream\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)livingonline\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)livingstream\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)livevideo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".livevideo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".liwangyang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("lizhizhuangbi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("lkcn.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".llss.me/") >= 0) return "+ss";
-        if (/(?:^|\.)lncn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".load.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lobsangwangyal.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".localdomain.ws") >= 0) return "+ss";
-        if (/(?:^|\.)localdomain\.ws$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("localpresshk.com") >= 0) return "+ss";
-        if (/(?:^|\.)lockestek\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("logbot.net") >= 0) return "+ss";
-        if (/(?:^|\.)logiqx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("secure.logmein.com") >= 0) return "+ss";
-        if (/(?:^|\.)secure\.logmein\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)logos\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".londonchinese.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".longhair.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("longmusic.com") >= 0) return "+ss";
-        if (/(?:^|\.)longtermly\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)lookpic\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".looktoronto.com") >= 0) return "+ss";
-        if (/^http:\/\/looktoronto\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lotsawahouse.org/tibetan-masters/fourteenth-dalai-lama") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lotuslight.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lotuslight.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hkreporter.loved.hk") >= 0) return "+ss";
-        if (/(?:^|\.)lpsg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lrfz\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lrip.org") >= 0) return "+ss";
-        if (/(?:^|\.)lrip\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsd.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)lsd\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("lsforum.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsm.org") >= 0) return "+ss";
-        if (/(?:^|\.)lsm\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsmchinese.org") >= 0) return "+ss";
-        if (/(?:^|\.)lsmchinese\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsmkorean.org") >= 0) return "+ss";
-        if (/(?:^|\.)lsmkorean\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsmradio.com/rad_archives") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lsmwebcast.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ltn.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ltn\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)luckydesigner\.space$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".luke54.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".luke54.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".lupm.org") >= 0) return "+ss";
-        if (/(?:^|\.)lupm\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)lushstories\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("luxebc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("lvhai.org") >= 0) return "+ss";
-        if (/(?:^|\.)lvhai\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)lvv2\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lyfhk.net") >= 0) return "+ss";
-        if (/^http:\/\/lyfhk\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)lzjscript\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".lzmtnews.org") >= 0) return "+ss";
-        if (/(?:^|\.)lzmtnews\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/.*http:\/\/.*\.m-team\.cc/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".macrovpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("macts.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)mad-ar\.ch$/.test(host)) return "+ss";
-        if (/(?:^|\.)madrau\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)madthumbs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)magic-net\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mahabodhi.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("my.mail.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".maiplus.com") >= 0) return "+ss";
-        if (/^http:\/\/maiplus\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".maizhong.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("makkahnewspaper.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mamingzhe.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("manicur4ik.ru") >= 0) return "+ss";
-        if (/(?:^|\.)manyvoices\.news$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".maplew.com") >= 0) return "+ss";
-        if (/^http:\/\/maplew\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)marc\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("marguerite.su") >= 0) return "+ss";
-        if (/(?:^|\.)martincartoons\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("maskedip.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".maiio.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mail-archive.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".malaysiakini.com") >= 0) return "+ss";
-        if (/(?:^|\.)makemymood\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".manchukuo.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".maniash.com") >= 0) return "+ss";
-        if (/^http:\/\/maniash\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mansion.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mansionpoker.com") >= 0) return "+ss";
-        if (/(?:^|\.)martau\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/blog\.martinoei\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".martsangkagyuofficial.org") >= 0) return "+ss";
-        if (/^http:\/\/martsangkagyuofficial\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("maruta.be/forget") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".marxist.com") >= 0) return "+ss";
-        if (/(?:^|\.)marxist\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".marxists.org/chinese") >= 0) return "+ss";
-        if (/(?:^|\.)matainja\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mathable\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)mathiew-badimon\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)matrix\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)matsushimakaede\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/maturejp\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("mayimayi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".maxing.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mcaf.ee") >= 0) return "+ss";
-        if (/^http:\/\/mcaf\.ee/.test(url)) return "+ss";
-        if (/(?:^|\.)mcadforums\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mcfog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mcreasite.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".md-t.org") >= 0) return "+ss";
-        if (/(?:^|\.)md-t\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)meansys\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".media.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mediachinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)mediachinese\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mediafire.com/?") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mediafire.com/download") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mediafreakcity.com") >= 0) return "+ss";
-        if (/(?:^|\.)mediafreakcity\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".medium.com") >= 0) return "+ss";
-        if (/(?:^|\.)medium\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".meetav.com") >= 0) return "+ss";
-        if (/(?:^|\.)meetup\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mefeedia.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("jihadintel.meforum.org") >= 0) return "+ss";
-        if (/(?:^|\.)mega\.co\.nz$/.test(host)) return "+ss";
-        if (/(?:^|\.)mega\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)mega\.nz$/.test(host)) return "+ss";
-        if (/(?:^|\.)megaproxy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)megarotic\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("megavideo.com") >= 0) return "+ss";
-        if (/(?:^|\.)megurineluka\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("meirixiaochao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".meltoday.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".memehk.com") >= 0) return "+ss";
-        if (/(?:^|\.)memehk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("memorybbs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".memri.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".memrijttm.org") >= 0) return "+ss";
-        if (/(?:^|\.)mercdn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mercyprophet.org") >= 0) return "+ss";
-        if (/^http:\/\/mercyprophet\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)mergersandinquisitions\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".meridian-trust.org") >= 0) return "+ss";
-        if (/^http:\/\/meridian-trust\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".meripet.biz") >= 0) return "+ss";
-        if (/^http:\/\/meripet\.biz/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".meripet.com") >= 0) return "+ss";
-        if (/^http:\/\/meripet\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("merit-times.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("meshrep.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mesotw.com/bbs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("metacafe.com/watch") >= 0) return "+ss";
-        if (/(?:^|\.)metafilter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)meteorshowersonline\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.metro\.taipei\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".metrohk.com.hk/?cmd=detail&categoryID=2") >= 0) return "+ss";
-        if (/(?:^|\.)metrolife\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".metroradio.com.hk") >= 0) return "+ss";
-        if (/^http:\/\/metroradio\.com\.hk/.test(url)) return "+ss";
-        if (/(?:^|\.)mewe\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("meyou.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".meyul.com") >= 0) return "+ss";
-        if (/(?:^|\.)mgoon\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mgstage\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mh4u\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mhradio.org") >= 0) return "+ss";
-        if (/^http:\/\/michaelanti\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)michaelmarketl\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/bbs\.mikocon\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".microvpn.com") >= 0) return "+ss";
-        if (/^http:\/\/microvpn\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("middle-way.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mihk.hk/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mihr.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mihua.org") >= 0) return "+ss";
-        if (/(?:^|\.)mikesoltys\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".milph.net") >= 0) return "+ss";
-        if (/^http:\/\/milph\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".milsurps.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mimiai.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mimivip.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mimivv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mindrolling.org") >= 0) return "+ss";
-        if (/^http:\/\/mindrolling\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)mingdemedia\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".minghui.or.kr") >= 0) return "+ss";
-        if (/^http:\/\/minghui\.or\.kr/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("minghui.org") >= 0) return "+ss";
-        if (/(?:^|\.)minghui\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("minghui-a.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("minghui-b.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("minghui-school.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingjinglishi.com") >= 0) return "+ss";
-        if (/(?:^|\.)mingjinglishi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mingjingnews.com") >= 0) return "+ss";
-        if (/(?:^|\.)mingjingtimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpao.com") >= 0) return "+ss";
-        if (/(?:^|\.)mingpao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaocanada.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaomonthly.com") >= 0) return "+ss";
-        if (/^http:\/\/mingpaomonthly\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("mingpaonews.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaony.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaosf.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaotor.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingpaovan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mingshengbao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".minhhue.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".miniforum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ministrybooks.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".minzhuhua.net") >= 0) return "+ss";
-        if (/(?:^|\.)minzhuhua\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("minzhuzhanxian.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("minzhuzhongguo.org") >= 0) return "+ss";
-        if (/(?:^|\.)miroguide\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mirrorbooks.com") >= 0) return "+ss";
-        if (/(?:^|\.)mirrormedia\.mg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mist.vip") >= 0) return "+ss";
-        if (/(?:^|\.)thecenter\.mit\.edu$/.test(host)) return "+ss";
-        if (/(?:^|\.)scratch\.mit\.edu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mitao.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mitbbs.com") >= 0) return "+ss";
-        if (/(?:^|\.)mitbbs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mitbbsau.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mixero.com") >= 0) return "+ss";
-        if (/(?:^|\.)mixero\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mixi\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mixpod.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mixx.com") >= 0) return "+ss";
-        if (/(?:^|\.)mixx\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mizzmona\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mk5000.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mlcool.com") >= 0) return "+ss";
-        if (/(?:^|\.)mlzs\.work$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mm-cg.com") >= 0) return "+ss";
-        if (/(?:^|\.)mmaaxx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mmmca.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mnewstv.com") >= 0) return "+ss";
-        if (/(?:^|\.)mobatek\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mobile01.com") >= 0) return "+ss";
-        if (/(?:^|\.)mobile01\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mobileways\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mobypicture.com") >= 0) return "+ss";
-        if (/^http:\/\/moby\.to/.test(url)) return "+ss";
-        if (/(?:^|\.)modernchinastudies\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)moeerolibrary\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wiki.moegirl.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mofaxiehui.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mofos.com") >= 0) return "+ss";
-        if (/(?:^|\.)mog\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mohu\.rocks$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("molihua.org") >= 0) return "+ss";
-        if (/(?:^|\.)mondex\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".money-link.com.tw") >= 0) return "+ss";
-        if (/^http:\/\/money-link\.com\.tw/.test(url)) return "+ss";
-        if (/^http:\/\/www\.monlamit\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".moonbbs.com") >= 0) return "+ss";
-        if (/(?:^|\.)moonbbs\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)moptt\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)monitorchina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.morbell.com") >= 0) return "+ss";
-        if (/(?:^|\.)morningsun\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)moroneta\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".motherless.com") >= 0) return "+ss";
-        if (/^http:\/\/motherless\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("motor4ik.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mousebreaker.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".movements.org") >= 0) return "+ss";
-        if (/(?:^|\.)movements\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)moviefap\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)www\.moztw\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mp3buscador.com") >= 0) return "+ss";
-        if (/(?:^|\.)mpettis\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mpfinance.com") >= 0) return "+ss";
-        if (/(?:^|\.)mpfinance\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mpinews.com") >= 0) return "+ss";
-        if (/(?:^|\.)mpinews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mponline.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mqxd.org") >= 0) return "+ss";
-        if (/^http:\/\/mqxd\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("mrtweet.com") >= 0) return "+ss";
-        if (/(?:^|\.)mrtweet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.hk.msn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.msn.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("msguancha.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mswe1.org") >= 0) return "+ss";
-        if (/^http:\/\/mswe1\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)mthruf\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mubi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("muchosucko.com") >= 0) return "+ss";
-        if (/(?:^|\.)multiply\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("multiproxy.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("multiupload.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mullvad.net") >= 0) return "+ss";
-        if (/(?:^|\.)mullvad\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mummysgold.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".murmur.tw") >= 0) return "+ss";
-        if (/^http:\/\/murmur\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".musicade.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".muslimvideo.com") >= 0) return "+ss";
-        if (/(?:^|\.)muzi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)muzi\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)mx981\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".my-formosa.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".my-proxy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".my-private-network.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)my-private-network\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.my903.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myactimes.com/actimes") >= 0) return "+ss";
-        if (/(?:^|\.)myanniu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".myaudiocast.com") >= 0) return "+ss";
-        if (/(?:^|\.)myaudiocast\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".myav.com.tw/bbs") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mybbs.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myca168.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mycanadanow.com") >= 0) return "+ss";
-        if (/(?:^|\.)bbs\.mychat\.to$/.test(host)) return "+ss";
-        if (/(?:^|\.)mychinamyhome\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mychinamyhome.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mychinanet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mychinanews.com") >= 0) return "+ss";
-        if (/(?:^|\.)mychinanews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mychinese.news") >= 0) return "+ss";
-        if (/(?:^|\.)mycnnews\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mykomica\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("mycould.com/discuz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myeasytv.com") >= 0) return "+ss";
-        if (/(?:^|\.)myeclipseide\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".myforum.com.hk") >= 0) return "+ss";
-        if (/(?:^|\.)myforum\.com\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)myforum\.com\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".myfreecams.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myfreepaysite.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myfreshnet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myiphide.com") >= 0) return "+ss";
-        if (/(?:^|\.)myiphide\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.mymaji.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mymediarom.com/files/box") >= 0) return "+ss";
-        if (/(?:^|\.)mymoe\.moe$/.test(host)) return "+ss";
-        if (/(?:^|\.)mymusic\.net\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)myparagliding\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)mypopescu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("myradio.hk/podcast") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myreadingmanga.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mysinablog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".myspace.com") >= 0) return "+ss";
-        if (/(?:^|\.)myspacecdn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".mytalkbox.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".mytizi.com") >= 0) return "+ss";
-        if (/(?:^|\.)naacoalition\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("old.nabble.com") >= 0) return "+ss";
-        if (/(?:^|\.)naitik\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nakido.com") >= 0) return "+ss";
-        if (/(?:^|\.)nakido\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nakuz.com/bbs") >= 0) return "+ss";
-        if (/(?:^|\.)nalandabodhi\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)nalandawest\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".namgyal.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("namgyalmonastery.org") >= 0) return "+ss";
-        if (/(?:^|\.)namsisi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nanyang.com") >= 0) return "+ss";
-        if (/(?:^|\.)nanyang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nanyangpost.com") >= 0) return "+ss";
-        if (/(?:^|\.)nanyangpost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nanzao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".naol.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".naol.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("uighur.narod.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nat.moe") >= 0) return "+ss";
-        if (/(?:^|\.)nat\.moe$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cyberghost.natado.com") >= 0) return "+ss";
-        if (/(?:^|\.)national-lottery\.co\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)nationalawakening\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)nationalinterest\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.nationalgeographic.com/news/2014/06/140603-tiananmen-square") >= 0) return "+ss";
-        if (/(?:^|\.)nationalreview\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nationsonline.org/oneworld/tibet") >= 0) return "+ss";
-        if (/(?:^|\.)line\.naver\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)navyfamily\.navy\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)navyreserve\.navy\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)nko\.navy\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)usno\.navy\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("naweeklytimes.com") >= 0) return "+ss";
-        if (/(?:^|\.)nbcnews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nbtvpn.com") >= 0) return "+ss";
-        if (/^http:\/\/nbtvpn\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("nccwatch.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nch.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ncn.org") >= 0) return "+ss";
-        if (/(?:^|\.)nchrd\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ncn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)etools\.ncol\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nde.de") >= 0) return "+ss";
-        if (/(?:^|\.)ndi\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ndr.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ned.org") >= 0) return "+ss";
-        if (/(?:^|\.)nekoslovakia\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)neowin\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nepusoku\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)net-fits\.pro$/.test(host)) return "+ss";
-        if (/(?:^|\.)netalert\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.netbig.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".netbirds.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("netcolony.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bolin.netfirms.com") >= 0) return "+ss";
-        if (/(?:^|\.)netflav\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)netme\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("netsneak.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".network54.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("networkedblogs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".networktunnel.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("neverforget8964.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("new-3lunch.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".new-akiba.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".new96.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newcenturymc.com") >= 0) return "+ss";
-        if (/^http:\/\/newcenturymc\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("newcenturynews.com") >= 0) return "+ss";
-        if (/(?:^|\.)newchen\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".newchen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newgrounds.com") >= 0) return "+ss";
-        if (/(?:^|\.)newhighlandvision\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("newipnow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newlandmagazine.com.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newnews.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news100.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("newschinacomment.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newscn.org") >= 0) return "+ss";
-        if (/(?:^|\.)newscn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("newspeak.cc/story") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newsancai.com") >= 0) return "+ss";
-        if (/(?:^|\.)newsancai\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".newsdetox.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".newsdh.com") >= 0) return "+ss";
-        if (/(?:^|\.)newsmax\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)newstamago\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)newstapa\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("newstarnet.com") >= 0) return "+ss";
-        if (/(?:^|\.)newsweek\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".newtaiwan.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("newtalk.tw") >= 0) return "+ss";
-        if (/(?:^|\.)newtalk\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)newyorker\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("newyorktimes.com") >= 0) return "+ss";
-        if (/(?:^|\.)nexon\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".next11.co.jp") >= 0) return "+ss";
-        if (/(?:^|\.)nextdigital\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nextmag.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nextmedia.com") >= 0) return "+ss";
-        if (/(?:^|\.)nexton-net\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("nexttv.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nfjtyd.com") >= 0) return "+ss";
-        if (/(?:^|\.)co\.ng\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)nga\.mil$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ngensis.com") >= 0) return "+ss";
-        if (/(?:^|\.)ngodupdongchung\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nhentai.net") >= 0) return "+ss";
-        if (/^http:\/\/nhentai\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nhk-ondemand.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nicovideo.jp/watch") >= 0) return "+ss";
-        if (/(?:^|\.)nicovideo\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)nighost\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("av.nightlife141.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ninecommentaries.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ninjacloak.com") >= 0) return "+ss";
-        if (/(?:^|\.)ninjaproxy\.ninja$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("nintendium.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwanyes.ning.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("usmgtcg.ning.com/forum") >= 0) return "+ss";
-        if (/(?:^|\.)niusnews\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)njactb\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("njuice.com") >= 0) return "+ss";
-        if (/(?:^|\.)njuice\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nlfreevpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nmsl\.website$/.test(host)) return "+ss";
-        if (/(?:^|\.)nnews\.eu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ddns.net/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".gooddns.info") >= 0) return "+ss";
-        if (/(?:^|\.)gotdns\.ch$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".maildns.xyz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".no-ip.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".opendn.xyz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".servehttp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sytes.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".whodns.xyz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zapto.org") >= 0) return "+ss";
-        if (/^http:\/\/dynupdate\.no-ip\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)nobel\.se$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("nobelprize.org/nobel_prizes/peace/laureates/1989") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nobelprize.org/nobel_prizes/peace/laureates/2010") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nobodycanstop.us") >= 0) return "+ss";
-        if (/(?:^|\.)nobodycanstop\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)nokogiri\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)nokola\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("noodlevpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".norbulingka.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nordvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)nordvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)novelasia\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".news.now.com") >= 0) return "+ss";
-        if (/^http:\/\/news\.now\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.now.com%2Fhome") >= 0) return "+ss";
-        if (/(?:^|\.)nownews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nowtorrents.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".noypf.com") >= 0) return "+ss";
-        if (/(?:^|\.)noypf\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)npa\.go\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".npnt.me") >= 0) return "+ss";
-        if (/^http:\/\/npnt\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nps.gov") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nradio.me") >= 0) return "+ss";
-        if (/^http:\/\/nradio\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nrk.no") >= 0) return "+ss";
-        if (/(?:^|\.)nrk\.no$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ntd.tv") >= 0) return "+ss";
-        if (/(?:^|\.)ntd\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ntdtv.com") >= 0) return "+ss";
-        if (/(?:^|\.)ntdtv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ntdtv\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ntdtv.co.kr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ntdtv.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ntdtv.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ntdtv.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ntdtvla.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ntrfun.com") >= 0) return "+ss";
-        if (/(?:^|\.)cbs\.ntu\.edu\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)media\.nu\.nl$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nubiles.net") >= 0) return "+ss";
-        if (/(?:^|\.)nuexpo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nukistream.com") >= 0) return "+ss";
-        if (/(?:^|\.)nurgo-software\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nutaku\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)nutsvpn\.work$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nuvid.com") >= 0) return "+ss";
-        if (/(?:^|\.)nvdst\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("nuzcom.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nvquan.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".nvtongzhisheng.org") >= 0) return "+ss";
-        if (/^http:\/\/nvtongzhisheng\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nwtca.org") >= 0) return "+ss";
-        if (/^http:\/\/nyaa\.eu/.test(url)) return "+ss";
-        if (/(?:^|\.)nyaa\.si$/.test(host)) return "+ss";
-        if (/(?:^|\.)nybooks\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nydus.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nylon-angel.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nylonstockingsonline.com") >= 0) return "+ss";
-        if (/(?:^|\.)nypost\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".nzchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)nzchinese\.net\.nz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("observechina.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".obutu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ocaspro.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("occupytiananmen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("oclp.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ocreampies.com") >= 0) return "+ss";
-        if (/(?:^|\.)october-review\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)odysee\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("offbeatchina.com") >= 0) return "+ss";
-        if (/(?:^|\.)officeoftibet\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/ofile\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)ogaoga\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twtr2src.ogaoga.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ogate.org") >= 0) return "+ss";
-        if (/(?:^|\.)ogate\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("www2.ohchr.org/english/bodies/cat/docs/ngos/II_China_41.pdf") >= 0) return "+ss";
-        if (/(?:^|\.)ohmyrss\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".oikos.com.tw/v4") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".oiktv.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("oizoblog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ok.ru") >= 0) return "+ss";
-        if (/(?:^|\.)ok\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".okayfreedom.com") >= 0) return "+ss";
-        if (/(?:^|\.)okayfreedom\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("okk.tw") >= 0) return "+ss";
-        if (/^http:\/\/filmy\.olabloga\.pl\/player/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("old-cat.net") >= 0) return "+ss";
-        if (/(?:^|\.)olumpo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".olympicwatch.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("omgili.com") >= 0) return "+ss";
-        if (/(?:^|\.)omnitalk\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)omnitalk\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)omny\.fm$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cling.omy.sg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.omy.sg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.omy.sg") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("showbiz.omy.sg") >= 0) return "+ss";
-        if (/(?:^|\.)on\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)onedrive\.live\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)onion\.city$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".onlinecha.com") >= 0) return "+ss";
-        if (/(?:^|\.)onlineyoutube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)onlygayvideo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".onlytweets.com") >= 0) return "+ss";
-        if (/^http:\/\/onlytweets\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("onmoon.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("onmoon.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".onthehunt.com") >= 0) return "+ss";
-        if (/^http:\/\/onthehunt\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".oopsforum.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("open.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("openallweb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("opendemocracy.net") >= 0) return "+ss";
-        if (/(?:^|\.)opendemocracy\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".openervpn.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("openid.net") >= 0) return "+ss";
-        if (/(?:^|\.)openid\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".openleaks.org") >= 0) return "+ss";
-        if (/(?:^|\.)openleaks\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)opentech\.fund$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("openvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)openvpn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)openwebster\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".openwrt.org.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("my.opera.com/dahema") >= 0) return "+ss";
-        if (/(?:^|\.)demo\.opera-mini\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".opus-gaming.com") >= 0) return "+ss";
-        if (/^http:\/\/opus-gaming\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("www.orchidbbs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".organcare.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("organharvestinvestigation.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".orgasm.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".orgfree.com") >= 0) return "+ss";
-        if (/(?:^|\.)orient-doll\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("orientaldaily.com.my") >= 0) return "+ss";
-        if (/(?:^|\.)orientaldaily\.com\.my$/.test(host)) return "+ss";
-        if (/(?:^|\.)orn\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("t.orzdream.com") >= 0) return "+ss";
-        if (/(?:^|\.)t\.orzdream\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tui.orzdream.com") >= 0) return "+ss";
-        if (/(?:^|\.)orzistic\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)osfoora\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".otnd.org") >= 0) return "+ss";
-        if (/(?:^|\.)otnd\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)otto\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)ourdearamy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("oursogo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".oursteps.com.au") >= 0) return "+ss";
-        if (/(?:^|\.)oursteps\.com\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".oursweb.net") >= 0) return "+ss";
-        if (/(?:^|\.)ourtv\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xinqimeng.over-blog.com") >= 0) return "+ss";
-        if (/(?:^|\.)overdaily\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)overplay\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("share.ovi.com/media") >= 0) return "+ss";
-        if (/(?:^|\.)ovpn\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/owl\.li/.test(url)) return "+ss";
-        if (/^http:\/\/ht\.ly/.test(url)) return "+ss";
-        if (/^http:\/\/htl\.li/.test(url)) return "+ss";
-        if (/^http:\/\/mash\.to/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("www.owind.com") >= 0) return "+ss";
-        if (/(?:^|\.)owltail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)oxfordscholarship\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.oxid\.it/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("oyax.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("oyghan.com/wps") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ozchinese.com/bbs") >= 0) return "+ss";
-        if (/(?:^|\.)ow\.ly$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.ozchinese.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ozvoice.org") >= 0) return "+ss";
-        if (/(?:^|\.)ozvoice\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ozxw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ozyoyo.com") >= 0) return "+ss";
-        if (/(?:^|\.)pachosting\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pacificpoker.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".packetix.net") >= 0) return "+ss";
-        if (/(?:^|\.)pacopacomama\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".padmanet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("page2rss.com") >= 0) return "+ss";
-        if (/(?:^|\.)pagodabox\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".palacemoon.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.palmislife.com") >= 0) return "+ss";
-        if (/(?:^|\.)eriversoft\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".paldengyal.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("paljorpublications.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".paltalk.com") >= 0) return "+ss";
-        if (/(?:^|\.)pandapow\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pandapow.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pandavpn-jp.com") >= 0) return "+ss";
-        if (/(?:^|\.)pandavpn-jp\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pandavpnpro\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".panluan.net") >= 0) return "+ss";
-        if (/(?:^|\.)panluan\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)pao-pao\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("paper.li") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("paperb.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".paradisehill.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".paradisepoker.com") >= 0) return "+ss";
-        if (/(?:^|\.)parler\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)parsevideo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".partycasino.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".partypoker.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".passion.com") >= 0) return "+ss";
-        if (/(?:^|\.)passion\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".passiontimes.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pastebin.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pastie.org") >= 0) return "+ss";
-        if (/(?:^|\.)pastie\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.pathtosharepoint\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("pbs.org/wgbh/pages/frontline/tankman") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pbs.org/wgbh/pages/frontline/tibet") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("video.pbs.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pbwiki.com") >= 0) return "+ss";
-        if (/(?:^|\.)pbworks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)developers\.box\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)wiki\.oauth\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)wiki\.phonegap\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wiki\.jqueryui\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pbxes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pbxes\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("pcdvd.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pchome.com.tw") >= 0) return "+ss";
-        if (/^http:\/\/pcij\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pcstore.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)pct\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("pdetails.com") >= 0) return "+ss";
-        if (/(?:^|\.)pdproxy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)peace\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("peacefire.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("peacehall.com") >= 0) return "+ss";
-        if (/(?:^|\.)peacehall\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/pearlher\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".peeasian.com") >= 0) return "+ss";
-        if (/(?:^|\.)peing\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pekingduck.org") >= 0) return "+ss";
-        if (/(?:^|\.)pekingduck\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pemulihan.or.id") >= 0) return "+ss";
-        if (/^http:\/\/pemulihan\.or\.id/.test(url)) return "+ss";
-        if (/(?:^|\.)pen\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("penchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)penchinese\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".penchinese.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pengyulong.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("penisbot.com") >= 0) return "+ss";
-        if (/(?:^|\.)blog\.pentalogic\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".penthouse.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pentoy.hk/%E4%B8%AD%E5%9C%8B") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pentoy.hk/%E6%99%82%E4%BA%8B") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".peoplebookcafe.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".peoplenews.tw") >= 0) return "+ss";
-        if (/(?:^|\.)peoplenews\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".peopo.org") >= 0) return "+ss";
-        if (/(?:^|\.)peopo\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".percy.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".perfectgirls.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("perfectvpn.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".persecutionblog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".persiankitty.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pfd.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("phapluan.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".phayul.com") >= 0) return "+ss";
-        if (/(?:^|\.)phayul\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("philborges.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("philly.com") >= 0) return "+ss";
-        if (/(?:^|\.)phncdn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)photodharma\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)photofocus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)phuquocservices\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)picacomiccn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".picidae.net") >= 0) return "+ss";
-        if (/(?:^|\.)img.*\.picturedip\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("picturesocial.com") >= 0) return "+ss";
-        if (/(?:^|\.)pin-cong\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pin6.com") >= 0) return "+ss";
-        if (/(?:^|\.)pin6\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ping.fm") >= 0) return "+ss";
-        if (/(?:^|\.)ping\.fm$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinimg\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pinkrod.com") >= 0) return "+ss";
-        if (/(?:^|\.)pinoy-n\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.at$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.co\.kr$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pinterest.com") >= 0) return "+ss";
-        if (/(?:^|\.)pinterest\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.com\.mx$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.dk$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.fr$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.nl$/.test(host)) return "+ss";
-        if (/(?:^|\.)pinterest\.se$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pipii.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".piposay.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("piraattilahti.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".piring.com") >= 0) return "+ss";
-        if (/(?:^|\.)pixelqi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)css\.pixnet\.in$/.test(host)) return "+ss";
-        if (/(?:^|\.)pixnet\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pixnet.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pk.com") >= 0) return "+ss";
-        if (/(?:^|\.)placemix\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/pictures\.playboy\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)playboy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".playboyplus.com") >= 0) return "+ss";
-        if (/(?:^|\.)playboyplus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)player\.fm$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".playno1.com") >= 0) return "+ss";
-        if (/(?:^|\.)playno1\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)playpcesor\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("plays.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)plexvpn\.pro$/.test(host)) return "+ss";
-        if (/(?:^|\.)m\.plixi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("plm.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("plunder.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".plurk.com") >= 0) return "+ss";
-        if (/(?:^|\.)plurk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".plus28.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".plusbb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pmatehunter.com") >= 0) return "+ss";
-        if (/(?:^|\.)pmatehunter\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pmates.com") >= 0) return "+ss";
-        if (/(?:^|\.)po2b\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("pobieramy.top") >= 0) return "+ss";
-        if (/(?:^|\.)podbean\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)podictionary\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pokerstars.com") >= 0) return "+ss";
-        if (/(?:^|\.)pokerstars\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pokerstars.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zh.pokerstrategy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("politicalchina.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("politicalconsultation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".politiscales.net") >= 0) return "+ss";
-        if (/(?:^|\.)poloniex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".polymerhk.com") >= 0) return "+ss";
-        if (/^http:\/\/polymerhk\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".popo.tw") >= 0) return "+ss";
-        if (/(?:^|\.)popvote\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".popyard.com") >= 0) return "+ss";
-        if (/(?:^|\.)popyard\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".porn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".porn2.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".porn5.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornbase.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornerbros.com") >= 0) return "+ss";
-        if (/(?:^|\.)pornhd\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornhost.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornhub.com") >= 0) return "+ss";
-        if (/(?:^|\.)pornhub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornhubdeutsch.net") >= 0) return "+ss";
-        if (/^http:\/\/pornhubdeutsch\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)pornmm\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornoxo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornrapidshare.com") >= 0) return "+ss";
-        if (/(?:^|\.)pornrapidshare\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornsharing.com") >= 0) return "+ss";
-        if (/^http:\/\/pornsharing\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornsocket.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornstarclub.com") >= 0) return "+ss";
-        if (/(?:^|\.)pornstarclub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".porntube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".porntubenews.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".porntvblog.com") >= 0) return "+ss";
-        if (/(?:^|\.)porntvblog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pornvisit.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".portablevpn.nl") >= 0) return "+ss";
-        if (/(?:^|\.)poskotanews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".post01.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".post76.com") >= 0) return "+ss";
-        if (/(?:^|\.)post76\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".post852.com") >= 0) return "+ss";
-        if (/(?:^|\.)post852\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("postadult.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".postimg.org") >= 0) return "+ss";
-        if (/(?:^|\.)potvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)powercx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".powerphoto.org") >= 0) return "+ss";
-        if (/(?:^|\.)www\.powerpointninja\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)presidentlee\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn\.printfriendly\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pritunl.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("provpnaccounts.com") >= 0) return "+ss";
-        if (/(?:^|\.)provpnaccounts\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxfree.com") >= 0) return "+ss";
-        if (/(?:^|\.)proxfree\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("proxyanonimo.es") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxynetwork.org.uk") >= 0) return "+ss";
-        if (/(?:^|\.)proxynetwork\.org\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)pts\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pttvan.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pubu.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("puffinbrowser.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pureinsight.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pushchinawall.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".putty.org") >= 0) return "+ss";
-        if (/(?:^|\.)putty\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)calebelston\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.fizzik\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nf\.id\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)sogrady\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)vatn\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)ventureswell\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)whereiswerner\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".power.com") >= 0) return "+ss";
-        if (/(?:^|\.)power\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("powerapple.com") >= 0) return "+ss";
-        if (/(?:^|\.)powerapple\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)abc\.pp\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("heix.pp.ru") >= 0) return "+ss";
-        if (/(?:^|\.)prayforchina\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)premeforwindows7\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)presentationzen\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)prestige-av\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("prisoner-state-secret-journal-premier") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".prisoneralert.com") >= 0) return "+ss";
-        if (/(?:^|\.)pritunl\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)privacybox\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".private.com/home") >= 0) return "+ss";
-        if (/(?:^|\.)privateinternetaccess\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("privatepaste.com") >= 0) return "+ss";
-        if (/(?:^|\.)privatepaste\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("privatetunnel.com") >= 0) return "+ss";
-        if (/(?:^|\.)privatetunnel\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)privatevpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)procopytips\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)project-syndicate\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("provideocoalition.com") >= 0) return "+ss";
-        if (/(?:^|\.)prosiben\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("proxifier.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("api.proxlet.com") >= 0) return "+ss";
-        if (/(?:^|\.)proxomitron\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)proxpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxylist.org.uk") >= 0) return "+ss";
-        if (/(?:^|\.)proxylist\.org\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxypy.net") >= 0) return "+ss";
-        if (/(?:^|\.)proxypy\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("proxyroad.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".proxytunnel.net") >= 0) return "+ss";
-        if (/(?:^|\.)proyectoclubes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("prozz.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("psblog.name") >= 0) return "+ss";
-        if (/(?:^|\.)psblog\.name$/.test(host)) return "+ss";
-        if (/(?:^|\.)pshvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)psiphon\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".psiphon3.com") >= 0) return "+ss";
-        if (/(?:^|\.)psiphon3\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".psiphontoday.com") >= 0) return "+ss";
-        if (/(?:^|\.)pt\.im$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ptt.cc") >= 0) return "+ss";
-        if (/(?:^|\.)ptt\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".puffstore.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".puuko.com") >= 0) return "+ss";
-        if (/(?:^|\.)pullfolio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".punyu.com/puny") >= 0) return "+ss";
-        if (/(?:^|\.)pureconcepts\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)pureinsight\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)purepdf\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)purevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".purplelotus.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".pursuestar.com") >= 0) return "+ss";
-        if (/(?:^|\.)pursuestar\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)nitter\.pussthecat\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".pussyspace.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".putihome.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".putlocker.com/file") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("pwned.com") >= 0) return "+ss";
-        if (/(?:^|\.)pximg\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("python.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".python.com.tw") >= 0) return "+ss";
-        if (/^http:\/\/python\.com\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("pythonhackers.com/p") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ss.pythonic.life/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qanote.com") >= 0) return "+ss";
-        if (/(?:^|\.)qanote\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".qgirl.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)qianbai\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)qiandao\.today$/.test(host)) return "+ss";
-        if (/(?:^|\.)qiangwaikan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".qi-gong.me") >= 0) return "+ss";
-        if (/(?:^|\.)qi-gong\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)qiangyou\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".qidian.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qienkuen.org") >= 0) return "+ss";
-        if (/(?:^|\.)qienkuen\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)qiwen\.lu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("qixianglu.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.qmzdd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qkshare.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("qoos.com") >= 0) return "+ss";
-        if (/(?:^|\.)qoos\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.qooza.hk/dafengqixi") >= 0) return "+ss";
-        if (/(?:^|\.)efksoft\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)qstatus\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)qtweeter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)qtrac\.eu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".quannengshen.org") >= 0) return "+ss";
-        if (/^http:\/\/quannengshen\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("quantumbooter.net") >= 0) return "+ss";
-        if (/(?:^|\.)quitccp\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".quitccp.net") >= 0) return "+ss";
-        if (/(?:^|\.)quitccp\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".quitccp.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".quora.com/Chinas-Future") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".quran.com") >= 0) return "+ss";
-        if (/^http:\/\/quran\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".quranexplorer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("qusi8.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".qvodzy.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("nemesis2.qx.net/pages/MyEnTunnel") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("qxbbs.org") >= 0) return "+ss";
-        if (/(?:^|\.)r0\.ru$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ra.gg") >= 0) return "+ss";
-        if (/^http:\/\/ra\.gg\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".radicalparty.org") >= 0) return "+ss";
-        if (/(?:^|\.)rael\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("radicalparty.org") >= 0) return "+ss";
-        if (/(?:^|\.)radio\.garden$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("radioaustralia.net.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".radiohilight.net") >= 0) return "+ss";
-        if (/(?:^|\.)radiohilight\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)radioline\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("opml.radiotime.com") >= 0) return "+ss";
-        if (/(?:^|\.)radiovaticana\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)radiovncr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)raggedbanner\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)raidcall\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".raidtalk.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rainbowplan.org/bbs") >= 0) return "+ss";
-        if (/^https:\/\/raindrop\.io\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".raizoji.or.jp") >= 0) return "+ss";
-        if (/^http:\/\/raizoji\.or\.jp/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("rangwang.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("rangzen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("rangzen.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("rangzen.org") >= 0) return "+ss";
-        if (/^http:\/\/blog\.ranxiang\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("ranyunfei.com") >= 0) return "+ss";
-        if (/(?:^|\.)ranyunfei\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rapbull.net") >= 0) return "+ss";
-        if (/^http:\/\/rapidgator\.net\//.test(url)) return "+ss";
-        if (/(?:^|\.)rapidmoviez\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("rapidvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)rapidvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rarbgprx\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".raremovie.cc") >= 0) return "+ss";
-        if (/^http:\/\/raremovie\.cc/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".raremovie.net") >= 0) return "+ss";
-        if (/^http:\/\/raremovie\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)rationalwiki\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)rawgit\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rawgithub\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)razyboard\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("rcinet.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".read100.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".readingtimes.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)readingtimes\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)readmoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".readydown.com") >= 0) return "+ss";
-        if (/^http:\/\/readydown\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".realcourage.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".realitykings.com") >= 0) return "+ss";
-        if (/(?:^|\.)realitykings\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".realraptalk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".realsexpass.com") >= 0) return "+ss";
-        if (/(?:^|\.)reason\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".recordhistory.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".recovery.org.tw") >= 0) return "+ss";
-        if (/^http:\/\/online\.recoveryversion\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)recoveryversion\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)red-lang\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("redballoonsolidarity.org") >= 0) return "+ss";
-        if (/(?:^|\.)redbubble\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".redchinacn.net") >= 0) return "+ss";
-        if (/^http:\/\/redchinacn\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("redchinacn.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("redtube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("referer.us") >= 0) return "+ss";
-        if (/(?:^|\.)referer\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)reflectivecode\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("relaxbbs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".relay.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".releaseinternational.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("religioustolerance.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("renminbao.com") >= 0) return "+ss";
-        if (/(?:^|\.)renminbao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".renyurenquan.org") >= 0) return "+ss";
-        if (/(?:^|\.)renyurenquan\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/certificate\.revocationcheck\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("subacme.rerouted.org") >= 0) return "+ss";
-        if (/(?:^|\.)resilio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".reuters.com") >= 0) return "+ss";
-        if (/(?:^|\.)reuters\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)reutersmedia\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".revleft.com") >= 0) return "+ss";
-        if (/(?:^|\.)resistchina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("retweetist.com") >= 0) return "+ss";
-        if (/(?:^|\.)retweetrank\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("revver.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rfa.org") >= 0) return "+ss";
-        if (/(?:^|\.)rfa\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rfachina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rfamobile.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("rfaweb.org") >= 0) return "+ss";
-        if (/(?:^|\.)rferl\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rfi.fr") >= 0) return "+ss";
-        if (/(?:^|\.)rfi\.fr$/.test(host)) return "+ss";
-        if (/^http:\/\/rfi\.my\//.test(url)) return "+ss";
-        if (/^http:\/\/vds\.rightster\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rigpa.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rileyguide.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("riku.me/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ritouki.jp") >= 0) return "+ss";
-        if (/(?:^|\.)ritter\.vg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rlwlw.com") >= 0) return "+ss";
-        if (/(?:^|\.)rlwlw\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rmjdw.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rmjdw132.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".roadshow.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".roboforex.com") >= 0) return "+ss";
-        if (/(?:^|\.)robustnessiskey\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rocket-inc\.net$/.test(host)) return "+ss";
-        if (/^http:\/\/www2\.rocketbbs\.com\/11\/bbs\.cgi.id=5mus/.test(url)) return "+ss";
-        if (/^http:\/\/www2\.rocketbbs\.com\/11\/bbs\.cgi.id=freemgl/.test(url)) return "+ss";
-        if (/(?:^|\.)rojo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)ronjoneswriter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rolfoundation\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)rolia\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)rolsociety\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".roodo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rosechina.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rotten.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rsf.org") >= 0) return "+ss";
-        if (/(?:^|\.)rsf\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rsf-chinese.org") >= 0) return "+ss";
-        if (/(?:^|\.)rsf-chinese\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rsgamen.org") >= 0) return "+ss";
-        if (/(?:^|\.)rsshub\.app$/.test(host)) return "+ss";
-        if (/(?:^|\.)phosphation13\.rssing\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rssmeme.com") >= 0) return "+ss";
-        if (/(?:^|\.)rssmeme\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)rtalabel\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rthk.hk") >= 0) return "+ss";
-        if (/(?:^|\.)rthk\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rthk.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)rthk\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rti.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)rti\.org\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)rti\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".rtycminnesota.org") >= 0) return "+ss";
-        if (/^http:\/\/.*\.ruanyifeng\.com\/blog.*some_ways_to_break_the_great_firewall/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("rukor.org") >= 0) return "+ss";
-        if (/(?:^|\.)rule34\.xxx$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".runbtx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rushbee.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ruten.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)ruten\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("rutube.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ruyiseek.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".rxhj.net") >= 0) return "+ss";
-        if (/^http:\/\/rxhj\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".s1s1s1.com") >= 0) return "+ss";
-        if (/(?:^|\.)s-cute\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".s-dragon.org") >= 0) return "+ss";
-        if (/(?:^|\.)s1heng\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.s4miniarchive\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)s8forum\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("cdn1.lp.saboom.com") >= 0) return "+ss";
-        if (/(?:^|\.)sacks\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sacom.hk") >= 0) return "+ss";
-        if (/(?:^|\.)sacom\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)sadpanda\.us$/.test(host)) return "+ss";
-        if (/(?:^|\.)safechat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".safervpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)safervpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".saintyculture.com") >= 0) return "+ss";
-        if (/^http:\/\/saintyculture\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".saiq.me") >= 0) return "+ss";
-        if (/(?:^|\.)saiq\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)sakuralive\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sakya.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".salvation.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)salvation\.org\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".samair.ru/proxy/type-01") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sambhota.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".cn.sandscotaicentral.com") >= 0) return "+ss";
-        if (/^http:\/\/cn\.sandscotaicentral\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)sankei\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sanmin.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sapikachu.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("savemedia.com") >= 0) return "+ss";
-        if (/(?:^|\.)savethesounds\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".savetibet.de") >= 0) return "+ss";
-        if (/(?:^|\.)savetibet\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("savetibet.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("savetibet.nl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".savetibet.org") >= 0) return "+ss";
-        if (/(?:^|\.)savetibet\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("savetibet.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".savetibetstore.org") >= 0) return "+ss";
-        if (/(?:^|\.)savetibetstore\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)saveuighur\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("savevid.com") >= 0) return "+ss";
-        if (/(?:^|\.)say2\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sbme.me") >= 0) return "+ss";
-        if (/^http:\/\/sbme\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sbs.com.au/yourlanguage") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".scasino.com") >= 0) return "+ss";
-        if (/^http:\/\/www\.sciencemag\.org\/content\/344\/6187\/953/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sciencenets.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".scmp.com") >= 0) return "+ss";
-        if (/(?:^|\.)scmp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".scmpchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)scramble\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".scribd.com") >= 0) return "+ss";
-        if (/(?:^|\.)scribd\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)scriptspot\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)search\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".searchtruth.com") >= 0) return "+ss";
-        if (/(?:^|\.)searx\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)seattlefdc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".secretchina.com") >= 0) return "+ss";
-        if (/(?:^|\.)secretchina\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)secretgarden\.no$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".secretsline.biz") >= 0) return "+ss";
-        if (/(?:^|\.)secretsline\.biz$/.test(host)) return "+ss";
-        if (/(?:^|\.)secureservercdn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)securetunnel\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("securityinabox.org") >= 0) return "+ss";
-        if (/^https:\/\/securityinabox\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".securitykiss.com") >= 0) return "+ss";
-        if (/(?:^|\.)securitykiss\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)seed4\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.seehua.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("seesmic.com") >= 0) return "+ss";
-        if (/(?:^|\.)seevpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)seezone\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sejie.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sendspace.com") >= 0) return "+ss";
-        if (/^http:\/\/tweets\.seraph\.me\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("sesawe.net") >= 0) return "+ss";
-        if (/(?:^|\.)sesawe\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sesawe.org") >= 0) return "+ss";
-        if (/(?:^|\.)sethwklein\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".setn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".settv.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.setty.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sevenload.com") >= 0) return "+ss";
-        if (/(?:^|\.)sevenload\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sex-11.com") >= 0) return "+ss";
-        if (/(?:^|\.)sex3\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sex8\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexandsubmission.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexbot.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexhu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sexhuang.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sexinsex.net") >= 0) return "+ss";
-        if (/(?:^|\.)sexinsex\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sextvx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("67.220.91.15") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("67.220.91.18") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("67.220.91.23") >= 0) return "+ss";
-        if (/^http:\/\/.*\.sf\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sfileydy.com") >= 0) return "+ss";
-        if (/(?:^|\.)sfshibao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sftindia.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sftuk.org") >= 0) return "+ss";
-        if (/(?:^|\.)sftuk\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)shadeyouvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("shadow.ma") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shadowsky.xyz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shadowsocks.asia") >= 0) return "+ss";
-        if (/(?:^|\.)www\.shadowsocks\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shadowsocks.com") >= 0) return "+ss";
-        if (/(?:^|\.)shadowsocks\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shadowsocks.org") >= 0) return "+ss";
-        if (/(?:^|\.)shadowsocks\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)shadowsocks-r\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/cn\.shafaqna\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shambalapost.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shambhalasun.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shangfang.org") >= 0) return "+ss";
-        if (/(?:^|\.)shangfang\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("shapeservices.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sharebee.com") >= 0) return "+ss";
-        if (/(?:^|\.)sharecool\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sharpdaily.com.hk") >= 0) return "+ss";
-        if (/(?:^|\.)sharpdaily\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sharpdaily.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sharpdaily.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shat-tibet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sheikyermami.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shellfire.de") >= 0) return "+ss";
-        if (/(?:^|\.)shellfire\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shenshou.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("shenyun.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("shenyunperformingarts.org") >= 0) return "+ss";
-        if (/(?:^|\.)shenyunperformingarts\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)shenyunshop\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("shenzhoufilm.com") >= 0) return "+ss";
-        if (/(?:^|\.)shenzhoufilm\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)shenzhouzhengdao\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)sherabgyaltsen\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shiatv.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shicheng.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("shinychan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("shipcamouflage.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shireyishunjian.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shitaotv.org") >= 0) return "+ss";
-        if (/(?:^|\.)shixiao\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)shizhao\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("shizhao.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("shkspr.mobi/dabr") >= 0) return "+ss";
-        if (/(?:^|\.)shodanhq\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)shooshtime\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shop2000.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)shopee\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shopping.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".showhaotu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".showtime.jp") >= 0) return "+ss";
-        if (/(?:^|\.)showwe\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shutterstock.com") >= 0) return "+ss";
-        if (/(?:^|\.)shutterstock\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ch.shvoong.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".shwchurch.org") >= 0) return "+ss";
-        if (/(?:^|\.)shwchurch\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".shwchurch3.com") >= 0) return "+ss";
-        if (/^http:\/\/shwchurch3\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".siddharthasintent.org") >= 0) return "+ss";
-        if (/(?:^|\.)sidelinesnews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sidelinessportseatery.com") >= 0) return "+ss";
-        if (/(?:^|\.)signal\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sijihuisuo.club") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sijihuisuo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".silkbook.com") >= 0) return "+ss";
-        if (/(?:^|\.)simbolostwitter\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("simplecd.org") >= 0) return "+ss";
-        if (/(?:^|\.)simplecd\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("simpleproductivityblog.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.sina.com/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.sina.com%2F") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.sina.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dailynews.sina.com/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("dailynews.sina.com%2F") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.sina.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("home.sina.com") >= 0) return "+ss";
-        if (/(?:^|\.)magazines\.sina\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.sina.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.sina.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.sinchew.com.my") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinchew.com.my/node/") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinchew.com.my/taxonomy/term") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".singaporepools.com.sg") >= 0) return "+ss";
-        if (/(?:^|\.)singaporepools\.com\.sg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".singfortibet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".singpao.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("singtao.com") >= 0) return "+ss";
-        if (/(?:^|\.)singtao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("news.singtao.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".singtaousa.com") >= 0) return "+ss";
-        if (/(?:^|\.)singtaousa\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sino-monthly.com") >= 0) return "+ss";
-        if (/(?:^|\.)sinoca\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sinocast\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sinocism.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sinomontreal.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinonet.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinopitt.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinoants.com") >= 0) return "+ss";
-        if (/(?:^|\.)sinoants\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sinoinsider\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sinoquebec.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sierrafriendsoftibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sis.xxx") >= 0) return "+ss";
-        if (/(?:^|\.)sis001\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sis001.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".site2unblock.com") >= 0) return "+ss";
-        if (/(?:^|\.)site90\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sitebro.tw") >= 0) return "+ss";
-        if (/(?:^|\.)sitekreator\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)siteks\.uk\.to$/.test(host)) return "+ss";
-        if (/(?:^|\.)sitemaps\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sjrt.org") >= 0) return "+ss";
-        if (/^http:\/\/sjrt\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)sjum\.cn$/.test(host)) return "+ss";
-        if (/(?:^|\.)sketchappsources\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)skimtube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lab\.skk\.moe$/.test(host)) return "+ss";
-        if (/(?:^|\.)skybet\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/users\.skynet\.be\/reves\/tibethome\.html/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".skyking.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.skykiwi.com") >= 0) return "+ss";
-        if (/^http:\/\/www\.skype\.com\/intl\//.test(url)) return "+ss";
-        if (/^http:\/\/www\.skype\.com\/zh-Hant/.test(url)) return "+ss";
-        if (/(?:^|\.)skyvegas\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xskywalker.com") >= 0) return "+ss";
-        if (/(?:^|\.)xskywalker\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)skyxvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("m.slandr.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".slaytizle.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sleazydream.com") >= 0) return "+ss";
-        if (/(?:^|\.)slheng\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)slideshare\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.slime.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".slinkset.com") >= 0) return "+ss";
-        if (/(?:^|\.)slickvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".slutload.com") >= 0) return "+ss";
-        if (/(?:^|\.)smartdnsproxy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".smarthide.com") >= 0) return "+ss";
-        if (/(?:^|\.)app\.smartmailcloud\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("smchbooks.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".smh.com.au/world/death-of-chinese-playboy-leaves-fresh-scratches-in-party-paintwork-20120903-25a8v") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("smhric.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".smith.edu/dalailama") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".smyxy.org") >= 0) return "+ss";
-        if (/(?:^|\.)snapchat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".snaptu.com") >= 0) return "+ss";
-        if (/(?:^|\.)snaptu\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sndcdn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sneakme.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("snowlionpub.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("home.so-net.net.tw/yisa_tsai") >= 0) return "+ss";
-        if (/(?:^|\.)soc\.mil$/.test(host)) return "+ss";
-        if (/(?:^|\.)socialblade\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".socks-proxy.net") >= 0) return "+ss";
-        if (/(?:^|\.)socks-proxy\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sockscap64.com") >= 0) return "+ss";
-        if (/(?:^|\.)sockslist\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".socrec.org") >= 0) return "+ss";
-        if (/^http:\/\/socrec\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sod.co.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".softether.org") >= 0) return "+ss";
-        if (/(?:^|\.)softether\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".softether-download.com") >= 0) return "+ss";
-        if (/(?:^|\.)softether-download\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cdn\.softlayer\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)sogclub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sohcradio.com") >= 0) return "+ss";
-        if (/(?:^|\.)sohcradio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sokmil.com") >= 0) return "+ss";
-        if (/(?:^|\.)sorting-algorithms\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sostibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".soumo.info") >= 0) return "+ss";
-        if (/(?:^|\.)soup\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sobees.com") >= 0) return "+ss";
-        if (/(?:^|\.)sobees\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("socialwhale.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".softether.co.jp") >= 0) return "+ss";
-        if (/(?:^|\.)softwarebychuck\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.sogoo.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("soh.tw") >= 0) return "+ss";
-        if (/(?:^|\.)soh\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sohfrance.org") >= 0) return "+ss";
-        if (/(?:^|\.)sohfrance\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("chinese.soifind.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sokamonline.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".solidaritetibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".solidfiles.com") >= 0) return "+ss";
-        if (/(?:^|\.)somee\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".songjianjun.com") >= 0) return "+ss";
-        if (/(?:^|\.)songjianjun\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sonicbbs.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sonidodelaesperanza.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sopcast.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sopcast.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sorazone.net") >= 0) return "+ss";
-        if (/(?:^|\.)sos\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.sou-tong.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".soubory.com") >= 0) return "+ss";
-        if (/^http:\/\/soubory\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".soul-plus.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".soulcaliburhentai.net") >= 0) return "+ss";
-        if (/(?:^|\.)soulcaliburhentai\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)soundcloud\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".soundofhope.kr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("soundofhope.org") >= 0) return "+ss";
-        if (/(?:^|\.)soundofhope\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)soupofmedia\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/sourceforge\.net\/p.*\/shadowsocksgui\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sourcewadio.com") >= 0) return "+ss";
-        if (/(?:^|\.)south-plus\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("southnews.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sowers.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)wlx\.sowiki\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)spankbang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".spankingtube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".spankwire.com") >= 0) return "+ss";
-        if (/(?:^|\.)spb\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)speakerdeck\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)speedify\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("spem.at") >= 0) return "+ss";
-        if (/(?:^|\.)spencertipping\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)spendee\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)spicevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".spideroak.com") >= 0) return "+ss";
-        if (/(?:^|\.)spideroak\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".spike.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".spotflux.com") >= 0) return "+ss";
-        if (/(?:^|\.)spotflux\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".spring4u.info") >= 0) return "+ss";
-        if (/^http:\/\/spring4u\.info/.test(url)) return "+ss";
-        if (/(?:^|\.)sproutcore\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sproxy\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)squirrelvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)srocket\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ss-link.com") >= 0) return "+ss";
-        if (/(?:^|\.)ss-link\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ssglobal.co/wp") >= 0) return "+ss";
-        if (/^http:\/\/ssglobal\.co/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ssglobal.me") >= 0) return "+ss";
-        if (/(?:^|\.)ssh91\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sspro.ml") >= 0) return "+ss";
-        if (/^http:\/\/sspro\.ml/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ssrshare.com") >= 0) return "+ss";
-        if (/(?:^|\.)ssrshare\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sss\.camp$/.test(host)) return "+ss";
-        if (/(?:^|\.)sstm\.moe$/.test(host)) return "+ss";
-        if (/(?:^|\.)sstmlt\.moe$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sstmlt.net") >= 0) return "+ss";
-        if (/(?:^|\.)sstmlt\.net$/.test(host)) return "+ss";
-        if (/^http:\/\/stackoverflow\.com\/users\/895245/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".stage64.hk") >= 0) return "+ss";
-        if (/(?:^|\.)stage64\.hk$/.test(host)) return "+ss";
-        if (/(?:^|\.)standupfortibet\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)standwithhk\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("stanford.edu/group/falun") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("usinfo.state.gov") >= 0) return "+ss";
-        if (/(?:^|\.)statueofdemocracy\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".starfishfx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".starp2p.com") >= 0) return "+ss";
-        if (/(?:^|\.)starp2p\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".startpage.com") >= 0) return "+ss";
-        if (/(?:^|\.)startpage\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".startuplivingchina.com") >= 0) return "+ss";
-        if (/^http:\/\/startuplivingchina\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)static-economist\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)stboy\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)stc\.com\.sa$/.test(host)) return "+ss";
-        if (/(?:^|\.)steel-storm\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".steganos.com") >= 0) return "+ss";
-        if (/(?:^|\.)steganos\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".steganos.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".stepchina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ny.stgloballink.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("hd.stheadline.com/news/realtime") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("sthoo.com") >= 0) return "+ss";
-        if (/(?:^|\.)sthoo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".stickam.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("stickeraction.com/sesawe") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".stileproject.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sto.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".stoporganharvesting.org") >= 0) return "+ss";
-        if (/(?:^|\.)storagenewsletter\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".storm.mg") >= 0) return "+ss";
-        if (/(?:^|\.)storm\.mg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".stoptibetcrisis.net") >= 0) return "+ss";
-        if (/(?:^|\.)stoptibetcrisis\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)storify\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".stormmediagroup.com") >= 0) return "+ss";
-        if (/(?:^|\.)stoweboyd\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)straitstimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("stranabg.com") >= 0) return "+ss";
-        if (/(?:^|\.)straplessdildo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)streamable\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)streamate\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)streamingthe\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("streema.com/tv/NTDTV_Chinese") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.streetvoice.com/article") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn.streetvoice.com/diary") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("cn2.streetvoice.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.streetvoice.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".strikingly.com") >= 0) return "+ss";
-        if (/(?:^|\.)strongvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".strongwindpress.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".student.tw/db") >= 0) return "+ss";
-        if (/(?:^|\.)studentsforafreetibet\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)stumbleupon\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("stupidvideos.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".successfn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("panamapapers.sueddeutsche.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sugarsync.com") >= 0) return "+ss";
-        if (/(?:^|\.)sugarsync\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sugobbs.com") >= 0) return "+ss";
-        if (/(?:^|\.)sugumiru18\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)suissl\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("summify.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sumrando.com") >= 0) return "+ss";
-        if (/(?:^|\.)sumrando\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sun1911.com") >= 0) return "+ss";
-        if (/(?:^|\.)sundayguardianlive\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sunporno.com") >= 0) return "+ss";
-        if (/(?:^|\.)sunmedia\.ca$/.test(host)) return "+ss";
-        if (/(?:^|\.)sunporno\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sunskyforum.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sunta.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sunvpn.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".suoluo.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".superfreevpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".supervpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)supervpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".superzooi.com") >= 0) return "+ss";
-        if (/^http:\/\/superzooi\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".suppig.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".suprememastertv.com") >= 0) return "+ss";
-        if (/^http:\/\/suprememastertv\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".surfeasy.com") >= 0) return "+ss";
-        if (/(?:^|\.)surfeasy\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".surfeasy.com.au") >= 0) return "+ss";
-        if (/^http:\/\/surfeasy\.com\.au/.test(url)) return "+ss";
-        if (/(?:^|\.)surfshark\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)surrenderat20\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".svsfx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".swissinfo.ch") >= 0) return "+ss";
-        if (/(?:^|\.)swissinfo\.ch$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".swissvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)swissvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("switchvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)switchvpn\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sydneytoday.com") >= 0) return "+ss";
-        if (/(?:^|\.)sydneytoday\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".sylfoundation.org") >= 0) return "+ss";
-        if (/(?:^|\.)sylfoundation\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)syncback\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("sysresccd.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".sytes.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.syx86.com/2009/09/puff") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.syx86.cn/2009/09/puff") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".szbbs.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".szetowah.org.hk") >= 0) return "+ss";
-        if (/(?:^|\.)t-g\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".t35.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".t66y.com") >= 0) return "+ss";
-        if (/(?:^|\.)t66y\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)esg\.t91y\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taa-usa.org") >= 0) return "+ss";
-        if (/^http:\/\/taa-usa\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taaze.tw") >= 0) return "+ss";
-        if (/(?:^|\.)taaze\.tw$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.tablesgenerator\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tabtter.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tacem.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".taconet.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)taedp\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tafm.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tagwa.org.au") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tagwalk.com") >= 0) return "+ss";
-        if (/(?:^|\.)tagwalk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tahr.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".taipeisociety.org") >= 0) return "+ss";
-        if (/(?:^|\.)taipeisociety\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taiwanbible.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".taiwancon.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".taiwandaily.net") >= 0) return "+ss";
-        if (/(?:^|\.)taiwandaily\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taiwandc.org") >= 0) return "+ss";
-        if (/(?:^|\.)taiwanhot\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taiwanjustice.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwankiss.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwannation.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwannation.com.tw") >= 0) return "+ss";
-        if (/(?:^|\.)taiwanncf\.org\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)taiwannews\.com\.tw$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.taiwanonline\.cc\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwantp.net") >= 0) return "+ss";
-        if (/(?:^|\.)taiwantt\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwanus.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwanyes.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("taiwan-sex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".talk853.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".talkboxapp.com") >= 0) return "+ss";
-        if (/(?:^|\.)talkboxapp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".talkcc.com") >= 0) return "+ss";
-        if (/(?:^|\.)talkcc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".talkonly.net") >= 0) return "+ss";
-        if (/(?:^|\.)talkonly\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)tamiaode\.tk$/.test(host)) return "+ss";
-        if (/(?:^|\.)tanc\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tangben.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tangren.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".taoism.net") >= 0) return "+ss";
-        if (/^http:\/\/taoism\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taolun.info") >= 0) return "+ss";
-        if (/(?:^|\.)taolun\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tapatalk.com") >= 0) return "+ss";
-        if (/(?:^|\.)tapatalk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.taragana.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tascn.com.au") >= 0) return "+ss";
-        if (/(?:^|\.)taup\.net$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.taup\.org\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".taweet.com") >= 0) return "+ss";
-        if (/(?:^|\.)taweet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbcollege.org") >= 0) return "+ss";
-        if (/(?:^|\.)tbcollege\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbi.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbicn.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbjyt.org") >= 0) return "+ss";
-        if (/(?:^|\.)tbpic\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbrc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tbs-rainbow.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbsec.org") >= 0) return "+ss";
-        if (/(?:^|\.)tbsec\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tbskkinabalu.page.tl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbsmalaysia.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbsn.org") >= 0) return "+ss";
-        if (/(?:^|\.)tbsn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbsseattle.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbssqh.org") >= 0) return "+ss";
-        if (/^http:\/\/tbssqh\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tbswd.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbtemple.org.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tbthouston.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tccwonline.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tcewf.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tchrd.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tcnynj.org") >= 0) return "+ss";
-        if (/(?:^|\.)tcpspeed\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tcpspeed.com") >= 0) return "+ss";
-        if (/(?:^|\.)tcpspeed\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tcsofbc.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tcsovi.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tdm.com.mo") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("teamamericany.com") >= 0) return "+ss";
-        if (/(?:^|\.)static\.techspot\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)techviz\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)teck\.in$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".teeniefuck.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("teensinasia.com") >= 0) return "+ss";
-        if (/(?:^|\.)tehrantimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".telecomspace.com") >= 0) return "+ss";
-        if (/(?:^|\.)telegraph\.co\.uk$/.test(host)) return "+ss";
-        if (/(?:^|\.)telegra\.ph$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tenacy.com") >= 0) return "+ss";
-        if (/(?:^|\.)tenzinpalmo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tew.org") >= 0) return "+ss";
-        if (/(?:^|\.)tew\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)tfiflve\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thaicn.com") >= 0) return "+ss";
-        if (/(?:^|\.)theatlantic\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)theatrum-belli\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cn\.theaustralian\.com\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("theblemish.com") >= 0) return "+ss";
-        if (/(?:^|\.)thebcomplex\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)theblaze\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thebobs.com") >= 0) return "+ss";
-        if (/(?:^|\.)thebobs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thechinabeat.org") >= 0) return "+ss";
-        if (/(?:^|\.)thechinacollection\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.thechinastory\.org\/yearbooks\/yearbook-2012\//.test(url)) return "+ss";
-        if (/(?:^|\.)theconversation\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thedalailamamovie.com") >= 0) return "+ss";
-        if (/^http:\/\/thedalailamamovie\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)thediplomat\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)thedw\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("thefrontier.hk/tf") >= 0) return "+ss";
-        if (/(?:^|\.)theguardian\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)thegay\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/thegioitinhoc\.vn\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thegly.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".thehots.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("thehousenews.com") >= 0) return "+ss";
-        if (/(?:^|\.)thehun\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".theinitium.com") >= 0) return "+ss";
-        if (/(?:^|\.)theinitium\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thenewslens.com") >= 0) return "+ss";
-        if (/(?:^|\.)thenewslens\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thepiratebay.org") >= 0) return "+ss";
-        if (/(?:^|\.)thepiratebay\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".theporndude.com") >= 0) return "+ss";
-        if (/(?:^|\.)theporndude\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)theportalwiki\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)theprint\.in$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("thereallove.kr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("therock.net.nz") >= 0) return "+ss";
-        if (/(?:^|\.)thesaturdaypaper\.com\.au$/.test(host)) return "+ss";
-        if (/(?:^|\.)thestandnews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("thetibetcenter.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("thetibetconnection.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".thetibetmuseum.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".thetibetpost.com") >= 0) return "+ss";
-        if (/(?:^|\.)thetibetpost\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)thetinhat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("thetrotskymovie.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("thevivekspot.com") >= 0) return "+ss";
-        if (/(?:^|\.)thewgo\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".theync.com") >= 0) return "+ss";
-        if (/^http:\/\/theync\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thinkingtaiwan.com") >= 0) return "+ss";
-        if (/(?:^|\.)thinkingtaiwan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thisav.com") >= 0) return "+ss";
-        if (/^http:\/\/thisav\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thlib.org") >= 0) return "+ss";
-        if (/(?:^|\.)thomasbernhard\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thongdreams.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("threatchaos.com") >= 0) return "+ss";
-        if (/(?:^|\.)throughnightsfire\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thumbzilla.com") >= 0) return "+ss";
-        if (/(?:^|\.)thywords\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".thywords.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tiananmenmother.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tiananmenduizhi.com") >= 0) return "+ss";
-        if (/(?:^|\.)tiananmenduizhi\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tiananmenuniv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tiananmenuniv\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)tiandixing\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tianhuayuan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tianlawoffice.com") >= 0) return "+ss";
-        if (/(?:^|\.)tianti\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tiantibooks.org") >= 0) return "+ss";
-        if (/(?:^|\.)tiantibooks\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tianyantong.org.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tianzhu.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.at") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibet.ca") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.com") >= 0) return "+ss";
-        if (/(?:^|\.)tibet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibet.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.net") >= 0) return "+ss";
-        if (/(?:^|\.)tibet\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibet.nu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.org") >= 0) return "+ss";
-        if (/(?:^|\.)tibet\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.sk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibet.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet-envoy.eu") >= 0) return "+ss";
-        if (/(?:^|\.)tibet-envoy\.eu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet-foundation.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet-house-trust.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)tibet-initiative\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet-munich.de") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibet3rdpole.org") >= 0) return "+ss";
-        if (/^http:\/\/tibet3rdpole\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetaction.net") >= 0) return "+ss";
-        if (/(?:^|\.)tibetaction\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetaid.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetalk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetan.fr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetan-alliance.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanarts.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanbuddhistinstitute.org") >= 0) return "+ss";
-        if (/^http:\/\/tibetanbuddhistinstitute\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetancommunity.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanjournal.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanlanguage.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanliberation.org") >= 0) return "+ss";
-        if (/(?:^|\.)tibetanliberation\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetcollection.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanaidproject.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetancommunityuk.net") >= 0) return "+ss";
-        if (/^http:\/\/tibetancommunityuk\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetanculture.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetanfeministcollective.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanpaintings.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanphotoproject.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanpoliticalreview.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanreview.net") >= 0) return "+ss";
-        if (/^http:\/\/tibetansports\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanwomen.org") >= 0) return "+ss";
-        if (/^http:\/\/tibetanwomen\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanyouth.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetanyouthcongress.org") >= 0) return "+ss";
-        if (/(?:^|\.)tibetanyouthcongress\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetcharity.dk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetcharity.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetchild.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetcity.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetcorps.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetexpress.net") >= 0) return "+ss";
-        if (/^http:\/\/tibetexpress\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetfocus.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetfund.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetgermany.com") >= 0) return "+ss";
-        if (/(?:^|\.)tibetgermany\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibethaus.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetheritagefund.org") >= 0) return "+ss";
-        if (/(?:^|\.)tibethouse\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)tibethouse\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)tibethouse\.us$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetinfonet.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetjustice.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetkomite.dk") >= 0) return "+ss";
-        if (/(?:^|\.)tibetmuseum\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)tibetnetwork\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetoffice.ch") >= 0) return "+ss";
-        if (/^http:\/\/tibetoffice\.ch/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetoffice.eu") >= 0) return "+ss";
-        if (/(?:^|\.)tibetoffice\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetonline.com") >= 0) return "+ss";
-        if (/(?:^|\.)tibetonline\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetoffice.com.au") >= 0) return "+ss";
-        if (/^http:\/\/tibetoffice\.com\.au/.test(url)) return "+ss";
-        if (/(?:^|\.)tibetonline\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetonline.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetoralhistory.org") >= 0) return "+ss";
-        if (/^http:\/\/tibetoralhistory\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetpolicy.eu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetrelieffund.co.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibetsites.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetsociety.com") >= 0) return "+ss";
-        if (/(?:^|\.)tibetsociety\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetsun.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetsupportgroup.org") >= 0) return "+ss";
-        if (/^http:\/\/tibetsupportgroup\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibetswiss.ch") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tibettelegraph.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tibettimes.net") >= 0) return "+ss";
-        if (/(?:^|\.)tibetwrites\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ticket.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tigervpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)tigervpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".timdir.com") >= 0) return "+ss";
-        if (/^http:\/\/timdir\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".time.com") >= 0) return "+ss";
-        if (/^http:\/\/time\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)timesnownews\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".timsah.com") >= 0) return "+ss";
-        if (/(?:^|\.)timtales\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.tiney\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tintuc101.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tiny.cc") >= 0) return "+ss";
-        if (/^http:\/\/tiny\.cc/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tinychat.com") >= 0) return "+ss";
-        if (/(?:^|\.)tinypaste\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tipas\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tistory.com") >= 0) return "+ss";
-        if (/(?:^|\.)tkcs-collins\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tmagazine.com") >= 0) return "+ss";
-        if (/(?:^|\.)tmagazine\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tmdfish.com") >= 0) return "+ss";
-        if (/^http:\/\/tmi\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tmpp.org") >= 0) return "+ss";
-        if (/^http:\/\/tmpp\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tnaflix.com") >= 0) return "+ss";
-        if (/(?:^|\.)tnaflix\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tngrnow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tngrnow.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tnp.org") >= 0) return "+ss";
-        if (/^http:\/\/tnp\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".to-porno.com") >= 0) return "+ss";
-        if (/(?:^|\.)to-porno\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("togetter.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tokyo-247.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tokyo-hot.com") >= 0) return "+ss";
-        if (/(?:^|\.)tokyo-porn-tube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tokyocn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tw.tomonews.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tongil.or.kr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tono-oka.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tonyyan.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".toodoc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("toonel.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("top81.ws") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".topnews.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".toppornsites.com") >= 0) return "+ss";
-        if (/^http:\/\/toppornsites\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".torguard.net") >= 0) return "+ss";
-        if (/(?:^|\.)torguard\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)top\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".topshareware.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".topsy.com") >= 0) return "+ss";
-        if (/(?:^|\.)topsy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)toptip\.ca$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tora.to") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".torcn.com") >= 0) return "+ss";
-        if (/(?:^|\.)torlock\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".torproject.org") >= 0) return "+ss";
-        if (/(?:^|\.)torproject\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)torrentkitty\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("torrentprivacy.com") >= 0) return "+ss";
-        if (/(?:^|\.)torrentprivacy\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/torrentproject\.se/.test(url)) return "+ss";
-        if (/(?:^|\.)torrenty\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)torrentz\.eu$/.test(host)) return "+ss";
-        if (/(?:^|\.)torvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)totalvpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".toutiaoabc.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("towngain.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("toypark.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("toytractorshow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tparents.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tpi.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)tpi\.org\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("traffichaus.com") >= 0) return "+ss";
-        if (/(?:^|\.)transparency\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)treemall\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("trendsmap.com") >= 0) return "+ss";
-        if (/(?:^|\.)trendsmap\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".trialofccp.org") >= 0) return "+ss";
-        if (/(?:^|\.)trialofccp\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".trimondi.de/SDLE") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".trouw.nl") >= 0) return "+ss";
-        if (/^http:\/\/trouw\.nl/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".trt.net.tr") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("trtc.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".truebuddha-md.org") >= 0) return "+ss";
-        if (/^http:\/\/truebuddha-md\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("trulyergonomic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".truth101.co.tv") >= 0) return "+ss";
-        if (/^http:\/\/truth101\.co\.tv/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".truthontour.org") >= 0) return "+ss";
-        if (/^http:\/\/truthontour\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".truveo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tsctv.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tsemtulku.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tsquare.tv") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tsu.org.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tsunagarumon.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tsctv.net") >= 0) return "+ss";
-        if (/(?:^|\.)tt1069\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tttan.com") >= 0) return "+ss";
-        if (/(?:^|\.)tttan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("bb.ttv.com.tw/bb") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tu8964.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tubaholic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tube8.com") >= 0) return "+ss";
-        if (/(?:^|\.)tube8\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tube911.com") >= 0) return "+ss";
-        if (/(?:^|\.)tube911\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tubecup.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tubegals.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tubeislam.com") >= 0) return "+ss";
-        if (/^http:\/\/tubeislam\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tubestack.com") >= 0) return "+ss";
-        if (/(?:^|\.)tubewolf\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tuibeitu.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("tuidang.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tuidang.org") >= 0) return "+ss";
-        if (/(?:^|\.)tuidang\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tuidang.se") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("bbs.tuitui.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tumutanzi.com") >= 0) return "+ss";
-        if (/^http:\/\/tumutanzi\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)tumview\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tunein.com") >= 0) return "+ss";
-        if (/^http:\/\/tunein\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)tunnelbear\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tunnelr.com") >= 0) return "+ss";
-        if (/(?:^|\.)tunnelr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tunsafe\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tuitwit.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".turansam.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".turbobit.net") >= 0) return "+ss";
-        if (/(?:^|\.)turbobit\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".turbohide.com") >= 0) return "+ss";
-        if (/(?:^|\.)turbohide\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)turkistantimes\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tushycash.com") >= 0) return "+ss";
-        if (/^http:\/\/tushycash\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)app\.tutanota\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tuvpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)tuvpn\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/tuzaijidi\.com/.test(url)) return "+ss";
-        if (/^http:\/\/.*\.tuzaijidi\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tw01.org") >= 0) return "+ss";
-        if (/^http:\/\/tw01\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tumblr.com") >= 0) return "+ss";
-        if (/(?:^|\.)tumblr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)lecloud\.net$/.test(host)) return "+ss";
-        if (/^http:\/\/cosmic\.monar\.ch/.test(url)) return "+ss";
-        if (/(?:^|\.)slutmoonbeam\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/blog\.soylent\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tv.com") >= 0) return "+ss";
-        if (/^http:\/\/tv\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tvants.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.tvb.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.tvb.com/list/world") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.tvb.com/local") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("news.tvbs.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tvboxnow.com") >= 0) return "+ss";
-        if (/^http:\/\/tvboxnow\.com\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("tvider.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tvmost.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tvplayvideos.com") >= 0) return "+ss";
-        if (/(?:^|\.)tvunetworks\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tw-blog.com") >= 0) return "+ss";
-        if (/^https:\/\/tw-blog\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tw-npo.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twaitter.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twapperkeeper.com") >= 0) return "+ss";
-        if (/(?:^|\.)twapperkeeper\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twaud\.io$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twaud.io") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twavi.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twbbs.net.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twbbs.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twbbs.tw") >= 0) return "+ss";
-        if (/(?:^|\.)twblogger\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tweepmag.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweepml.org") >= 0) return "+ss";
-        if (/(?:^|\.)tweepml\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweetbackup.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweetbackup\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tweetboard.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweetboard\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweetboner.biz") >= 0) return "+ss";
-        if (/(?:^|\.)tweetboner\.biz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweetcs.com") >= 0) return "+ss";
-        if (/^http:\/\/tweetcs\.com/.test(url)) return "+ss";
-        if (/^http:\/\/deck\.ly/.test(url)) return "+ss";
-        if (/(?:^|\.)mtw\.tl$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweetedtimes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweetmylast\.fm$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tweetphoto.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweetphoto\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweetrans\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tweetree.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweetree\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweettunnel.com") >= 0) return "+ss";
-        if (/(?:^|\.)tweettunnel\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweetwally\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tweetymail.com") >= 0) return "+ss";
-        if (/(?:^|\.)twelve\.today$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".tweez.net") >= 0) return "+ss";
-        if (/^http:\/\/tweez\.net/.test(url)) return "+ss";
-        if (/(?:^|\.)twftp\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)twgreatdaily\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twibase.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twibble.de") >= 0) return "+ss";
-        if (/(?:^|\.)twibble\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twibbon.com") >= 0) return "+ss";
-        if (/(?:^|\.)twibs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twicountry.org") >= 0) return "+ss";
-        if (/^http:\/\/twicountry\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("twicsy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twiends.com") >= 0) return "+ss";
-        if (/^http:\/\/twiends\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twifan.com") >= 0) return "+ss";
-        if (/^http:\/\/twifan\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("twiffo.com") >= 0) return "+ss";
-        if (/(?:^|\.)twiffo\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twilightsex.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twilog.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twimbow.com") >= 0) return "+ss";
-        if (/(?:^|\.)twindexx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twipple.jp") >= 0) return "+ss";
-        if (/(?:^|\.)twipple\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)twip\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twishort.com") >= 0) return "+ss";
-        if (/(?:^|\.)twishort\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twistar.cc") >= 0) return "+ss";
-        if (/(?:^|\.)twister\.net\.co$/.test(host)) return "+ss";
-        if (/(?:^|\.)twisterio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twisternow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twistory.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twitbrowser.net") >= 0) return "+ss";
-        if (/(?:^|\.)twitcause\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitgether\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twiggit\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twitgoo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twitiq.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitiq\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitlonger.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitlonger\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/tl\.gd\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("twitmania.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twitoaster.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitoaster\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitonmsn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twit2d.com") >= 0) return "+ss";
-        if (/(?:^|\.)twit2d\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitstat.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitstat\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)firstfivefollowers\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)retweeteffect\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweeplike\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)tweepguide\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)turbotwitter\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitvid.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitvid\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/twt\.tl/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("twittbot.net") >= 0) return "+ss";
-        if (/(?:^|\.)ads-twitter\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twttr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitter4j\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twittercounter.com") >= 0) return "+ss";
-        if (/(?:^|\.)twittercounter\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twitterfeed.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twittergadget.com") >= 0) return "+ss";
-        if (/(?:^|\.)twittergadget\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitterkr.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitterkr\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twittermail\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)twitterrific\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twittertim.es") >= 0) return "+ss";
-        if (/(?:^|\.)twittertim\.es$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twitthat.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitturk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitturly.com") >= 0) return "+ss";
-        if (/(?:^|\.)twitturly\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twitzap.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twiyia.com") >= 0) return "+ss";
-        if (/(?:^|\.)twstar\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twtkr.com") >= 0) return "+ss";
-        if (/^http:\/\/twtkr\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".twnorth.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)twreporter\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("twskype.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twtrland.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("twurl.nl") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".twyac.org") >= 0) return "+ss";
-        if (/(?:^|\.)twyac\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".txxx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".tycool.com") >= 0) return "+ss";
-        if (/(?:^|\.)tycool\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)typepad\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blog\.expofutures\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)legaltech\.law\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)blogs\.tampabay\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)contests\.twilio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".embr.in") >= 0) return "+ss";
-        if (/(?:^|\.)embr\.in$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".u9un.com") >= 0) return "+ss";
-        if (/(?:^|\.)u9un\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ubddns.org") >= 0) return "+ss";
-        if (/^http:\/\/ubddns\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)uberproxy\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uc-japan.org") >= 0) return "+ss";
-        if (/(?:^|\.)uc-japan\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".srcf.ucam.org/salon/") >= 0) return "+ss";
-        if (/^http:\/\/china\.ucanews\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)ucdc1998\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/hum.*\.uchicago\.edu\/faculty\/ywang\/history/.test(url)) return "+ss";
-        if (/(?:^|\.)uderzo\.it$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".udn.com") >= 0) return "+ss";
-        if (/(?:^|\.)udn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)udn\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("udnbkk.com/bbs") >= 0) return "+ss";
-        if (/(?:^|\.)uforadio\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ufreevpn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ugo.com") >= 0) return "+ss";
-        if (/(?:^|\.)uhdwallpapers\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)uhrp\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uighur.nl") >= 0) return "+ss";
-        if (/(?:^|\.)uighur\.nl$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("uighurbiz.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".ulike.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ukcdp.co.uk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ukliferadio.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)ukliferadio\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ultravpn.fr") >= 0) return "+ss";
-        if (/(?:^|\.)ultravpn\.fr$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("ultraxs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("umich.edu/~falun") >= 0) return "+ss";
-        if (/(?:^|\.)unblock\.cn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".unblocker.yt") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("unblock-us.com") >= 0) return "+ss";
-        if (/(?:^|\.)unblock-us\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".unblockdmm.com") >= 0) return "+ss";
-        if (/^http:\/\/unblockdmm\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)unblocksit\.es$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("uncyclomedia.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".uncyclopedia.hk/wiki") >= 0) return "+ss";
-        if (/^http:\/\/uncyclopedia\.hk/.test(url)) return "+ss";
-        if (/^http:\/\/uncyclopedia\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("underwoodammo.com") >= 0) return "+ss";
-        if (/(?:^|\.)underwoodammo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)unholyknight\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uni.cc") >= 0) return "+ss";
-        if (/(?:^|\.)cldr\.unicode\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".unification.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".unification.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)unirule\.cloud$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".unitedsocialpress.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".unix100.com") >= 0) return "+ss";
-        if (/(?:^|\.)unknownspace\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".unodedos.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("unpo.org") >= 0) return "+ss";
-        if (/(?:^|\.)unstable\.icu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".untraceable.us") >= 0) return "+ss";
-        if (/^http:\/\/untraceable\.us/.test(url)) return "+ss";
-        if (/(?:^|\.)uocn\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("tor.updatestar.com") >= 0) return "+ss";
-        if (/(?:^|\.)upghsbc\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".upholdjustice.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".upload4u.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("uploaded.net/file") >= 0) return "+ss";
-        if (/^http:\/\/uploaded\.net\/file/.test(url)) return "+ss";
-        if (/^http:\/\/uploaded\.to\/file/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uploadstation.com/file") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".upmedia.mg") >= 0) return "+ss";
-        if (/(?:^|\.)upmedia\.mg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".upornia.com") >= 0) return "+ss";
-        if (/^http:\/\/upornia\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)uproxy\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)uptodown\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".upwill.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ur7s.com") >= 0) return "+ss";
-        if (/(?:^|\.)urbandictionary\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)urbansurvival\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("myshare.url.com.tw/") >= 0) return "+ss";
-        if (/(?:^|\.)urlborg\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)urlparser\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("us.to") >= 0) return "+ss";
-        if (/(?:^|\.)usacn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".usaip.eu") >= 0) return "+ss";
-        if (/(?:^|\.)usaip\.eu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("dalailama.usc.edu") >= 0) return "+ss";
-        if (/(?:^|\.)usma\.edu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".usocctn.com") >= 0) return "+ss";
-        if (/(?:^|\.)ustibetcommittee\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ustream.tv") >= 0) return "+ss";
-        if (/(?:^|\.)ustream\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".usunitednews.com") >= 0) return "+ss";
-        if (/^http:\/\/usunitednews\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("usus.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".utopianpal.com") >= 0) return "+ss";
-        if (/(?:^|\.)utopianpal\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uu-gg.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".uvwxyz.xyz") >= 0) return "+ss";
-        if (/(?:^|\.)uvwxyz\.xyz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uwants.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".uwants.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("uyghur.co.uk") >= 0) return "+ss";
-        if (/^http:\/\/uyghur-j\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)uyghuramerican\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)uyghurbiz\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uyghurcanadiansociety.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".uyghurensemble.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)uyghurcongress\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uyghurpen.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".uyghurpress.com") >= 0) return "+ss";
-        if (/^https:\/\/uyghurpress\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".uyghurstudies.org") >= 0) return "+ss";
-        if (/^http:\/\/uyghurstudies\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("uygur.org") >= 0) return "+ss";
-        if (/^http:\/\/uymaarip\.com\//.test(url)) return "+ss";
-        if (/(?:^|\.)v2fly\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".v2ray.com") >= 0) return "+ss";
-        if (/(?:^|\.)v2ray\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)v2raycn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)v2raytech\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)valeursactuelles\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".van001.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".van698.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vanemu.cn") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vanilla-jp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vanpeople.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vansky.com") >= 0) return "+ss";
-        if (/(?:^|\.)vaticannews\.va$/.test(host)) return "+ss";
-        if (/(?:^|\.)vcf-online\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)vcfbuilder\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vegasred.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".velkaepocha.sk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".venbbs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".venchina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".venetianmacao.com") >= 0) return "+ss";
-        if (/(?:^|\.)venetianmacao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("veoh.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("mysite.verizon.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vermonttibet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".versavpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)versavpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)verybs\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vft.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".viber.com") >= 0) return "+ss";
-        if (/(?:^|\.)viber\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vica.info") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".victimsofcommunism.org") >= 0) return "+ss";
-        if (/^http:\/\/victimsofcommunism\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)vid\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)vidble\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("videobam.com") >= 0) return "+ss";
-        if (/(?:^|\.)videobam\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".videodetective.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".videomega.tv") >= 0) return "+ss";
-        if (/(?:^|\.)videomega\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".videomo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("videopediaworld.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".videopress.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vidinfo.org/video") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vietdaikynguyen.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vijayatemple.org") >= 0) return "+ss";
-        if (/(?:^|\.)vilavpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("vimeo.com") >= 0) return "+ss";
-        if (/(?:^|\.)vimeo\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vimperator\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)vincnd\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vinniev\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/www\.lib\.virginia\.edu\/area-studies\/Tibet\/tibet\.html/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".virtualrealporn.com") >= 0) return "+ss";
-        if (/(?:^|\.)virtualrealporn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("visibletweets.com") >= 0) return "+ss";
-        if (/^http:\/\/ny\.visiontimes\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vital247.org") >= 0) return "+ss";
-        if (/(?:^|\.)viu\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vivahentai4u.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vivatube.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vivthomas.com") >= 0) return "+ss";
-        if (/(?:^|\.)vivthomas\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vjav.com") >= 0) return "+ss";
-        if (/(?:^|\.)vjav\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vjmedia.com.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vllcs.org") >= 0) return "+ss";
-        if (/^http:\/\/vllcs\.org/.test(url)) return "+ss";
-        if (/(?:^|\.)vmixcore\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vnet\.link$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vocativ.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vocn.tv") >= 0) return "+ss";
-        if (/(?:^|\.)vocus\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)voicettank\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vot.org") >= 0) return "+ss";
-        if (/(?:^|\.)vot\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vovo2000.com") >= 0) return "+ss";
-        if (/^http:\/\/vovo2000\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voxer.com") >= 0) return "+ss";
-        if (/(?:^|\.)voxer\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".voy.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpn\.ac$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpn4all.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpn4all\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnaccount.org") >= 0) return "+ss";
-        if (/^http:\/\/vpnaccount\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnaccounts.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnaccounts\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpncomparison.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpncup.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpncup\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("vpnbook.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpncoupons.com") >= 0) return "+ss";
-        if (/^http:\/\/vpncoupons\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpndada.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpndada\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnfan.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vpnfire.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnfires.biz") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnforgame.net") >= 0) return "+ss";
-        if (/(?:^|\.)vpnforgame\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)vpngate\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpngate.net") >= 0) return "+ss";
-        if (/(?:^|\.)vpngate\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpngratis.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vpnhq.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnhub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnmaster.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnmaster\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnmentor.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnmentor\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpninja.net") >= 0) return "+ss";
-        if (/(?:^|\.)vpninja\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnintouch.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnintouch\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("vpnjack.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnjack\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnpick.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnpick\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vpnpop\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vpnpronet\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnreactor.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnreactor\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vpnreviewz\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnsecure.me") >= 0) return "+ss";
-        if (/(?:^|\.)vpnsecure\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnshazam.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnshazam\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnshieldapp.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnshieldapp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnsp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpntraffic.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpntunnel.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpntunnel\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnuk.info") >= 0) return "+ss";
-        if (/(?:^|\.)vpnuk\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)vpnunlimitedapp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnvip.com") >= 0) return "+ss";
-        if (/(?:^|\.)vpnvip\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpnworldwide.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vporn.com") >= 0) return "+ss";
-        if (/(?:^|\.)vporn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".vpser.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vraiesagesse.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".vrmtr.com") >= 0) return "+ss";
-        if (/(?:^|\.)vtunnel\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vuku\.cc$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("lists.w3.org/archives/public") >= 0) return "+ss";
-        if (/(?:^|\.)w3schools\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)waffle1999\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wahas.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".waigaobu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("waikeung.org/php_wind") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wailaike.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".waiwaier.com") >= 0) return "+ss";
-        if (/^http:\/\/waiwaier\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)wallmama\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wallornot.org") >= 0) return "+ss";
-        if (/(?:^|\.)wallpapercasa\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wallproxy.com") >= 0) return "+ss";
-        if (/(?:^|\.)wallsttv\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)waltermartin\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)waltermartin\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)www\.wan-press\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)wanderinghorse\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)wangafu\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)wangjinbo\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wangjinbo.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wanglixiong.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wango.org") >= 0) return "+ss";
-        if (/(?:^|\.)wango\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wangruoshui.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("www.wangruowang.org") >= 0) return "+ss";
-        if (/(?:^|\.)want-daily\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wapedia.mobi/zhsimp") >= 0) return "+ss";
-        if (/(?:^|\.)warroom\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)waselpro\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".watchinese.com") >= 0) return "+ss";
-        if (/(?:^|\.)watchout\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wattpad.com") >= 0) return "+ss";
-        if (/(?:^|\.)wattpad\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".makzhou.warehouse333.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("washeng.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".watch8x.com") >= 0) return "+ss";
-        if (/(?:^|\.)watchmygf\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)wav\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wdf5.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wearehairy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wearn.com") >= 0) return "+ss";
-        if (/(?:^|\.)wearn\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/hkcoc\.weather\.com\.hk/.test(url)) return "+ss";
-        if (/(?:^|\.)hudatoriq\.web\.id$/.test(host)) return "+ss";
-        if (/(?:^|\.)web2project\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("webbang.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".webevader.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".webfreer.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("weblagu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".webjb.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".webrush.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("webs-tv.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".websitepulse.com/help/testtools.china-test") >= 0) return "+ss";
-        if (/^http:\/\/www\.websnapr\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".webwarper.net") >= 0) return "+ss";
-        if (/^http:\/\/webwarper\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("webworkerdaily.com") >= 0) return "+ss";
-        if (/(?:^|\.)wechatlawsuit\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".weekmag.info") >= 0) return "+ss";
-        if (/(?:^|\.)wefightcensorship\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wefong.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("weiboleak.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".weihuo.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("weijingsheng.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".weiming.info") >= 0) return "+ss";
-        if (/(?:^|\.)weiming\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("weiquanwang.org") >= 0) return "+ss";
-        if (/^http:\/\/weisuo\.ws/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".welovecock.com") >= 0) return "+ss";
-        if (/(?:^|\.)welt\.de$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wemigrate.org") >= 0) return "+ss";
-        if (/^http:\/\/wemigrate\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("wengewang.com") >= 0) return "+ss";
-        if (/(?:^|\.)wengewang\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wenhui.ch") >= 0) return "+ss";
-        if (/^http:\/\/trans\.wenweipo\.com\/gb\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wenxuecity.com") >= 0) return "+ss";
-        if (/(?:^|\.)wenxuecity\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wenyunchao.com") >= 0) return "+ss";
-        if (/(?:^|\.)wenyunchao\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".westca.com") >= 0) return "+ss";
-        if (/(?:^|\.)westca\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)westernwolves\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".westkit.net") >= 0) return "+ss";
-        if (/(?:^|\.)westpoint\.edu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".westernshugdensociety.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wetpussygames.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wetplace.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wexiaobo.org") >= 0) return "+ss";
-        if (/(?:^|\.)wexiaobo\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wezhiyong.org") >= 0) return "+ss";
-        if (/(?:^|\.)wezone\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wforum.com") >= 0) return "+ss";
-        if (/(?:^|\.)wforum\.com\/$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".whatblocked.com") >= 0) return "+ss";
-        if (/(?:^|\.)whatblocked\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wheatseeds.org") >= 0) return "+ss";
-        if (/(?:^|\.)wheelockslatin\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".whippedass.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".whoer.net") >= 0) return "+ss";
-        if (/(?:^|\.)whoer\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("whotalking.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("whylover.com") >= 0) return "+ss";
-        if (/(?:^|\.)whyx\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.ch$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.de$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.eu$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.lu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wikileaks.org") >= 0) return "+ss";
-        if (/(?:^|\.)wikileaks\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikileaks\.pl$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wikileaks-forum.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wildammo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".williamhill.com") >= 0) return "+ss";
-        if (/(?:^|\.)collateralmurder\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)collateralmurder\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wikilivres.info/wiki/%E9%9B%B6%E5%85%AB%E5%AE%AA%E7%AB%A0") >= 0) return "+ss";
-        if (/(?:^|\.)wikimapia\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wikiwand.com") >= 0) return "+ss";
-        if (/(?:^|\.)wikiwand\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wikiwiki\.jp$/.test(host)) return "+ss";
-        if (/(?:^|\.)casino\.williamhill\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sports\.williamhill\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)vegas\.williamhill\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)willw\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)windowsphoneme\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".windscribe.com") >= 0) return "+ss";
-        if (/(?:^|\.)windscribe\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)community\.windy\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wingy\.site$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".winning11.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("winwhispers.info") >= 0) return "+ss";
-        if (/(?:^|\.)wionews\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wiredbytes\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wiredpen\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wireguard\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wisdompubs.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wisevid.com") >= 0) return "+ss";
-        if (/(?:^|\.)wisevid\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)whispersystems\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".witnessleeteaching.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".witopia.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wjbk.org") >= 0) return "+ss";
-        if (/(?:^|\.)wjbk\.org$/.test(host)) return "+ss";
-        if (/^http:\/\/wn\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wnacg.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wnacg.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wo.tc") >= 0) return "+ss";
-        if (/(?:^|\.)woeser\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/woesermiddle-way\.net\//.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wokar.org") >= 0) return "+ss";
-        if (/^http:\/\/wokar\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("wolfax.com") >= 0) return "+ss";
-        if (/(?:^|\.)wolfax\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wombo\.ai$/.test(host)) return "+ss";
-        if (/(?:^|\.)woolyss\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("woopie.jp") >= 0) return "+ss";
-        if (/(?:^|\.)woopie\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("woopie.tv") >= 0) return "+ss";
-        if (/(?:^|\.)woopie\.tv$/.test(host)) return "+ss";
-        if (/(?:^|\.)workatruna\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".workerdemo.org.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".workerempowerment.org") >= 0) return "+ss";
-        if (/(?:^|\.)workersthebig\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".worldcat.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("worldjournal.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".worldvpn.net") >= 0) return "+ss";
-        if (/(?:^|\.)worldvpn\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)videopress\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wordpress.com") >= 0) return "+ss";
-        if (/^http:\/\/.*\.wordpress\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)chenshan20042005\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)chinaview\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)cnbbnews\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)freedominfonetweb\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hka8964\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hkanews\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hqsbnet\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)hqsbonline\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)investigating\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)jobnewera\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)matthewdgreen\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)minghuiyw\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wo3ttt\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)sujiatun\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xijie\.wordpress\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wp\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wow.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wow-life.net") >= 0) return "+ss";
-        if (/(?:^|\.)wowlegacy\.ml$/.test(host)) return "+ss";
-        if (/(?:^|\.)wowporn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)wowgirls\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wowrk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("woxinghuiguo.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".woyaolian.org") >= 0) return "+ss";
-        if (/^http:\/\/woyaolian\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wpoforum.com") >= 0) return "+ss";
-        if (/(?:^|\.)wpoforum\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wqyd.org") >= 0) return "+ss";
-        if (/(?:^|\.)wqyd\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wrchina.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wretch.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wsj.com") >= 0) return "+ss";
-        if (/(?:^|\.)wsj\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wsj.net") >= 0) return "+ss";
-        if (/(?:^|\.)wsj\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wsjhk.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wtbn.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".wtfpeople.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wuerkaixi.com") >= 0) return "+ss";
-        if (/(?:^|\.)wufafangwen\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wufi.org.tw") >= 0) return "+ss";
-        if (/(?:^|\.)wuguoguang\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wujie.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("wujieliulan.com") >= 0) return "+ss";
-        if (/(?:^|\.)wujieliulan\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wukangrui.net") >= 0) return "+ss";
-        if (/(?:^|\.)wuw\.red$/.test(host)) return "+ss";
-        if (/(?:^|\.)wuyanblog\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".wwitv.com") >= 0) return "+ss";
-        if (/(?:^|\.)wwitv\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("wzyboy.im/post/160") >= 0) return "+ss";
-        if (/(?:^|\.)x\.co$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".x-berry.com") >= 0) return "+ss";
-        if (/(?:^|\.)x-berry\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)x-art\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)x-wall\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("x1949x.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("x365x.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xanga.com") >= 0) return "+ss";
-        if (/(?:^|\.)xbabe\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xbookcn.com") >= 0) return "+ss";
-        if (/(?:^|\.)xbookcn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xcafe\.in$/.test(host)) return "+ss";
-        if (/(?:^|\.)xcity\.jp$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xcritic.com") >= 0) return "+ss";
-        if (/^http:\/\/cdn.*\.xda-developers\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xerotica.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("destiny.xfiles.to/ubbthreads") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xfm.pp.ru") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xgmyd.com") >= 0) return "+ss";
-        if (/(?:^|\.)xgmyd\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xhamster.com") >= 0) return "+ss";
-        if (/(?:^|\.)xhamster\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xianba.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xianchawang.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xianjian.tw") >= 0) return "+ss";
-        if (/^http:\/\/xianjian\.tw/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xianqiao.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiaobaiwu.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiaochuncnjp.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiaod.in") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiaohexie.com") >= 0) return "+ss";
-        if (/(?:^|\.)xiaolan\.me$/.test(host)) return "+ss";
-        if (/(?:^|\.)xiaoma\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)xiaohexie\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xiaxiaoqiang\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xiezhua.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xihua.es") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("forum.xinbao.de/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xing.com") >= 0) return "+ss";
-        if (/^http:\/\/xing\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xinmiao.com.hk") >= 0) return "+ss";
-        if (/(?:^|\.)xinmiao\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xinsheng.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xinshijue.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xinhuanet.org") >= 0) return "+ss";
-        if (/^http:\/\/xinyubbs\.net/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiongpian.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xiuren.org") >= 0) return "+ss";
-        if (/(?:^|\.)xixicui\.icu$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xizang-zhiye.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xjp.cc") >= 0) return "+ss";
-        if (/(?:^|\.)xjp\.cc$/.test(host)) return "+ss";
-        if (/(?:^|\.)xjtravelguide\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xlfmtalk.com") >= 0) return "+ss";
-        if (/(?:^|\.)xlfmwz\.info$/.test(host)) return "+ss";
-        if (/(?:^|\.)xml-training-guide\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xmovies.com") >= 0) return "+ss";
-        if (/(?:^|\.)xnxx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xpdo.net") >= 0) return "+ss";
-        if (/(?:^|\.)xpud\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xrentdvd.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xskywalker.net") >= 0) return "+ss";
-        if (/(?:^|\.)xtube\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.xuite.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("vlog.xuite.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xuzhiyong.net") >= 0) return "+ss";
-        if (/(?:^|\.)xuchao\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xuchao.net") >= 0) return "+ss";
-        if (/(?:^|\.)xuchao\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("xvideo.cc") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xvideos.com") >= 0) return "+ss";
-        if (/(?:^|\.)xvideos\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xvideos-cdn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xvideos\.es$/.test(host)) return "+ss";
-        if (/(?:^|\.)xvbelink\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)xvinlink\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xkiwi.tk/") >= 0) return "+ss";
-        if (/(?:^|\.)xsden\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxbbx.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxlmovies.com") >= 0) return "+ss";
-        if (/(?:^|\.)xxx\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxx.xxx") >= 0) return "+ss";
-        if (/^http:\/\/xxx\.xxx/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxxfuckmom.com") >= 0) return "+ss";
-        if (/(?:^|\.)xxxx\.com\.au$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".xxxymovies.com") >= 0) return "+ss";
-        if (/^http:\/\/xxxymovies\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("xys.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xysblogs.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xyy69.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xyy69.info") >= 0) return "+ss";
-        if (/(?:^|\.)y2mate\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yakbutterblues\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yam\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yam\.org\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)yande\.re$/.test(host)) return "+ss";
-        if (/(?:^|\.)disk\.yandex\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yanghengjun.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("yangjianli.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yasni.co.uk") >= 0) return "+ss";
-        if (/(?:^|\.)yasni\.co\.uk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yayabay.com/forum") >= 0) return "+ss";
-        if (/(?:^|\.)news\.ycombinator\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ydy.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yeahteentube.com") >= 0) return "+ss";
-        if (/(?:^|\.)yeahteentube\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yecl\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)yeelou\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yeeyi\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("yegle.net") >= 0) return "+ss";
-        if (/(?:^|\.)yegle\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yes.xxx") >= 0) return "+ss";
-        if (/(?:^|\.)yes123\.com\.tw$/.test(host)) return "+ss";
-        if (/(?:^|\.)yesasia\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)yesasia\.com\.hk$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yes-news.com") >= 0) return "+ss";
-        if (/^http:\/\/yes-news\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yespornplease.com") >= 0) return "+ss";
-        if (/(?:^|\.)yespornplease\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/yeyeclub\.com/.test(url)) return "+ss";
-        if (/(?:^|\.)yhcw\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yibada.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yibaochina.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yidio.com") >= 0) return "+ss";
-        if (/(?:^|\.)yidio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("yilubbs.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("xa.yimg.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yingsuoss.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yipub.com") >= 0) return "+ss";
-        if (/(?:^|\.)yipub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("yinlei.org/mt") >= 0) return "+ss";
-        if (/(?:^|\.)yiyechat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yizhihongxing.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yobt.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yobt.tv") >= 0) return "+ss";
-        if (/(?:^|\.)yobt\.tv$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yogichen.org") >= 0) return "+ss";
-        if (/(?:^|\.)yogichen\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yolasite.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yomiuri.co.jp") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("yong.hu") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yorkbbs.ca") >= 0) return "+ss";
-        if (/(?:^|\.)youxu\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youjizz.com") >= 0) return "+ss";
-        if (/(?:^|\.)youjizz\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youmaker.com") >= 0) return "+ss";
-        if (/(?:^|\.)youmaker\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youngpornvideos.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("youngspiration.hk") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".youpai.org") >= 0) return "+ss";
-        if (/(?:^|\.)youpai\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".your-freedom.net") >= 0) return "+ss";
-        if (/(?:^|\.)yourepeat\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yourprivatevpn.com") >= 0) return "+ss";
-        if (/(?:^|\.)yourprivatevpn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yousendit.com") >= 0) return "+ss";
-        if (/(?:^|\.)yousendit\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)youthforfreechina\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youthnetradio.org/tmit/forum") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.youthwant.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("me.youthwant.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("share.youthwant.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("topic.youthwant.com.tw") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".youporn.com") >= 0) return "+ss";
-        if (/(?:^|\.)youporn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".youporngay.com") >= 0) return "+ss";
-        if (/(?:^|\.)youporngay\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yourlisten.com") >= 0) return "+ss";
-        if (/^http:\/\/yourlisten\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yourlust.com") >= 0) return "+ss";
-        if (/^http:\/\/yourlust\.com/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("youshun12.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".youtubecn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("youversion.com") >= 0) return "+ss";
-        if (/(?:^|\.)youversion\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("blog.youxu.info/2010/03/14/west-chamber") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ytht.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("yuanming.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yuanzhengtang.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yulghun.com") >= 0) return "+ss";
-        if (/(?:^|\.)yunchao\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)yuntipub\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yuvutu.com") >= 0) return "+ss";
-        if (/(?:^|\.)yvesgeleyn\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ywpw.com/forums/history/post/A0/p0/html/227") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("yx51.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".yyii.org") >= 0) return "+ss";
-        if (/(?:^|\.)yyii\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)yyjlymb\.xyz$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".yzzk.com") >= 0) return "+ss";
-        if (/(?:^|\.)yzzk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("zacebook.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zalmos.com") >= 0) return "+ss";
-        if (/(?:^|\.)zalmos\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zannel\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zaobao.com") >= 0) return "+ss";
-        if (/(?:^|\.)zaobao\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/zaobao\.com\.sg/.test(url)) return "+ss";
-        if (/(?:^|\.)zaobao\.com\.sg$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zaozon.com") >= 0) return "+ss";
-        if (/(?:^|\.)zdnet\.com\.tw$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zello.com") >= 0) return "+ss";
-        if (/(?:^|\.)zello\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zengjinyan.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zenmate.com") >= 0) return "+ss";
-        if (/(?:^|\.)zenmate\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zenmate\.com\.ru$/.test(host)) return "+ss";
-        if (/(?:^|\.)zerohedge\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zeronet\.io$/.test(host)) return "+ss";
-        if (/(?:^|\.)zeutch\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zfreet.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zgsddh.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zgzcjj.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhanbin.net") >= 0) return "+ss";
-        if (/(?:^|\.)zhanbin\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhangboli.net") >= 0) return "+ss";
-        if (/(?:^|\.)zhangtianliang\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zhanlve\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("zhenghui.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhengjian.org") >= 0) return "+ss";
-        if (/(?:^|\.)zhengjian\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("zhengwunet.org") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zhenlibu.info") >= 0) return "+ss";
-        if (/(?:^|\.)zhenlibu\.info$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhenlibu1984.com") >= 0) return "+ss";
-        if (/(?:^|\.)zhenlibu1984\.com$/.test(host)) return "+ss";
-        if (/^http:\/\/zhenxiang\.biz/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhinengluyou.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zhongguo.ca") >= 0) return "+ss";
-        if (/^http:\/\/zhongguorenquan\.org/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("zhongguotese.net") >= 0) return "+ss";
-        if (/(?:^|\.)zhongguotese\.net$/.test(host)) return "+ss";
-        if (/(?:^|\.)zhongmeng\.org$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhoushuguang.com") >= 0) return "+ss";
-        if (/(?:^|\.)zhreader\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhuangbi.me") >= 0) return "+ss";
-        if (/(?:^|\.)zhuangbi\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zhuanxing.cn") >= 0) return "+ss";
-        if (/(?:^|\.)zhuatieba\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("zhuichaguoji.org") >= 0) return "+ss";
-        if (/(?:^|\.)zhuichaguoji\.org$/.test(host)) return "+ss";
-        if (/(?:^|\.)zi\.media$/.test(host)) return "+ss";
-        if (/^http:\/\/book\.zi5\.me/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ziddu.com/download") >= 0) return "+ss";
-        if (/(?:^|\.)zillionk\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zinio.com") >= 0) return "+ss";
-        if (/(?:^|\.)zinio\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".ziporn.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zippyshare.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zkaip.com") >= 0) return "+ss";
-        if (/(?:^|\.)zkaip\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("realforum.zkiz.com") >= 0) return "+ss";
-        if (/(?:^|\.)zmw\.cn$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zodgame.us") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zomobo.net") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zonaeuropa.com") >= 0) return "+ss";
-        if (/(?:^|\.)zonaeuropa\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zonghexinwen\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zonghexinwen.net") >= 0) return "+ss";
-        if (/(?:^|\.)zoogvpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zootool\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zoozle.net") >= 0) return "+ss";
-        if (/(?:^|\.)zophar\.net$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf("writer.zoho.com") >= 0) return "+ss";
-        if (/(?:^|\.)zorrovpn\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zpn\.im$/.test(host)) return "+ss";
-        if (/(?:^|\.)zspeeder\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zsrhao.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zuo.la") >= 0) return "+ss";
-        if (/(?:^|\.)zuo\.la$/.test(host)) return "+ss";
-        if (/(?:^|\.)zuobiao\.me$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zuola.com") >= 0) return "+ss";
-        if (/(?:^|\.)zuola\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zvereff\.com$/.test(host)) return "+ss";
-        if (/(?:^|\.)zyxel\.com$/.test(host)) return "+ss";
-        if (scheme === "http" && url.indexOf(".zynaima.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("zyzc9.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf(".zzcartoon.com") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("64memo") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("aHR0cHM6Ly95ZWNsLm5ldA") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("freenet") >= 0) return "+ss";
-        if (/^http:\/\/.*\.google\..*\/falun/.test(url)) return "+ss";
-        if (/^http:\/\/.*phobos\.apple\.com.*\/video/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("q=freedom") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("q%3Dfreedom") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("remembering_tiananmen_20_years") >= 0) return "+ss";
-        if (/^http:\/\/.*search.*safeweb/.test(url)) return "+ss";
-        if (scheme === "http" && url.indexOf("q=triangle") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("q%3DTriangle") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ultrareach") >= 0) return "+ss";
-        if (scheme === "http" && url.indexOf("ultrasurf") >= 0) return "+ss";
-        return "DIRECT";
-    },
-    "+ss": function(url, host, scheme) {
-        "use strict";
-        if (host === "127.0.0.1" || host === "::1" || host.indexOf(".") < 0) return "DIRECT";
-        return "PROXY 192.168.2.6:7890";
+/**
+ * genpac 2.1.0 https://github.com/JinnLynn/genpac
+ * GFWList Last-Modified: 2021-08-12 01:07:10
+ */
+
+var proxy = 'PROXY 127.0.0.1:1080';
+var rules = [
+    [
+        [],
+        []
+    ],
+    [
+        [
+            "aftygh.gov.tw",
+            "aide.gov.tw",
+            "aliyun.com",
+            "arte.gov.tw",
+            "baidu.com",
+            "chinaso.com",
+            "chinaz.com",
+            "chukuang.gov.tw",
+            "cycab.gov.tw",
+            "dbnsa.gov.tw",
+            "df.gov.tw",
+            "eastcoast-nsa.gov.tw",
+            "erv-nsa.gov.tw",
+            "gravatar.com",
+            "grb.gov.tw",
+            "haosou.com",
+            "haygo.com",
+            "hchcc.gov.tw",
+            "hsinchu-cc.gov.tw",
+            "iner.gov.tw",
+            "ip.cn",
+            "jike.com",
+            "jpush.cn",
+            "klsio.gov.tw",
+            "kmseh.gov.tw",
+            "locql.com",
+            "lungtanhr.gov.tw",
+            "maolin-nsa.gov.tw",
+            "matsu-news.gov.tw",
+            "matsu-nsa.gov.tw",
+            "matsucc.gov.tw",
+            "moe.gov.tw",
+            "nankan.gov.tw",
+            "ncree.gov.tw",
+            "necoast-nsa.gov.tw",
+            "ner.gov.tw",
+            "nmmba.gov.tw",
+            "nmp.gov.tw",
+            "nmvttc.gov.tw",
+            "northguan-nsa.gov.tw",
+            "npm.gov.tw",
+            "nstm.gov.tw",
+            "ntdmh.gov.tw",
+            "ntl.gov.tw",
+            "ntsec.gov.tw",
+            "ntuh.gov.tw",
+            "nvri.gov.tw",
+            "nyc.gov.tw",
+            "penghu-nsa.gov.tw",
+            "post.gov.tw",
+            "qq.com",
+            "simplecd.me",
+            "sina.cn",
+            "sina.com.cn",
+            "siraya-nsa.gov.tw",
+            "sl-reverse.com",
+            "so.com",
+            "sogou.com",
+            "soso.com",
+            "stdtime.gov.tw",
+            "sunmoonlake.gov.tw",
+            "syniumsoftware.com",
+            "taitung-house.gov.tw",
+            "taoyuan.gov.tw",
+            "tphcc.gov.tw",
+            "trimt-nsa.gov.tw",
+            "uluai.com.cn",
+            "vghks.gov.tw",
+            "vghtc.gov.tw",
+            "vghtpe.gov.tw",
+            "wallproxy.com.cn",
+            "wanfang.gov.tw",
+            "weibo.com",
+            "yahoo.cn",
+            "yatsen.gov.tw",
+            "yda.gov.tw",
+            "youdao.com",
+            "zhongsou.com"
+        ],
+        [
+            "000webhost.com",
+            "030buy.com",
+            "0rz.tw",
+            "1-apple.com.tw",
+            "10.tt",
+            "1000giri.net",
+            "100ke.org",
+            "10beasts.net",
+            "10conditionsoflove.com",
+            "10musume.com",
+            "123rf.com",
+            "12bet.com",
+            "12vpn.com",
+            "12vpn.net",
+            "1337x.to",
+            "138.com",
+            "141hongkong.com",
+            "141jj.com",
+            "141tube.com",
+            "1688.com.au",
+            "173ng.com",
+            "177pic.info",
+            "17t17p.com",
+            "18board.com",
+            "18board.info",
+            "18onlygirls.com",
+            "18p2p.com",
+            "18virginsex.com",
+            "1949er.org",
+            "1984.city",
+            "1984bbs.com",
+            "1984bbs.org",
+            "1991way.com",
+            "1998cdp.org",
+            "1bao.org",
+            "1dumb.com",
+            "1e100.net",
+            "1eew.com",
+            "1mobile.com",
+            "1mobile.tw",
+            "1pondo.tv",
+            "2-hand.info",
+            "2000fun.com",
+            "2008xianzhang.info",
+            "2017.hk",
+            "2047.name",
+            "21andy.com",
+            "21join.com",
+            "21pron.com",
+            "21sextury.com",
+            "228.net.tw",
+            "233abc.com",
+            "24hrs.ca",
+            "24smile.org",
+            "25u.com",
+            "2lipstube.com",
+            "2shared.com",
+            "2waky.com",
+            "3-a.net",
+            "30boxes.com",
+            "315lz.com",
+            "32red.com",
+            "36rain.com",
+            "3a5a.com",
+            "3arabtv.com",
+            "3boys2girls.com",
+            "3d-game.com",
+            "3proxy.ru",
+            "3ren.ca",
+            "3tui.net",
+            "404museum.com",
+            "43110.cf",
+            "466453.com",
+            "4bluestones.biz",
+            "4chan.com",
+            "4dq.com",
+            "4everproxy.com",
+            "4irc.com",
+            "4mydomain.com",
+            "4pu.com",
+            "4rbtv.com",
+            "4shared.com",
+            "4sqi.net",
+            "50webs.com",
+            "51.ca",
+            "51jav.org",
+            "51luoben.com",
+            "5278.cc",
+            "5299.tv",
+            "5aimiku.com",
+            "5i01.com",
+            "5isotoi5.org",
+            "5maodang.com",
+            "63i.com",
+            "64museum.org",
+            "64tianwang.com",
+            "64wiki.com",
+            "66.ca",
+            "666kb.com",
+            "6do.news",
+            "6park.com",
+            "6parkbbs.com",
+            "6parker.com",
+            "6parknews.com",
+            "7capture.com",
+            "7cow.com",
+            "8-d.com",
+            "85cc.net",
+            "85cc.us",
+            "85st.com",
+            "881903.com",
+            "888.com",
+            "888poker.com",
+            "89-64.org",
+            "8964museum.com",
+            "8news.com.tw",
+            "8z1.net",
+            "9001700.com",
+            "908taiwan.org",
+            "91porn.com",
+            "91vps.club",
+            "92ccav.com",
+            "991.com",
+            "99btgc01.com",
+            "99cn.info",
+            "9bis.com",
+            "9bis.net",
+            "9cache.com",
+            "9gag.com",
+            "9news.com.au",
+            "a-normal-day.com",
+            "aamacau.com",
+            "abc.com",
+            "abc.net.au",
+            "abc.xyz",
+            "abchinese.com",
+            "abclite.net",
+            "abebooks.com",
+            "ablwang.com",
+            "aboluowang.com",
+            "about.google",
+            "aboutgfw.com",
+            "abs.edu",
+            "accim.org",
+            "accountkit.com",
+            "aceros-de-hispania.com",
+            "acevpn.com",
+            "acg18.me",
+            "acgbox.org",
+            "acgkj.com",
+            "acgnx.se",
+            "acmedia365.com",
+            "acmetoy.com",
+            "acnw.com.au",
+            "actfortibet.org",
+            "actimes.com.au",
+            "activpn.com",
+            "aculo.us",
+            "adcex.com",
+            "addictedtocoffee.de",
+            "addyoutube.com",
+            "adelaidebbs.com",
+            "admob.com",
+            "adpl.org.hk",
+            "ads-twitter.com",
+            "adsense.com",
+            "adult-sex-games.com",
+            "adultfriendfinder.com",
+            "adultkeep.net",
+            "advanscene.com",
+            "advertfan.com",
+            "advertisercommunity.com",
+            "ae.org",
+            "aenhancers.com",
+            "aex.com",
+            "af.mil",
+            "afantibbs.com",
+            "afr.com",
+            "afreecatv.com",
+            "agnesb.fr",
+            "agoogleaday.com",
+            "agro.hk",
+            "ai-kan.net",
+            "ai-wen.net",
+            "ai.google",
+            "aiph.net",
+            "airasia.com",
+            "airconsole.com",
+            "aircrack-ng.org",
+            "airvpn.org",
+            "aisex.com",
+            "ait.org.tw",
+            "aiweiwei.com",
+            "aiweiweiblog.com",
+            "ajsands.com",
+            "akademiye.org",
+            "akamai.net",
+            "akamaihd.net",
+            "akamaistream.net",
+            "akamaized.net",
+            "akiba-online.com",
+            "akiba-web.com",
+            "akow.org",
+            "al-islam.com",
+            "al-qimmah.net",
+            "alabout.com",
+            "alanhou.com",
+            "alarab.qa",
+            "alasbarricadas.org",
+            "alexlur.org",
+            "alforattv.net",
+            "alhayat.com",
+            "alicejapan.co.jp",
+            "aliengu.com",
+            "alive.bar",
+            "alkasir.com",
+            "all4mom.org",
+            "allcoin.com",
+            "allconnected.co",
+            "alldrawnsex.com",
+            "allervpn.com",
+            "allfinegirls.com",
+            "allgirlmassage.com",
+            "allgirlsallowed.org",
+            "allgravure.com",
+            "alliance.org.hk",
+            "allinfa.com",
+            "alljackpotscasino.com",
+            "allmovie.com",
+            "allowed.org",
+            "almasdarnews.com",
+            "almostmy.com",
+            "alphaporno.com",
+            "alternate-tools.com",
+            "alternativeto.net",
+            "altrec.com",
+            "alvinalexander.com",
+            "alwaysdata.com",
+            "alwaysdata.net",
+            "alwaysvpn.com",
+            "am730.com.hk",
+            "amazon.co.jp",
+            "amazon.com",
+            "amazonaws.com",
+            "ameblo.jp",
+            "america.gov",
+            "american.edu",
+            "americangreencard.com",
+            "americanunfinished.com",
+            "americorps.gov",
+            "amiblockedornot.com",
+            "amigobbs.net",
+            "amitabhafoundation.us",
+            "amnesty.org",
+            "amnesty.org.hk",
+            "amnesty.tw",
+            "amnestyusa.org",
+            "amnyemachen.org",
+            "amoiist.com",
+            "ampproject.org",
+            "amtb-taipei.org",
+            "anchor.fm",
+            "anchorfree.com",
+            "ancsconf.org",
+            "andfaraway.net",
+            "android-x86.org",
+            "android.com",
+            "androidify.com",
+            "androidplus.co",
+            "androidtv.com",
+            "andygod.com",
+            "angela-merkel.de",
+            "angelfire.com",
+            "angola.org",
+            "angularjs.org",
+            "animecrazy.net",
+            "aniscartujo.com",
+            "annatam.com",
+            "anobii.com",
+            "anontext.com",
+            "anonymise.us",
+            "anonymitynetwork.com",
+            "anonymizer.com",
+            "anonymouse.org",
+            "anpopo.com",
+            "answering-islam.org",
+            "antd.org",
+            "anthonycalzadilla.com",
+            "anti1984.com",
+            "antichristendom.com",
+            "antiwave.net",
+            "anws.gov.tw",
+            "anyporn.com",
+            "anysex.com",
+            "ao3.org",
+            "aobo.com.au",
+            "aofriend.com",
+            "aofriend.com.au",
+            "aojiao.org",
+            "aol.ca",
+            "aol.co.uk",
+            "aol.com",
+            "aolnews.com",
+            "aomiwang.com",
+            "ap.org",
+            "apartmentratings.com",
+            "apartments.com",
+            "apat1989.org",
+            "apetube.com",
+            "api.ai",
+            "apiary.io",
+            "apigee.com",
+            "apk-dl.com",
+            "apk.support",
+            "apkcombo.com",
+            "apkmirror.com",
+            "apkmonk.com",
+            "apkplz.com",
+            "apkpure.com",
+            "aplusvpn.com",
+            "appbrain.com",
+            "appdownloader.net",
+            "appledaily.com",
+            "appledaily.com.hk",
+            "appledaily.com.tw",
+            "appshopper.com",
+            "appsocks.net",
+            "appspot.com",
+            "appsto.re",
+            "aptoide.com",
+            "archive.fo",
+            "archive.is",
+            "archive.li",
+            "archive.org",
+            "archive.ph",
+            "archive.today",
+            "archiveofourown.com",
+            "archiveofourown.org",
+            "archives.gov",
+            "archives.gov.tw",
+            "arctosia.com",
+            "areca-backup.org",
+            "arena.taipei",
+            "arethusa.su",
+            "arlingtoncemetery.mil",
+            "army.mil",
+            "art4tibet1998.org",
+            "arte.tv",
+            "artofpeacefoundation.org",
+            "artstation.com",
+            "artsy.net",
+            "asacp.org",
+            "asdfg.jp",
+            "asg.to",
+            "asia-gaming.com",
+            "asiaharvest.org",
+            "asianage.com",
+            "asianews.it",
+            "asianfreeforum.com",
+            "asiansexdiary.com",
+            "asianspiss.com",
+            "asianwomensfilm.de",
+            "asiatgp.com",
+            "asiatoday.us",
+            "askstudent.com",
+            "askynz.net",
+            "aspi.org.au",
+            "aspistrategist.org.au",
+            "assembla.com",
+            "assimp.org",
+            "astrill.com",
+            "atc.org.au",
+            "atchinese.com",
+            "atdmt.com",
+            "atgfw.org",
+            "athenaeizou.com",
+            "atlanta168.com",
+            "atlaspost.com",
+            "atnext.com",
+            "audionow.com",
+            "authorizeddns.net",
+            "authorizeddns.org",
+            "authorizeddns.us",
+            "autodraw.com",
+            "av-e-body.com",
+            "av.com",
+            "av.movie",
+            "avaaz.org",
+            "avbody.tv",
+            "avcity.tv",
+            "avcool.com",
+            "avdb.in",
+            "avdb.tv",
+            "avfantasy.com",
+            "avg.com",
+            "avgle.com",
+            "avidemux.org",
+            "avmo.pw",
+            "avmoo.com",
+            "avmoo.net",
+            "avmoo.pw",
+            "avoision.com",
+            "avyahoo.com",
+            "axios.com",
+            "axureformac.com",
+            "azerbaycan.tv",
+            "azerimix.com",
+            "azubu.tv",
+            "azurewebsites.net",
+            "b-ok.cc",
+            "b0ne.com",
+            "baby-kingdom.com",
+            "babylonbee.com",
+            "babynet.com.hk",
+            "backchina.com",
+            "backpackers.com.tw",
+            "backtotiananmen.com",
+            "badiucao.com",
+            "badjojo.com",
+            "badoo.com",
+            "baidu.jp",
+            "baijie.org",
+            "bailandaily.com",
+            "baixing.me",
+            "bakgeekhome.tk",
+            "banana-vpn.com",
+            "band.us",
+            "bandcamp.com",
+            "bandwagonhost.com",
+            "bangbrosnetwork.com",
+            "bangchen.net",
+            "bangdream.space",
+            "bangkokpost.com",
+            "bangyoulater.com",
+            "bankmobilevibe.com",
+            "bannedbook.org",
+            "bannednews.org",
+            "banorte.com",
+            "baramangaonline.com",
+            "barenakedislam.com",
+            "barnabu.co.uk",
+            "barton.de",
+            "bastillepost.com",
+            "bayvoice.net",
+            "baywords.com",
+            "bb-chat.tv",
+            "bbc.co.uk",
+            "bbc.com",
+            "bbc.in",
+            "bbcchinese.com",
+            "bbchat.tv",
+            "bbci.co.uk",
+            "bbg.gov",
+            "bbkz.com",
+            "bbnradio.org",
+            "bbs-tw.com",
+            "bbsdigest.com",
+            "bbsfeed.com",
+            "bbsland.com",
+            "bbsmo.com",
+            "bbsone.com",
+            "bbtoystore.com",
+            "bcast.co.nz",
+            "bcc.com.tw",
+            "bcchinese.net",
+            "bcex.ca",
+            "bcmorning.com",
+            "bdsmvideos.net",
+            "beaconevents.com",
+            "bebo.com",
+            "beeg.com",
+            "beevpn.com",
+            "behance.net",
+            "behindkink.com",
+            "beijing1989.com",
+            "beijingspring.com",
+            "beijingzx.org",
+            "belamionline.com",
+            "bell.wiki",
+            "bemywife.cc",
+            "beric.me",
+            "berlinerbericht.de",
+            "berlintwitterwall.com",
+            "berm.co.nz",
+            "bestforchina.org",
+            "bestgore.com",
+            "bestpornstardb.com",
+            "bestvpn.com",
+            "bestvpnanalysis.com",
+            "bestvpnserver.com",
+            "bestvpnservice.com",
+            "bestvpnusa.com",
+            "bet365.com",
+            "betfair.com",
+            "betternet.co",
+            "bettervpn.com",
+            "bettween.com",
+            "betvictor.com",
+            "bewww.net",
+            "beyondfirewall.com",
+            "bfnn.org",
+            "bfsh.hk",
+            "bgvpn.com",
+            "bianlei.com",
+            "biantailajiao.com",
+            "biantailajiao.in",
+            "biblesforamerica.org",
+            "bibox.com",
+            "bic2011.org",
+            "biedian.me",
+            "big.one",
+            "bigfools.com",
+            "bigjapanesesex.com",
+            "bigmoney.biz",
+            "bignews.org",
+            "bigone.com",
+            "bigsound.org",
+            "bild.de",
+            "biliworld.com",
+            "billypan.com",
+            "binance.com",
+            "bing.com",
+            "binux.me",
+            "binwang.me",
+            "bird.so",
+            "bit-z.com",
+            "bit.do",
+            "bit.ly",
+            "bitbay.net",
+            "bitchute.com",
+            "bitcointalk.org",
+            "bitcoinworld.com",
+            "bitfinex.com",
+            "bithumb.com",
+            "bitinka.com.ar",
+            "bitmex.com",
+            "bitshare.com",
+            "bitsnoop.com",
+            "bitterwinter.org",
+            "bitvise.com",
+            "bitz.ai",
+            "bizhat.com",
+            "bjnewlife.org",
+            "bjs.org",
+            "bjzc.org",
+            "bl-doujinsouko.com",
+            "blacklogic.com",
+            "blackvpn.com",
+            "blewpass.com",
+            "blingblingsquad.net",
+            "blinkx.com",
+            "blinw.com",
+            "blip.tv",
+            "blockcn.com",
+            "blockless.com",
+            "blog.de",
+            "blog.google",
+            "blog.jp",
+            "blogblog.com",
+            "blogcatalog.com",
+            "blogcity.me",
+            "blogdns.org",
+            "blogger.com",
+            "blogimg.jp",
+            "bloglines.com",
+            "bloglovin.com",
+            "blogs.com",
+            "blogspot.com",
+            "blogspot.hk",
+            "blogspot.jp",
+            "blogspot.tw",
+            "blogtd.net",
+            "blogtd.org",
+            "bloodshed.net",
+            "bloomberg.cn",
+            "bloomberg.com",
+            "bloomberg.de",
+            "bloombergview.com",
+            "bloomfortune.com",
+            "blueangellive.com",
+            "bmfinn.com",
+            "bnews.co",
+            "bnn.co",
+            "bnrmetal.com",
+            "boardreader.com",
+            "bod.asia",
+            "bodog88.com",
+            "bolehvpn.net",
+            "bonbonme.com",
+            "bonbonsex.com",
+            "bonfoundation.org",
+            "bongacams.com",
+            "boobstagram.com",
+            "book.com.tw",
+            "bookepub.com",
+            "books.com.tw",
+            "booktopia.com.au",
+            "boomssr.com",
+            "bot.nu",
+            "botanwang.com",
+            "bowenpress.com",
+            "box.com",
+            "box.net",
+            "boxpn.com",
+            "boxun.com",
+            "boxun.tv",
+            "boxunblog.com",
+            "boxunclub.com",
+            "boyangu.com",
+            "boyfriendtv.com",
+            "boysfood.com",
+            "boysmaster.com",
+            "br.st",
+            "brainyquote.com",
+            "brandonhutchinson.com",
+            "braumeister.org",
+            "brave.com",
+            "bravotube.net",
+            "brazzers.com",
+            "break.com",
+            "breakgfw.com",
+            "breaking911.com",
+            "breakingtweets.com",
+            "breakwall.net",
+            "briefdream.com",
+            "briian.com",
+            "brizzly.com",
+            "brkmd.com",
+            "broadbook.com",
+            "broadpressinc.com",
+            "brockbbs.com",
+            "brookings.edu",
+            "brucewang.net",
+            "brutaltgp.com",
+            "bt2mag.com",
+            "bt95.com",
+            "btaia.com",
+            "btbtav.com",
+            "btc98.com",
+            "btcbank.bank",
+            "btctrade.im",
+            "btdigg.org",
+            "btku.me",
+            "btku.org",
+            "btspread.com",
+            "btsynckeys.com",
+            "budaedu.org",
+            "buddhanet.com.tw",
+            "buddhistchannel.tv",
+            "buffered.com",
+            "bullguard.com",
+            "bullog.org",
+            "bullogger.com",
+            "bunbunhk.com",
+            "busayari.com",
+            "business-humanrights.org",
+            "businessinsider.com",
+            "businessinsider.com.au",
+            "businesstoday.com.tw",
+            "businessweek.com",
+            "busu.org",
+            "busytrade.com",
+            "buugaa.com",
+            "buzzhand.com",
+            "buzzhand.net",
+            "buzzorange.com",
+            "bvpn.com",
+            "bwbx.io",
+            "bwgyhw.com",
+            "bwh1.net",
+            "bwsj.hk",
+            "bx.in.th",
+            "bx.tl",
+            "bynet.co.il",
+            "bypasscensorship.org",
+            "c-est-simple.com",
+            "c-span.org",
+            "c-spanvideo.org",
+            "c100tibet.org",
+            "c2cx.com",
+            "cablegatesearch.net",
+            "cachinese.com",
+            "cacnw.com",
+            "cactusvpn.com",
+            "cafepress.com",
+            "cahr.org.tw",
+            "caijinglengyan.com",
+            "calameo.com",
+            "calebelston.com",
+            "calgarychinese.ca",
+            "calgarychinese.com",
+            "calgarychinese.net",
+            "calibre-ebook.com",
+            "caltech.edu",
+            "cam4.com",
+            "cam4.jp",
+            "cam4.sg",
+            "camfrog.com",
+            "campaignforuyghurs.org",
+            "cams.com",
+            "cams.org.sg",
+            "canadameet.com",
+            "canalporno.com",
+            "cantonese.asia",
+            "canyu.org",
+            "cao.im",
+            "caobian.info",
+            "caochangqing.com",
+            "cap.org.hk",
+            "carabinasypistolas.com",
+            "cardinalkungfoundation.org",
+            "careerengine.us",
+            "carfax.com",
+            "cari.com.my",
+            "caribbeancom.com",
+            "carmotorshow.com",
+            "carrd.co",
+            "carryzhou.com",
+            "cartoonmovement.com",
+            "casadeltibetbcn.org",
+            "casatibet.org.mx",
+            "casinobellini.com",
+            "casinoking.com",
+            "casinoriva.com",
+            "castbox.fm",
+            "catch22.net",
+            "catchgod.com",
+            "catfightpayperview.xxx",
+            "catholic.org.hk",
+            "catholic.org.tw",
+            "cathvoice.org.tw",
+            "cato.org",
+            "cattt.com",
+            "cbc.ca",
+            "cbsnews.com",
+            "cbtc.org.hk",
+            "cc.com",
+            "cccat.cc",
+            "cccat.co",
+            "ccdtr.org",
+            "cchere.com",
+            "ccim.org",
+            "cclife.ca",
+            "cclife.org",
+            "cclifefl.org",
+            "ccthere.com",
+            "ccthere.net",
+            "cctmweb.net",
+            "cctongbao.com",
+            "ccue.ca",
+            "ccue.com",
+            "ccvoice.ca",
+            "ccw.org.tw",
+            "cdbook.org",
+            "cdcparty.com",
+            "cdef.org",
+            "cdig.info",
+            "cdjp.org",
+            "cdn-apple.com",
+            "cdnews.com.tw",
+            "cdninstagram.com",
+            "cdp1989.org",
+            "cdp1998.org",
+            "cdp2006.org",
+            "cdpeu.org",
+            "cdpusa.org",
+            "cdpweb.org",
+            "cdpwu.org",
+            "cdw.com",
+            "cecc.gov",
+            "cellulo.info",
+            "cenews.eu",
+            "centauro.com.br",
+            "centerforhumanreprod.com",
+            "centralnation.com",
+            "centurys.net",
+            "certificate-transparency.org",
+            "cfhks.org.hk",
+            "cfos.de",
+            "cfr.org",
+            "cftfc.com",
+            "cgdepot.org",
+            "cgst.edu",
+            "change.org",
+            "changeip.name",
+            "changeip.net",
+            "changeip.org",
+            "changp.com",
+            "changsa.net",
+            "channelnewsasia.com",
+            "chaoex.com",
+            "chapm25.com",
+            "chatnook.com",
+            "chaturbate.com",
+            "checkgfw.com",
+            "chengmingmag.com",
+            "chenguangcheng.com",
+            "chenpokong.com",
+            "chenpokong.net",
+            "chenpokongvip.com",
+            "cherrysave.com",
+            "chhongbi.org",
+            "chicagoncmtv.com",
+            "china-mmm.net",
+            "china-review.com.ua",
+            "china-week.com",
+            "china101.com",
+            "china18.org",
+            "china21.com",
+            "china21.org",
+            "china5000.us",
+            "chinaaffairs.org",
+            "chinaaid.me",
+            "chinaaid.net",
+            "chinaaid.org",
+            "chinaaid.us",
+            "chinachange.org",
+            "chinachannel.hk",
+            "chinacitynews.be",
+            "chinacomments.org",
+            "chinadialogue.net",
+            "chinadigitaltimes.net",
+            "chinaelections.org",
+            "chinaeweekly.com",
+            "chinafreepress.org",
+            "chinagate.com",
+            "chinageeks.org",
+            "chinagfw.org",
+            "chinagonet.com",
+            "chinagreenparty.org",
+            "chinahorizon.org",
+            "chinahush.com",
+            "chinainperspective.com",
+            "chinainterimgov.org",
+            "chinalaborwatch.org",
+            "chinalawandpolicy.com",
+            "chinalawtranslate.com",
+            "chinamule.com",
+            "chinamz.org",
+            "chinanewscenter.com",
+            "chinapost.com.tw",
+            "chinapress.com.my",
+            "chinarightsia.org",
+            "chinasmile.net",
+            "chinasocialdemocraticparty.com",
+            "chinasoul.org",
+            "chinasucks.net",
+            "chinatimes.com",
+            "chinatopsex.com",
+            "chinatown.com.au",
+            "chinatweeps.com",
+            "chinaway.org",
+            "chinaworker.info",
+            "chinaxchina.com",
+            "chinayouth.org.hk",
+            "chinayuanmin.org",
+            "chinese-hermit.net",
+            "chinese-leaders.org",
+            "chinese-memorial.org",
+            "chinesedaily.com",
+            "chinesedailynews.com",
+            "chinesedemocracy.com",
+            "chinesegay.org",
+            "chinesen.de",
+            "chinesenews.net.au",
+            "chinesepen.org",
+            "chineseradioseattle.com",
+            "chinesetalks.net",
+            "chineseupress.com",
+            "chingcheong.com",
+            "chinman.net",
+            "chithu.org",
+            "chobit.cc",
+            "chosun.com",
+            "chrdnet.com",
+            "christianfreedom.org",
+            "christianstudy.com",
+            "christiantimes.org.hk",
+            "christusrex.org",
+            "chrlawyers.hk",
+            "chrome.com",
+            "chromecast.com",
+            "chromeenterprise.google",
+            "chromeexperiments.com",
+            "chromercise.com",
+            "chromestatus.com",
+            "chromium.org",
+            "chuang-yen.org",
+            "chubold.com",
+            "chubun.com",
+            "churchinhongkong.org",
+            "chushigangdrug.ch",
+            "cienen.com",
+            "cineastentreff.de",
+            "cipfg.org",
+            "circlethebayfortibet.org",
+            "cirosantilli.com",
+            "citizencn.com",
+            "citizenlab.ca",
+            "citizenlab.org",
+            "citizenscommission.hk",
+            "citizensradio.org",
+            "city365.ca",
+            "city9x.com",
+            "citypopulation.de",
+            "citytalk.tw",
+            "civicparty.hk",
+            "civildisobediencemovement.org",
+            "civilhrfront.org",
+            "civiliangunner.com",
+            "civilmedia.tw",
+            "civisec.org",
+            "cjb.net",
+            "ck101.com",
+            "clarionproject.org",
+            "classicalguitarblog.net",
+            "clb.org.hk",
+            "cleansite.biz",
+            "cleansite.info",
+            "cleansite.us",
+            "clearharmony.net",
+            "clearsurance.com",
+            "clearwisdom.net",
+            "clementine-player.org",
+            "clinica-tibet.ru",
+            "clipfish.de",
+            "cloakpoint.com",
+            "cloudcone.com",
+            "cloudfront.net",
+            "club1069.com",
+            "clubhouseapi.com",
+            "clyp.it",
+            "cmcn.org",
+            "cmi.org.tw",
+            "cmoinc.org",
+            "cms.gov",
+            "cmu.edu",
+            "cmule.com",
+            "cmule.org",
+            "cmx.im",
+            "cn-proxy.com",
+            "cn.com",
+            "cn6.eu",
+            "cna.com.tw",
+            "cnabc.com",
+            "cnd.org",
+            "cnet.com",
+            "cnex.org.cn",
+            "cnineu.com",
+            "cnitter.com",
+            "cnn.com",
+            "cnpolitics.org",
+            "cnproxy.com",
+            "cnyes.com",
+            "co.tv",
+            "coat.co.jp",
+            "cobinhood.com",
+            "cochina.co",
+            "cochina.org",
+            "code1984.com",
+            "codeplex.com",
+            "codeshare.io",
+            "codeskulptor.org",
+            "coin2co.in",
+            "coinbene.com",
+            "coinegg.com",
+            "coinex.com",
+            "coingi.com",
+            "coinrail.co.kr",
+            "cointiger.com",
+            "cointobe.com",
+            "coinut.com",
+            "collateralmurder.com",
+            "collateralmurder.org",
+            "com.google",
+            "com.ru",
+            "com.uk",
+            "comedycentral.com",
+            "comefromchina.com",
+            "comic-mega.me",
+            "comico.tw",
+            "commandarms.com",
+            "commentshk.com",
+            "communistcrimes.org",
+            "communitychoicecu.com",
+            "comparitech.com",
+            "compileheart.com",
+            "compress.to",
+            "compython.net",
+            "conoha.jp",
+            "constitutionalism.solutions",
+            "contactmagazine.net",
+            "convio.net",
+            "coobay.com",
+            "cool18.com",
+            "coolaler.com",
+            "coolder.com",
+            "coolloud.org.tw",
+            "coolncute.com",
+            "coolstuffinc.com",
+            "corumcollege.com",
+            "cos-moe.com",
+            "cosplayjav.pl",
+            "costco.com",
+            "cotweet.com",
+            "counter.social",
+            "coursehero.com",
+            "cpj.org",
+            "cq99.us",
+            "crackle.com",
+            "crazys.cc",
+            "crazyshit.com",
+            "crbug.com",
+            "crchina.org",
+            "crd-net.org",
+            "creaders.net",
+            "creadersnet.com",
+            "creativelab5.com",
+            "crisisresponse.google",
+            "cristyli.com",
+            "crocotube.com",
+            "crossfire.co.kr",
+            "crossthewall.net",
+            "crossvpn.net",
+            "crrev.com",
+            "crucial.com",
+            "crunchyroll.com",
+            "cryptographyengineering.com",
+            "csdparty.com",
+            "csis.org",
+            "csmonitor.com",
+            "csuchen.de",
+            "csw.org.uk",
+            "ct.org.tw",
+            "ctao.org",
+            "ctfriend.net",
+            "ctitv.com.tw",
+            "ctowc.org",
+            "cts.com.tw",
+            "ctwant.com",
+            "cuhk.edu.hk",
+            "cuhkacs.org",
+            "cuihua.org",
+            "cuiweiping.net",
+            "culture.tw",
+            "cumlouder.com",
+            "curvefish.com",
+            "cusp.hk",
+            "cusu.hk",
+            "cutscenes.net",
+            "cw.com.tw",
+            "cwb.gov.tw",
+            "cyberctm.com",
+            "cyberghostvpn.com",
+            "cynscribe.com",
+            "cytode.us",
+            "cz.cc",
+            "d-fukyu.com",
+            "d0z.net",
+            "d100.net",
+            "d2bay.com",
+            "d2pass.com",
+            "dabr.co.uk",
+            "dabr.eu",
+            "dabr.me",
+            "dabr.mobi",
+            "dadazim.com",
+            "dadi360.com",
+            "dafabet.com",
+            "dafagood.com",
+            "dafahao.com",
+            "dafoh.org",
+            "daftporn.com",
+            "dagelijksestandaard.nl",
+            "daidostup.ru",
+            "dailidaili.com",
+            "dailymail.co.uk",
+            "dailymotion.com",
+            "dailysabah.com",
+            "dailyview.tw",
+            "daiphapinfo.net",
+            "dajiyuan.com",
+            "dajiyuan.de",
+            "dajiyuan.eu",
+            "dalailama-archives.org",
+            "dalailama.com",
+            "dalailama.mn",
+            "dalailama.ru",
+            "dalailama80.org",
+            "dalailamacenter.org",
+            "dalailamafellows.org",
+            "dalailamafilm.com",
+            "dalailamafoundation.org",
+            "dalailamahindi.com",
+            "dalailamainaustralia.org",
+            "dalailamajapanese.com",
+            "dalailamaprotesters.info",
+            "dalailamaquotes.org",
+            "dalailamatrust.org",
+            "dalailamavisit.org.nz",
+            "dalailamaworld.com",
+            "dalianmeng.org",
+            "daliulian.org",
+            "danke4china.net",
+            "danwei.org",
+            "daolan.net",
+            "daozhongxing.org",
+            "darktech.org",
+            "darktoy.net",
+            "darpa.mil",
+            "dastrassi.org",
+            "data-vocabulary.org",
+            "data.gov.tw",
+            "daum.net",
+            "david-kilgour.com",
+            "dawangidc.com",
+            "daxa.cn",
+            "dayabook.com",
+            "daylife.com",
+            "db.tt",
+            "dbc.hk",
+            "dbgjd.com",
+            "dcard.tw",
+            "dcmilitary.com",
+            "ddc.com.tw",
+            "ddhw.info",
+            "ddns.info",
+            "ddns.me.uk",
+            "ddns.mobi",
+            "ddns.ms",
+            "ddns.name",
+            "ddns.net",
+            "ddns.us",
+            "de-sci.org",
+            "deadline.com",
+            "deaftone.com",
+            "debug.com",
+            "deck.ly",
+            "decodet.co",
+            "deepmind.com",
+            "deezer.com",
+            "definebabe.com",
+            "deja.com",
+            "delcamp.net",
+            "delicious.com",
+            "democrats.org",
+            "demosisto.hk",
+            "depositphotos.com",
+            "desc.se",
+            "design.google",
+            "desipro.de",
+            "dessci.com",
+            "destroy-china.jp",
+            "deutsche-welle.de",
+            "deviantart.com",
+            "deviantart.net",
+            "devio.us",
+            "devpn.com",
+            "dfas.mil",
+            "dfn.org",
+            "dharamsalanet.com",
+            "dharmakara.net",
+            "dhcp.biz",
+            "diaoyuislands.org",
+            "difangwenge.org",
+            "digiland.tw",
+            "digisfera.com",
+            "digitalnomadsproject.org",
+            "diigo.com",
+            "dilber.se",
+            "dingchin.com.tw",
+            "dipity.com",
+            "directcreative.com",
+            "discoins.com",
+            "disconnect.me",
+            "discord.com",
+            "discord.gg",
+            "discordapp.com",
+            "discordapp.net",
+            "discuss.com.hk",
+            "discuss4u.com",
+            "dish.com",
+            "disp.cc",
+            "disqus.com",
+            "dit-inc.us",
+            "dizhidizhi.com",
+            "dizhuzhishang.com",
+            "djangosnippets.org",
+            "djorz.com",
+            "dl-laby.jp",
+            "dlive.tv",
+            "dlsite.com",
+            "dlsite.jp",
+            "dlyoutube.com",
+            "dm530.net",
+            "dmcdn.net",
+            "dmhy.org",
+            "dmm.co.jp",
+            "dmm.com",
+            "dns-dns.com",
+            "dns-stuff.com",
+            "dns.google",
+            "dns04.com",
+            "dns05.com",
+            "dns1.us",
+            "dns2.us",
+            "dns2go.com",
+            "dnscrypt.org",
+            "dnset.com",
+            "dnsrd.com",
+            "dnssec.net",
+            "dnvod.tv",
+            "doctorvoice.org",
+            "documentingreality.com",
+            "dogfartnetwork.com",
+            "dojin.com",
+            "dok-forum.net",
+            "dolc.de",
+            "dolf.org.hk",
+            "dollf.com",
+            "domain.club.tw",
+            "domains.google",
+            "domaintoday.com.au",
+            "donga.com",
+            "dongtaiwang.com",
+            "dongtaiwang.net",
+            "dongyangjing.com",
+            "donmai.us",
+            "dontfilter.us",
+            "dontmovetochina.com",
+            "dorjeshugden.com",
+            "dotplane.com",
+            "dotsub.com",
+            "dotvpn.com",
+            "doub.io",
+            "doubibackup.com",
+            "doubmirror.cf",
+            "dougscripts.com",
+            "douhokanko.net",
+            "doujincafe.com",
+            "dowei.org",
+            "dowjones.com",
+            "dphk.org",
+            "dpp.org.tw",
+            "dpr.info",
+            "dragonex.io",
+            "dragonsprings.org",
+            "dreamamateurs.com",
+            "drepung.org",
+            "drgan.net",
+            "drmingxia.org",
+            "dropbooks.tv",
+            "dropbox.com",
+            "dropboxapi.com",
+            "dropboxusercontent.com",
+            "drsunacademy.com",
+            "drtuber.com",
+            "dscn.info",
+            "dsmtp.com",
+            "dstk.dk",
+            "dtdns.net",
+            "dtiblog.com",
+            "dtic.mil",
+            "dtwang.org",
+            "duanzhihu.com",
+            "dubox.com",
+            "duck.com",
+            "duckdns.org",
+            "duckduckgo.com",
+            "duckload.com",
+            "duckmylife.com",
+            "duga.jp",
+            "duihua.org",
+            "duihuahrjournal.org",
+            "dumb1.com",
+            "dunyabulteni.net",
+            "duoweitimes.com",
+            "duping.net",
+            "duplicati.com",
+            "dupola.com",
+            "dupola.net",
+            "dushi.ca",
+            "duyaoss.com",
+            "dvdpac.com",
+            "dvorak.org",
+            "dw-world.com",
+            "dw-world.de",
+            "dw.com",
+            "dw.de",
+            "dwheeler.com",
+            "dwnews.com",
+            "dwnews.net",
+            "dxiong.com",
+            "dynamic-dns.net",
+            "dynamicdns.biz",
+            "dynamicdns.co.uk",
+            "dynamicdns.me.uk",
+            "dynamicdns.org.uk",
+            "dynawebinc.com",
+            "dyndns-ip.com",
+            "dyndns-pics.com",
+            "dyndns.org",
+            "dyndns.pro",
+            "dynssl.com",
+            "dynu.com",
+            "dynu.net",
+            "dysfz.cc",
+            "dzze.com",
+            "e-classical.com.tw",
+            "e-gold.com",
+            "e-hentai.org",
+            "e-hentaidb.com",
+            "e-info.org.tw",
+            "e-traderland.net",
+            "e-zone.com.hk",
+            "e123.hk",
+            "earlytibet.com",
+            "earthcam.com",
+            "earthvpn.com",
+            "eastern-ark.com",
+            "easternlightning.org",
+            "eastturkestan.com",
+            "eastturkistan-gov.org",
+            "eastturkistan.net",
+            "eastturkistancc.org",
+            "eastturkistangovernmentinexile.us",
+            "easyca.ca",
+            "easypic.com",
+            "ebc.net.tw",
+            "ebony-beauty.com",
+            "ebookbrowse.com",
+            "ebookee.com",
+            "ebtcbank.com",
+            "ecfa.org.tw",
+            "echainhost.com",
+            "echofon.com",
+            "ecimg.tw",
+            "ecministry.net",
+            "economist.com",
+            "ecstart.com",
+            "edgecastcdn.net",
+            "edgesuite.net",
+            "edicypages.com",
+            "edmontonchina.cn",
+            "edmontonservice.com",
+            "edns.biz",
+            "edoors.com",
+            "edubridge.com",
+            "edupro.org",
+            "eesti.ee",
+            "eevpn.com",
+            "efcc.org.hk",
+            "effers.com",
+            "efksoft.com",
+            "efukt.com",
+            "eic-av.com",
+            "eireinikotaerukai.com",
+            "eisbb.com",
+            "eksisozluk.com",
+            "electionsmeter.com",
+            "elgoog.im",
+            "ellawine.org",
+            "elpais.com",
+            "eltondisney.com",
+            "emaga.com",
+            "emanna.com",
+            "embr.in",
+            "emilylau.org.hk",
+            "emory.edu",
+            "empfil.com",
+            "emule-ed2k.com",
+            "emulefans.com",
+            "emuparadise.me",
+            "enanyang.my",
+            "encrypt.me",
+            "encyclopedia.com",
+            "enewstree.com",
+            "enfal.de",
+            "engadget.com",
+            "engagedaily.org",
+            "englishforeveryone.org",
+            "englishfromengland.co.uk",
+            "englishpen.org",
+            "enlighten.org.tw",
+            "entermap.com",
+            "environment.google",
+            "epa.gov.tw",
+            "epac.to",
+            "episcopalchurch.org",
+            "epochhk.com",
+            "epochtimes-bg.com",
+            "epochtimes-romania.com",
+            "epochtimes.co.il",
+            "epochtimes.co.kr",
+            "epochtimes.com",
+            "epochtimes.cz",
+            "epochtimes.de",
+            "epochtimes.fr",
+            "epochtimes.ie",
+            "epochtimes.it",
+            "epochtimes.jp",
+            "epochtimes.ru",
+            "epochtimes.se",
+            "epochtimestr.com",
+            "epochweek.com",
+            "epochweekly.com",
+            "eporner.com",
+            "equinenow.com",
+            "erabaru.net",
+            "eracom.com.tw",
+            "eraysoft.com.tr",
+            "erepublik.com",
+            "erights.net",
+            "eriversoft.com",
+            "erktv.com",
+            "ernestmandel.org",
+            "erodaizensyu.com",
+            "erodoujinlog.com",
+            "erodoujinworld.com",
+            "eromanga-kingdom.com",
+            "eromangadouzin.com",
+            "eromon.net",
+            "eroprofile.com",
+            "eroticsaloon.net",
+            "eslite.com",
+            "esmtp.biz",
+            "esu.dog",
+            "esu.im",
+            "esurance.com",
+            "etaa.org.au",
+            "etadult.com",
+            "etaiwannews.com",
+            "etherdelta.com",
+            "etherscan.io",
+            "etizer.org",
+            "etokki.com",
+            "etowns.net",
+            "etowns.org",
+            "etsy.com",
+            "ettoday.net",
+            "etvonline.hk",
+            "eu.org",
+            "eucasino.com",
+            "eulam.com",
+            "eurekavpt.com",
+            "euronews.com",
+            "europa.eu",
+            "evozi.com",
+            "evschool.net",
+            "exblog.co.jp",
+            "exblog.jp",
+            "exchristian.hk",
+            "excite.co.jp",
+            "exhentai.org",
+            "exmo.com",
+            "exmormon.org",
+            "expatshield.com",
+            "expecthim.com",
+            "expekt.com",
+            "experts-univers.com",
+            "exploader.net",
+            "expofutures.com",
+            "expressvpn.com",
+            "exrates.me",
+            "extmatrix.com",
+            "extremetube.com",
+            "exx.com",
+            "eyevio.jp",
+            "eyny.com",
+            "ezpc.tk",
+            "ezpeer.com",
+            "ezua.com",
+            "f8.com",
+            "fa.gov.tw",
+            "facebook.br",
+            "facebook.com",
+            "facebook.design",
+            "facebook.hu",
+            "facebook.in",
+            "facebook.net",
+            "facebook.nl",
+            "facebook.se",
+            "facebookmail.com",
+            "facebookquotes4u.com",
+            "faceless.me",
+            "facesofnyfw.com",
+            "facesoftibetanselfimmolators.info",
+            "factpedia.org",
+            "fail.hk",
+            "faith100.org",
+            "faithfuleye.com",
+            "faiththedog.info",
+            "fakku.net",
+            "fallenark.com",
+            "falsefire.com",
+            "falun-co.org",
+            "falun-ny.net",
+            "falunart.org",
+            "falunasia.info",
+            "falunau.org",
+            "falunaz.net",
+            "falundafa-dc.org",
+            "falundafa-florida.org",
+            "falundafa-nc.org",
+            "falundafa-pa.net",
+            "falundafa-sacramento.org",
+            "falundafa.org",
+            "falundafaindia.org",
+            "falundafamuseum.org",
+            "falungong.club",
+            "falungong.de",
+            "falungong.org.uk",
+            "falunhr.org",
+            "faluninfo.de",
+            "faluninfo.net",
+            "falunpilipinas.net",
+            "falunworld.net",
+            "familyfed.org",
+            "famunion.com",
+            "fan-qiang.com",
+            "fandom.com",
+            "fangbinxing.com",
+            "fangeming.com",
+            "fangeqiang.com",
+            "fanglizhi.info",
+            "fangmincn.org",
+            "fangong.org",
+            "fangongheike.com",
+            "fanhaodang.com",
+            "fanqiang.network",
+            "fanqiang.tk",
+            "fanqiangdang.com",
+            "fanqianghou.com",
+            "fanqiangyakexi.net",
+            "fanqiangzhe.com",
+            "fanswong.com",
+            "fantv.hk",
+            "fanyue.info",
+            "fapdu.com",
+            "faproxy.com",
+            "faqserv.com",
+            "fartit.com",
+            "farwestchina.com",
+            "fastestvpn.com",
+            "fastly.net",
+            "fastpic.ru",
+            "fastssh.com",
+            "faststone.org",
+            "fatbtc.com",
+            "favotter.net",
+            "favstar.fm",
+            "fawanghuihui.org",
+            "faydao.com",
+            "faz.net",
+            "fb.com",
+            "fb.me",
+            "fb.watch",
+            "fbaddins.com",
+            "fbcdn.net",
+            "fbsbx.com",
+            "fbworkmail.com",
+            "fc2.com",
+            "fc2blog.net",
+            "fc2china.com",
+            "fc2cn.com",
+            "fc2web.com",
+            "fda.gov.tw",
+            "fdbox.com",
+            "fdc64.de",
+            "fdc64.org",
+            "fdc89.jp",
+            "feedburner.com",
+            "feeder.co",
+            "feedly.com",
+            "feedx.net",
+            "feelssh.com",
+            "feer.com",
+            "feifeiss.com",
+            "feitian-california.org",
+            "feitianacademy.org",
+            "feixiaohao.com",
+            "feministteacher.com",
+            "fengzhenghu.com",
+            "fengzhenghu.net",
+            "fevernet.com",
+            "ff.im",
+            "fffff.at",
+            "fflick.com",
+            "ffvpn.com",
+            "fgmtv.net",
+            "fgmtv.org",
+            "fhreports.net",
+            "figprayer.com",
+            "fileflyer.com",
+            "fileforum.com",
+            "files2me.com",
+            "fileserve.com",
+            "filesor.com",
+            "fillthesquare.org",
+            "filmingfortibet.org",
+            "filthdump.com",
+            "financetwitter.com",
+            "finchvpn.com",
+            "findmespot.com",
+            "findyoutube.com",
+            "findyoutube.net",
+            "fingerdaily.com",
+            "finler.net",
+            "firearmsworld.net",
+            "firebaseio.com",
+            "fireofliberty.org",
+            "firetweet.io",
+            "firstfivefollowers.com",
+            "firstpost.com",
+            "fizzik.com",
+            "flagsonline.it",
+            "flecheinthepeche.fr",
+            "fleshbot.com",
+            "fleursdeslettres.com",
+            "flgg.us",
+            "flgjustice.org",
+            "flickr.com",
+            "flickrhivemind.net",
+            "flickriver.com",
+            "fling.com",
+            "flipboard.com",
+            "flipkart.com",
+            "flitto.com",
+            "flnet.org",
+            "flog.tw",
+            "flurry.com",
+            "flyvpn.com",
+            "flyzy2005.com",
+            "fmnnow.com",
+            "fnac.be",
+            "fnac.com",
+            "fochk.org",
+            "focustaiwan.tw",
+            "focusvpn.com",
+            "fofg-europe.net",
+            "fofg.org",
+            "fofldfradio.org",
+            "foolsmountain.com",
+            "fooooo.com",
+            "foreignaffairs.com",
+            "foreignpolicy.com",
+            "forum4hk.com",
+            "forums-free.com",
+            "fotile.me",
+            "fourthinternational.org",
+            "foxbusiness.com",
+            "foxdie.us",
+            "foxgay.com",
+            "foxsub.com",
+            "foxtang.com",
+            "fpmt-osel.org",
+            "fpmt.org",
+            "fpmt.tw",
+            "fpmtmexico.org",
+            "fqok.org",
+            "fqrouter.com",
+            "franklc.com",
+            "freakshare.com",
+            "free-gate.org",
+            "free-hada-now.org",
+            "free-proxy.cz",
+            "free-ss.site",
+            "free-ssh.com",
+            "free.fr",
+            "free4u.com.ar",
+            "freealim.com",
+            "freebeacon.com",
+            "freebearblog.org",
+            "freebrowser.org",
+            "freechal.com",
+            "freechina.net",
+            "freechina.news",
+            "freechinaforum.org",
+            "freechinaweibo.com",
+            "freeddns.com",
+            "freeddns.org",
+            "freedomchina.info",
+            "freedomcollection.org",
+            "freedomhouse.org",
+            "freedomsherald.org",
+            "freeforums.org",
+            "freefq.com",
+            "freefuckvids.com",
+            "freegao.com",
+            "freehongkong.org",
+            "freeilhamtohti.org",
+            "freekazakhs.org",
+            "freekwonpyong.org",
+            "freelotto.com",
+            "freeman2.com",
+            "freemoren.com",
+            "freemorenews.com",
+            "freemuse.org",
+            "freenet-china.org",
+            "freenetproject.org",
+            "freenewscn.com",
+            "freeones.com",
+            "freeopenvpn.com",
+            "freeoz.org",
+            "freerk.com",
+            "freessh.us",
+            "freetcp.com",
+            "freetibet.net",
+            "freetibet.org",
+            "freetibetanheroes.org",
+            "freetribe.me",
+            "freeviewmovies.com",
+            "freevpn.me",
+            "freevpn.nl",
+            "freewallpaper4.me",
+            "freewebs.com",
+            "freewechat.com",
+            "freeweibo.com",
+            "freewww.biz",
+            "freewww.info",
+            "freexinwen.com",
+            "freeyellow.com",
+            "freeyoutubeproxy.net",
+            "frienddy.com",
+            "friendfeed-media.com",
+            "friendfeed.com",
+            "friendfinder.com",
+            "friends-of-tibet.org",
+            "friendsoftibet.org",
+            "fring.com",
+            "fringenetwork.com",
+            "from-pr.com",
+            "from-sd.com",
+            "fromchinatousa.net",
+            "frommel.net",
+            "frontlinedefenders.org",
+            "frootvpn.com",
+            "fscked.org",
+            "fsurf.com",
+            "ftchinese.com",
+            "ftp1.biz",
+            "ftpserver.biz",
+            "ftv.com.tw",
+            "ftvnews.com.tw",
+            "fucd.com",
+            "fuckcnnic.net",
+            "fuckgfw.org",
+            "fuckgfw233.org",
+            "fulione.com",
+            "fullerconsideration.com",
+            "fulue.com",
+            "funf.tw",
+            "funkyimg.com",
+            "funp.com",
+            "fuq.com",
+            "furbo.org",
+            "furhhdl.org",
+            "furinkan.com",
+            "furl.net",
+            "futurechinaforum.org",
+            "futuremessage.org",
+            "fux.com",
+            "fuyin.net",
+            "fuyindiantai.org",
+            "fuyu.org.tw",
+            "fw.cm",
+            "fxcm-chinese.com",
+            "fxnetworks.com",
+            "fzh999.com",
+            "fzh999.net",
+            "fzlm.com",
+            "g-area.org",
+            "g-queen.com",
+            "g.co",
+            "g0v.social",
+            "g6hentai.com",
+            "gab.com",
+            "gabocorp.com",
+            "gaeproxy.com",
+            "gaforum.org",
+            "gagaoolala.com",
+            "galaxymacau.com",
+            "galenwu.com",
+            "galstars.net",
+            "game735.com",
+            "gamebase.com.tw",
+            "gamejolt.com",
+            "gamer.com.tw",
+            "gamerp.jp",
+            "gamez.com.tw",
+            "gamousa.com",
+            "ganges.com",
+            "gaoming.net",
+            "gaopi.net",
+            "gaozhisheng.net",
+            "gaozhisheng.org",
+            "gardennetworks.com",
+            "gardennetworks.org",
+            "gartlive.com",
+            "gate-project.com",
+            "gate.io",
+            "gatecoin.com",
+            "gather.com",
+            "gatherproxy.com",
+            "gati.org.tw",
+            "gaybubble.com",
+            "gaycn.net",
+            "gayhub.com",
+            "gaymap.cc",
+            "gaymenring.com",
+            "gaytube.com",
+            "gaywatch.com",
+            "gazotube.com",
+            "gcc.org.hk",
+            "gclooney.com",
+            "gclubs.com",
+            "gcmasia.com",
+            "gcpnews.com",
+            "gcr.io",
+            "gdbt.net",
+            "gdzf.org",
+            "geek-art.net",
+            "geekerhome.com",
+            "geekheart.info",
+            "gekikame.com",
+            "gelbooru.com",
+            "genius.com",
+            "geocities.co.jp",
+            "geocities.com",
+            "geocities.jp",
+            "geph.io",
+            "gerefoundation.org",
+            "get.app",
+            "get.dev",
+            "get.how",
+            "get.page",
+            "getastrill.com",
+            "getchu.com",
+            "getcloak.com",
+            "getfoxyproxy.org",
+            "getfreedur.com",
+            "getgom.com",
+            "geti2p.net",
+            "getiton.com",
+            "getjetso.com",
+            "getlantern.org",
+            "getmalus.com",
+            "getmdl.io",
+            "getoutline.org",
+            "getsocialscope.com",
+            "getsync.com",
+            "gettr.com",
+            "gettrials.com",
+            "gettyimages.com",
+            "getuploader.com",
+            "gfbv.de",
+            "gfgold.com.hk",
+            "gfsale.com",
+            "gfw.org.ua",
+            "gfw.press",
+            "ggpht.com",
+            "ggssl.com",
+            "ghidra-sre.org",
+            "ghostpath.com",
+            "ghut.org",
+            "giantessnight.com",
+            "gifree.com",
+            "giga-web.jp",
+            "gigacircle.com",
+            "giganews.com",
+            "gigporno.ru",
+            "girlbanker.com",
+            "git.io",
+            "gitbooks.io",
+            "github.blog",
+            "github.com",
+            "github.io",
+            "githubassets.com",
+            "githubusercontent.com",
+            "gizlen.net",
+            "gjczz.com",
+            "glass8.eu",
+            "globaljihad.net",
+            "globalmediaoutreach.com",
+            "globalmuseumoncommunism.org",
+            "globalrescue.net",
+            "globaltm.org",
+            "globalvoices.org",
+            "globalvoicesonline.org",
+            "globalvpn.net",
+            "glock.com",
+            "gloryhole.com",
+            "glorystar.me",
+            "gluckman.com",
+            "glype.com",
+            "gmail.com",
+            "gmbd.cn",
+            "gmhz.org",
+            "gmiddle.com",
+            "gmiddle.net",
+            "gmll.org",
+            "gmodules.com",
+            "gmx.net",
+            "gnci.org.hk",
+            "gnews.org",
+            "go-pki.com",
+            "go141.com",
+            "goagent.biz",
+            "goagentplus.com",
+            "gobet.cc",
+            "godfootsteps.org",
+            "godns.work",
+            "godoc.org",
+            "godsdirectcontact.co.uk",
+            "godsdirectcontact.org",
+            "godsdirectcontact.org.tw",
+            "godsimmediatecontact.com",
+            "gofundme.com",
+            "gogotunnel.com",
+            "gohappy.com.tw",
+            "gokbayrak.com",
+            "golang.org",
+            "goldbet.com",
+            "goldbetsports.com",
+            "golden-ages.org",
+            "goldeneyevault.com",
+            "goldenfrog.com",
+            "goldjizz.com",
+            "goldstep.net",
+            "goldwave.com",
+            "gongm.in",
+            "gongmeng.info",
+            "gongminliliang.com",
+            "gongwt.com",
+            "goo.gl",
+            "goo.ne.jp",
+            "gooday.xyz",
+            "gooddns.info",
+            "goodreaders.com",
+            "goodreads.com",
+            "goodtv.com.tw",
+            "goodtv.tv",
+            "goofind.com",
+            "google.ac",
+            "google.ad",
+            "google.ae",
+            "google.af",
+            "google.ai",
+            "google.al",
+            "google.am",
+            "google.as",
+            "google.at",
+            "google.az",
+            "google.ba",
+            "google.be",
+            "google.bf",
+            "google.bg",
+            "google.bi",
+            "google.bj",
+            "google.bs",
+            "google.bt",
+            "google.by",
+            "google.ca",
+            "google.cat",
+            "google.cd",
+            "google.cf",
+            "google.cg",
+            "google.ch",
+            "google.ci",
+            "google.cl",
+            "google.cm",
+            "google.cn",
+            "google.co.ao",
+            "google.co.bw",
+            "google.co.ck",
+            "google.co.cr",
+            "google.co.id",
+            "google.co.il",
+            "google.co.in",
+            "google.co.jp",
+            "google.co.ke",
+            "google.co.kr",
+            "google.co.ls",
+            "google.co.ma",
+            "google.co.mz",
+            "google.co.nz",
+            "google.co.th",
+            "google.co.tz",
+            "google.co.ug",
+            "google.co.uk",
+            "google.co.uz",
+            "google.co.ve",
+            "google.co.vi",
+            "google.co.za",
+            "google.co.zm",
+            "google.co.zw",
+            "google.com",
+            "google.com.af",
+            "google.com.ag",
+            "google.com.ai",
+            "google.com.ar",
+            "google.com.au",
+            "google.com.bd",
+            "google.com.bh",
+            "google.com.bn",
+            "google.com.bo",
+            "google.com.br",
+            "google.com.bz",
+            "google.com.co",
+            "google.com.cu",
+            "google.com.cy",
+            "google.com.do",
+            "google.com.ec",
+            "google.com.eg",
+            "google.com.et",
+            "google.com.fj",
+            "google.com.gh",
+            "google.com.gi",
+            "google.com.gt",
+            "google.com.hk",
+            "google.com.jm",
+            "google.com.kh",
+            "google.com.kw",
+            "google.com.lb",
+            "google.com.ly",
+            "google.com.mm",
+            "google.com.mt",
+            "google.com.mx",
+            "google.com.my",
+            "google.com.na",
+            "google.com.nf",
+            "google.com.ng",
+            "google.com.ni",
+            "google.com.np",
+            "google.com.om",
+            "google.com.pa",
+            "google.com.pe",
+            "google.com.pg",
+            "google.com.ph",
+            "google.com.pk",
+            "google.com.pr",
+            "google.com.py",
+            "google.com.qa",
+            "google.com.sa",
+            "google.com.sb",
+            "google.com.sg",
+            "google.com.sl",
+            "google.com.sv",
+            "google.com.tj",
+            "google.com.tr",
+            "google.com.tw",
+            "google.com.ua",
+            "google.com.uy",
+            "google.com.vc",
+            "google.com.vn",
+            "google.cv",
+            "google.cz",
+            "google.de",
+            "google.dev",
+            "google.dj",
+            "google.dk",
+            "google.dm",
+            "google.dz",
+            "google.ee",
+            "google.es",
+            "google.eu",
+            "google.fi",
+            "google.fm",
+            "google.fr",
+            "google.ga",
+            "google.ge",
+            "google.gg",
+            "google.gl",
+            "google.gm",
+            "google.gp",
+            "google.gr",
+            "google.gy",
+            "google.hk",
+            "google.hn",
+            "google.hr",
+            "google.ht",
+            "google.hu",
+            "google.ie",
+            "google.im",
+            "google.iq",
+            "google.is",
+            "google.it",
+            "google.it.ao",
+            "google.je",
+            "google.jo",
+            "google.kg",
+            "google.ki",
+            "google.kz",
+            "google.la",
+            "google.li",
+            "google.lk",
+            "google.lt",
+            "google.lu",
+            "google.lv",
+            "google.md",
+            "google.me",
+            "google.mg",
+            "google.mk",
+            "google.ml",
+            "google.mn",
+            "google.ms",
+            "google.mu",
+            "google.mv",
+            "google.mw",
+            "google.mx",
+            "google.ne",
+            "google.nl",
+            "google.no",
+            "google.nr",
+            "google.nu",
+            "google.org",
+            "google.pl",
+            "google.pn",
+            "google.ps",
+            "google.pt",
+            "google.ro",
+            "google.rs",
+            "google.ru",
+            "google.rw",
+            "google.sc",
+            "google.se",
+            "google.sh",
+            "google.si",
+            "google.sk",
+            "google.sm",
+            "google.sn",
+            "google.so",
+            "google.sr",
+            "google.st",
+            "google.td",
+            "google.tg",
+            "google.tk",
+            "google.tl",
+            "google.tm",
+            "google.tn",
+            "google.to",
+            "google.tt",
+            "google.us",
+            "google.vg",
+            "google.vn",
+            "google.vu",
+            "google.ws",
+            "googleapis.cn",
+            "googleapis.com",
+            "googleapps.com",
+            "googlearth.com",
+            "googleartproject.com",
+            "googleblog.com",
+            "googlebot.com",
+            "googlechinawebmaster.com",
+            "googlecode.com",
+            "googlecommerce.com",
+            "googledomains.com",
+            "googledrive.com",
+            "googleearth.com",
+            "googlefiber.net",
+            "googlegroups.com",
+            "googlehosted.com",
+            "googleideas.com",
+            "googleinsidesearch.com",
+            "googlelabs.com",
+            "googlemail.com",
+            "googlemashups.com",
+            "googlepagecreator.com",
+            "googleplay.com",
+            "googleplus.com",
+            "googlesile.com",
+            "googlesource.com",
+            "googleusercontent.com",
+            "googlevideo.com",
+            "googleweblight.com",
+            "googlezip.net",
+            "gopetition.com",
+            "goproxing.net",
+            "goreforum.com",
+            "goregrish.com",
+            "gospelherald.com",
+            "got-game.org",
+            "gotdns.ch",
+            "gotgeeks.com",
+            "gotrusted.com",
+            "gotw.ca",
+            "gov.taipei",
+            "gr8domain.biz",
+            "gr8name.biz",
+            "gradconnection.com",
+            "grammaly.com",
+            "grandtrial.org",
+            "grangorz.org",
+            "graphis.ne.jp",
+            "graphql.org",
+            "greasespot.net",
+            "great-firewall.com",
+            "great-roc.org",
+            "greatfire.org",
+            "greatfirewall.biz",
+            "greatfirewallofchina.net",
+            "greatfirewallofchina.org",
+            "greatroc.org",
+            "greatroc.tw",
+            "greatzhonghua.org",
+            "greenfieldbookstore.com.hk",
+            "greenparty.org.tw",
+            "greenpeace.com.tw",
+            "greenpeace.org",
+            "greenreadings.com",
+            "greenvpn.net",
+            "greenvpn.org",
+            "grotty-monday.com",
+            "grow.google",
+            "gs-discuss.com",
+            "gsearch.media",
+            "gstatic.com",
+            "gtricks.com",
+            "gts-vpn.com",
+            "gtv.org",
+            "gtv1.org",
+            "gu-chu-sum.org",
+            "guaguass.com",
+            "guaguass.org",
+            "guancha.org",
+            "guaneryu.com",
+            "guangming.com.my",
+            "guangnianvpn.com",
+            "guardster.com",
+            "guishan.org",
+            "gumroad.com",
+            "gun-world.net",
+            "gunsamerica.com",
+            "gunsandammo.com",
+            "guo.media",
+            "guruonline.hk",
+            "gutteruncensored.com",
+            "gvlib.com",
+            "gvm.com.tw",
+            "gvt0.com",
+            "gvt1.com",
+            "gvt3.com",
+            "gwins.org",
+            "gwtproject.org",
+            "gyalwarinpoche.com",
+            "gyatsostudio.com",
+            "gzm.tv",
+            "gzone-anime.info",
+            "h-china.org",
+            "h-moe.com",
+            "h1n1china.org",
+            "h528.com",
+            "h5dm.com",
+            "h5galgame.me",
+            "hacg.club",
+            "hacg.in",
+            "hacg.li",
+            "hacg.me",
+            "hacg.red",
+            "hacken.cc",
+            "hacker.org",
+            "hackmd.io",
+            "hackthatphone.net",
+            "hahlo.com",
+            "hakkatv.org.tw",
+            "handcraftedsoftware.org",
+            "hanime.tv",
+            "hanminzu.org",
+            "hanunyi.com",
+            "hao.news",
+            "hao123.com",
+            "hao123img.com",
+            "happy-vpn.com",
+            "haproxy.org",
+            "hardsextube.com",
+            "harunyahya.com",
+            "hasi.wang",
+            "hautelook.com",
+            "hautelookcdn.com",
+            "have8.com",
+            "hbg.com",
+            "hbo.com",
+            "hclips.com",
+            "hdlt.me",
+            "hdtvb.net",
+            "hdzog.com",
+            "he.net",
+            "heartyit.com",
+            "heavy-r.com",
+            "hec.su",
+            "hecaitou.net",
+            "hechaji.com",
+            "heeact.edu.tw",
+            "hegre-art.com",
+            "helixstudios.net",
+            "helloandroid.com",
+            "helloqueer.com",
+            "helloss.pw",
+            "hellotxt.com",
+            "hellouk.org",
+            "helpeachpeople.com",
+            "helplinfen.com",
+            "helpster.de",
+            "helpuyghursnow.org",
+            "helpzhuling.org",
+            "hentai.to",
+            "hentaitube.tv",
+            "hentaivideoworld.com",
+            "heqinglian.net",
+            "here.com",
+            "heritage.org",
+            "heroku.com",
+            "heungkongdiscuss.com",
+            "hexieshe.com",
+            "hexieshe.xyz",
+            "hexxeh.net",
+            "heywire.com",
+            "heyzo.com",
+            "hgseav.com",
+            "hhdcb3office.org",
+            "hhthesakyatrizin.org",
+            "hi-on.org.tw",
+            "hidden-advent.org",
+            "hide.me",
+            "hidecloud.com",
+            "hidein.net",
+            "hideipvpn.com",
+            "hideman.net",
+            "hideme.nl",
+            "hidemy.name",
+            "hidemyass.com",
+            "hidemycomp.com",
+            "higfw.com",
+            "highpeakspureearth.com",
+            "highrockmedia.com",
+            "hightail.com",
+            "hihiforum.com",
+            "hihistory.net",
+            "hiitch.com",
+            "hikinggfw.org",
+            "hilive.tv",
+            "himalayan-foundation.org",
+            "himalayanglacier.com",
+            "himemix.com",
+            "himemix.net",
+            "hinet.net",
+            "hitbtc.com",
+            "hitomi.la",
+            "hiwifi.com",
+            "hizb-ut-tahrir.info",
+            "hizb-ut-tahrir.org",
+            "hizbuttahrir.org",
+            "hjclub.info",
+            "hk-pub.com",
+            "hk01.com",
+            "hk32168.com",
+            "hkacg.com",
+            "hkacg.net",
+            "hkatvnews.com",
+            "hkbc.net",
+            "hkbf.org",
+            "hkbookcity.com",
+            "hkchronicles.com",
+            "hkchurch.org",
+            "hkci.org.hk",
+            "hkcmi.edu",
+            "hkcnews.com",
+            "hkcoc.com",
+            "hkctu.org.hk",
+            "hkdailynews.com.hk",
+            "hkday.net",
+            "hkdc.us",
+            "hkdf.org",
+            "hkej.com",
+            "hkepc.com",
+            "hket.com",
+            "hkfaa.com",
+            "hkfreezone.com",
+            "hkfront.org",
+            "hkgalden.com",
+            "hkgolden.com",
+            "hkgpao.com",
+            "hkgreenradio.org",
+            "hkheadline.com",
+            "hkhkhk.com",
+            "hkhrc.org.hk",
+            "hkhrm.org.hk",
+            "hkip.org.uk",
+            "hkja.org.hk",
+            "hkjc.com",
+            "hkjp.org",
+            "hklft.com",
+            "hklts.org.hk",
+            "hkmap.live",
+            "hkopentv.com",
+            "hkpeanut.com",
+            "hkptu.org",
+            "hkreporter.com",
+            "hku.hk",
+            "hkusu.net",
+            "hkvwet.com",
+            "hkwcc.org.hk",
+            "hkzone.org",
+            "hmonghot.com",
+            "hmv.co.jp",
+            "hmvdigital.ca",
+            "hmvdigital.com",
+            "hnjhj.com",
+            "hnntube.com",
+            "hola.com",
+            "hola.org",
+            "holymountaincn.com",
+            "holyspiritspeaks.org",
+            "homedepot.com",
+            "homeip.net",
+            "homeperversion.com",
+            "homeservershow.com",
+            "honeynet.org",
+            "hongkongfp.com",
+            "hongmeimei.com",
+            "hongzhi.li",
+            "honven.xyz",
+            "hootsuite.com",
+            "hoover.org",
+            "hoovers.com",
+            "hopedialogue.org",
+            "hopto.org",
+            "hornygamer.com",
+            "hornytrip.com",
+            "hotair.com",
+            "hotav.tv",
+            "hotels.cn",
+            "hotfrog.com.tw",
+            "hotgoo.com",
+            "hotpornshow.com",
+            "hotpot.hk",
+            "hotshame.com",
+            "hotspotshield.com",
+            "hottg.com",
+            "hotvpn.com",
+            "hougaige.com",
+            "howtoforge.com",
+            "hoxx.com",
+            "hpa.gov.tw",
+            "hqcdp.org",
+            "hqjapanesesex.com",
+            "hqmovies.com",
+            "hrcchina.org",
+            "hrcir.com",
+            "hrea.org",
+            "hrichina.org",
+            "hrtsea.com",
+            "hrw.org",
+            "hrweb.org",
+            "hsjp.net",
+            "hsselite.com",
+            "hst.net.tw",
+            "hstern.net",
+            "hstt.net",
+            "ht.ly",
+            "htkou.net",
+            "htl.li",
+            "html5rocks.com",
+            "https443.net",
+            "https443.org",
+            "hua-yue.net",
+            "huaglad.com",
+            "huanghuagang.org",
+            "huangyiyu.com",
+            "huaren.us",
+            "huaren4us.com",
+            "huashangnews.com",
+            "huasing.org",
+            "huaxia-news.com",
+            "huaxiabao.org",
+            "huaxin.ph",
+            "huayuworld.org",
+            "hudatoriq.web.id",
+            "hudson.org",
+            "huffingtonpost.com",
+            "hugoroy.eu",
+            "huhaitai.com",
+            "huhamhire.com",
+            "huhangfei.com",
+            "huiyi.in",
+            "hulkshare.com",
+            "hulu.com",
+            "huluim.com",
+            "hung-ya.com",
+            "hungerstrikeforaids.org",
+            "huobi.co",
+            "huobi.com",
+            "huobi.me",
+            "huobi.pro",
+            "huobi.sc",
+            "huobipro.com",
+            "huping.net",
+            "hurgokbayrak.com",
+            "hurriyet.com.tr",
+            "hustler.com",
+            "hustlercash.com",
+            "hut2.ru",
+            "hutianyi.net",
+            "hutong9.net",
+            "huyandex.com",
+            "hwadzan.tw",
+            "hwayue.org.tw",
+            "hwinfo.com",
+            "hxwk.org",
+            "hxwq.org",
+            "hybrid-analysis.com",
+            "hyperrate.com",
+            "hyread.com.tw",
+            "i-cable.com",
+            "i-part.com.tw",
+            "i-scmp.com",
+            "i1.hk",
+            "i2p2.de",
+            "i2runner.com",
+            "i818hk.com",
+            "iam.soy",
+            "iamtopone.com",
+            "iask.bz",
+            "iask.ca",
+            "iav19.com",
+            "ibiblio.org",
+            "ibit.am",
+            "iblist.com",
+            "iblogserv-f.net",
+            "ibros.org",
+            "ibtimes.com",
+            "ibvpn.com",
+            "icams.com",
+            "icerocket.com",
+            "icij.org",
+            "icl-fi.org",
+            "icoco.com",
+            "iconfactory.net",
+            "iconpaper.org",
+            "icu-project.org",
+            "idaiwan.com",
+            "idemocracy.asia",
+            "identi.ca",
+            "idiomconnection.com",
+            "idlcoyote.com",
+            "idouga.com",
+            "idreamx.com",
+            "idsam.com",
+            "ieasy5.com",
+            "ied2k.net",
+            "ienergy1.com",
+            "iepl.us",
+            "ifanqiang.com",
+            "ifcss.org",
+            "ifjc.org",
+            "ifreewares.com",
+            "ift.tt",
+            "igcd.net",
+            "igfw.net",
+            "igfw.tech",
+            "igmg.de",
+            "ignitedetroit.net",
+            "igoogle.com",
+            "igotmail.com.tw",
+            "igvita.com",
+            "ihakka.net",
+            "ihao.org",
+            "iicns.com",
+            "ikstar.com",
+            "ikwb.com",
+            "ilbe.com",
+            "ilhamtohtiinstitute.org",
+            "illusionfactory.com",
+            "ilove80.be",
+            "ilovelongtoes.com",
+            "im.tv",
+            "im88.tw",
+            "imageab.com",
+            "imagefap.com",
+            "imageflea.com",
+            "images-gaytube.com",
+            "imageshack.us",
+            "imagevenue.com",
+            "imagezilla.net",
+            "imb.org",
+            "imdb.com",
+            "img.ly",
+            "imgchili.net",
+            "imgmega.com",
+            "imgur.com",
+            "imkev.com",
+            "imlive.com",
+            "immigration.gov.tw",
+            "immoral.jp",
+            "impact.org.au",
+            "impp.mn",
+            "in-disguise.com",
+            "in.com",
+            "in99.org",
+            "incapdns.net",
+            "incloak.com",
+            "incredibox.fr",
+            "independent.co.uk",
+            "indiablooms.com",
+            "indianarrative.com",
+            "indiandefensenews.in",
+            "indiatimes.com",
+            "indiemerch.com",
+            "info-graf.fr",
+            "informer.com",
+            "initiativesforchina.org",
+            "inkui.com",
+            "inmediahk.net",
+            "innermongolia.org",
+            "inoreader.com",
+            "inote.tw",
+            "insecam.org",
+            "insidevoa.com",
+            "instagram.com",
+            "instanthq.com",
+            "institut-tibetain.org",
+            "internet.org",
+            "internetdefenseleague.org",
+            "internetfreedom.org",
+            "internetpopculture.com",
+            "inthenameofconfuciusmovie.com",
+            "inxian.com",
+            "iownyour.biz",
+            "iownyour.org",
+            "ipalter.com",
+            "ipfire.org",
+            "ipfs.io",
+            "iphone4hongkong.com",
+            "iphonehacks.com",
+            "iphonetaiwan.org",
+            "iphonix.fr",
+            "ipicture.ru",
+            "ipjetable.net",
+            "ipobar.com",
+            "ipoock.com",
+            "iportal.me",
+            "ippotv.com",
+            "ipredator.se",
+            "iptv.com.tw",
+            "iptvbin.com",
+            "ipvanish.com",
+            "iqiyi.com",
+            "iredmail.org",
+            "irib.ir",
+            "ironpython.net",
+            "ironsocket.com",
+            "is-a-hunter.com",
+            "is.gd",
+            "isaacmao.com",
+            "isasecret.com",
+            "isgreat.org",
+            "islahhaber.net",
+            "islam.org.hk",
+            "islamawareness.net",
+            "islamhouse.com",
+            "islamicity.com",
+            "islamicpluralism.org",
+            "islamtoday.net",
+            "ismaelan.com",
+            "ismalltits.com",
+            "ismprofessional.net",
+            "isohunt.com",
+            "israbox.com",
+            "issuu.com",
+            "istars.co.nz",
+            "istarshine.com",
+            "istef.info",
+            "istiqlalhewer.com",
+            "istockphoto.com",
+            "isunaffairs.com",
+            "isuntv.com",
+            "itaboo.info",
+            "itaiwan.gov.tw",
+            "italiatibet.org",
+            "itasoftware.com",
+            "itemdb.com",
+            "ithome.com.tw",
+            "itsaol.com",
+            "itshidden.com",
+            "itsky.it",
+            "itweet.net",
+            "iu45.com",
+            "iuhrdf.org",
+            "iuksky.com",
+            "ivacy.com",
+            "iverycd.com",
+            "ivpn.net",
+            "ixquick.com",
+            "ixxx.com",
+            "iyouport.com",
+            "izaobao.us",
+            "izihost.org",
+            "izles.net",
+            "izlesem.org",
+            "j.mp",
+            "jackjia.com",
+            "jamaat.org",
+            "jamestown.org",
+            "jamyangnorbu.com",
+            "jandyx.com",
+            "janwongphoto.com",
+            "japan-whores.com",
+            "japantimes.co.jp",
+            "jav.com",
+            "jav101.com",
+            "jav2be.com",
+            "jav68.tv",
+            "javakiba.org",
+            "javbus.com",
+            "javfor.me",
+            "javhd.com",
+            "javhip.com",
+            "javhub.net",
+            "javhuge.com",
+            "javlibrary.com",
+            "javmobile.net",
+            "javmoo.com",
+            "javmoo.xyz",
+            "javseen.com",
+            "javtag.com",
+            "javzoo.com",
+            "jbtalks.cc",
+            "jbtalks.com",
+            "jbtalks.my",
+            "jcpenney.com",
+            "jdwsy.com",
+            "jeanyim.com",
+            "jetos.com",
+            "jex.com",
+            "jfqu36.club",
+            "jfqu37.xyz",
+            "jgoodies.com",
+            "jiangweiping.com",
+            "jiaoyou8.com",
+            "jiehua.cz",
+            "jiepang.com",
+            "jieshibaobao.com",
+            "jigglegifs.com",
+            "jigong1024.com",
+            "jigsy.com",
+            "jihadology.net",
+            "jiji.com",
+            "jims.net",
+            "jinbushe.org",
+            "jingpin.org",
+            "jingsim.org",
+            "jinhai.de",
+            "jinpianwang.com",
+            "jinroukong.com",
+            "jintian.net",
+            "jinx.com",
+            "jiruan.net",
+            "jitouch.com",
+            "jizzthis.com",
+            "jjgirls.com",
+            "jkb.cc",
+            "jkforum.net",
+            "jkub.com",
+            "jma.go.jp",
+            "jmscult.com",
+            "joachims.org",
+            "jobso.tv",
+            "joinbbs.net",
+            "joinclubhouse.com",
+            "joinmastodon.org",
+            "joins.com",
+            "journalchretien.net",
+            "journalofdemocracy.org",
+            "joymiihub.com",
+            "joyourself.com",
+            "jp.net",
+            "jpopforum.net",
+            "jqueryui.com",
+            "jshell.net",
+            "jtvnw.net",
+            "jubushoushen.com",
+            "juhuaren.com",
+            "jukujo-club.com",
+            "juliepost.com",
+            "juliereyc.com",
+            "junauza.com",
+            "june4commemoration.org",
+            "junefourth-20.net",
+            "jungleheart.com",
+            "junglobal.net",
+            "juoaa.com",
+            "justdied.com",
+            "justfreevpn.com",
+            "justicefortenzin.org",
+            "justmysocks1.net",
+            "justpaste.it",
+            "justtristan.com",
+            "juyuange.org",
+            "juziyue.com",
+            "jwmusic.org",
+            "jyxf.net",
+            "k-doujin.net",
+            "ka-wai.com",
+            "kadokawa.co.jp",
+            "kagyu.org",
+            "kagyu.org.za",
+            "kagyumonlam.org",
+            "kagyunews.com.hk",
+            "kagyuoffice.org",
+            "kagyuoffice.org.tw",
+            "kaiyuan.de",
+            "kakao.com",
+            "kalachakralugano.org",
+            "kangye.org",
+            "kankan.today",
+            "kannewyork.com",
+            "kanshifang.com",
+            "kantie.org",
+            "kanzhongguo.com",
+            "kanzhongguo.eu",
+            "kaotic.com",
+            "karayou.com",
+            "karkhung.com",
+            "karmapa-teachings.org",
+            "karmapa.org",
+            "kawaiikawaii.jp",
+            "kawase.com",
+            "kba-tx.org",
+            "kcoolonline.com",
+            "kebrum.com",
+            "kechara.com",
+            "keepandshare.com",
+            "keezmovies.com",
+            "kendatire.com",
+            "kendincos.net",
+            "kenengba.com",
+            "keontech.net",
+            "kepard.com",
+            "keso.cn",
+            "kex.com",
+            "keycdn.com",
+            "khabdha.org",
+            "khatrimaza.org",
+            "khmusic.com.tw",
+            "kichiku-doujinko.com",
+            "kik.com",
+            "killwall.com",
+            "kimy.com.tw",
+            "kindleren.com",
+            "kingdomsalvation.org",
+            "kinghost.com",
+            "kingstone.com.tw",
+            "kink.com",
+            "kinmen.org.tw",
+            "kinmen.travel",
+            "kinokuniya.com",
+            "kir.jp",
+            "kissbbao.cn",
+            "kiwi.kz",
+            "kk-whys.co.jp",
+            "kkbox.com",
+            "kknews.cc",
+            "klip.me",
+            "kmuh.org.tw",
+            "knowledgerush.com",
+            "knowyourmeme.com",
+            "kobo.com",
+            "kobobooks.com",
+            "kodingen.com",
+            "kompozer.net",
+            "konachan.com",
+            "kone.com",
+            "koolsolutions.com",
+            "koornk.com",
+            "koranmandarin.com",
+            "korenan2.com",
+            "kqes.net",
+            "krtco.com.tw",
+            "ksdl.org",
+            "ksnews.com.tw",
+            "kspcoin.com",
+            "ktzhk.com",
+            "kucoin.com",
+            "kui.name",
+            "kun.im",
+            "kurashsultan.com",
+            "kurtmunger.com",
+            "kusocity.com",
+            "kwcg.ca",
+            "kwok7.com",
+            "kwongwah.com.my",
+            "kxsw.life",
+            "kyofun.com",
+            "kyohk.net",
+            "kyoyue.com",
+            "kyzyhello.com",
+            "kzeng.info",
+            "la-forum.org",
+            "labiennale.org",
+            "ladbrokes.com",
+            "lagranepoca.com",
+            "lala.im",
+            "lalulalu.com",
+            "lama.com.tw",
+            "lamayeshe.com",
+            "lamenhu.com",
+            "lamnia.co.uk",
+            "lamrim.com",
+            "landofhope.tv",
+            "lanterncn.cn",
+            "lantosfoundation.org",
+            "laod.cn",
+            "laogai.org",
+            "laogairesearch.org",
+            "laomiu.com",
+            "laoyang.info",
+            "laptoplockdown.com",
+            "laqingdan.net",
+            "larsgeorge.com",
+            "lastcombat.com",
+            "lastfm.es",
+            "latelinenews.com",
+            "lausan.hk",
+            "law.com",
+            "lbank.info",
+            "le-vpn.com",
+            "leafyvpn.net",
+            "lecloud.net",
+            "leeao.com.cn",
+            "lefora.com",
+            "left21.hk",
+            "legalporno.com",
+            "legsjapan.com",
+            "leirentv.ca",
+            "leisurecafe.ca",
+            "leisurepro.com",
+            "lematin.ch",
+            "lemonde.fr",
+            "lenwhite.com",
+            "leorockwell.com",
+            "lerosua.org",
+            "lers.google",
+            "lesoir.be",
+            "lester850.info",
+            "letou.com",
+            "letscorp.net",
+            "letsencrypt.org",
+            "levyhsu.com",
+            "lflink.com",
+            "lflinkup.com",
+            "lflinkup.net",
+            "lflinkup.org",
+            "lfpcontent.com",
+            "lhakar.org",
+            "lhasocialwork.org",
+            "liangyou.net",
+            "liangzhichuanmei.com",
+            "lianyue.net",
+            "liaowangxizang.net",
+            "liberal.org.hk",
+            "libertytimes.com.tw",
+            "libraryinformationtechnology.com",
+            "lidecheng.com",
+            "lifemiles.com",
+            "lighten.org.tw",
+            "lighti.me",
+            "lightnovel.cn",
+            "lightyearvpn.com",
+            "lihkg.com",
+            "like.com",
+            "limiao.net",
+            "line-apps.com",
+            "line-scdn.net",
+            "line.me",
+            "linglingfa.com",
+            "lingvodics.com",
+            "link-o-rama.com",
+            "linkideo.com",
+            "linksalpha.com",
+            "linkuswell.com",
+            "linpie.com",
+            "linux.org.hk",
+            "linuxtoy.org",
+            "lionsroar.com",
+            "lipuman.com",
+            "liquidvpn.com",
+            "list-manage.com",
+            "listennotes.com",
+            "listentoyoutube.com",
+            "listorious.com",
+            "lithium.com",
+            "liu-xiaobo.org",
+            "liudejun.com",
+            "liuhanyu.com",
+            "liujianshu.com",
+            "liuxiaobo.net",
+            "liuxiaotong.com",
+            "live.com",
+            "livecoin.net",
+            "livedoor.jp",
+            "liveleak.com",
+            "livemint.com",
+            "livestation.com",
+            "livestream.com",
+            "livevideo.com",
+            "livingonline.us",
+            "livingstream.com",
+            "liwangyang.com",
+            "lizhizhuangbi.com",
+            "lkcn.net",
+            "llss.me",
+            "lncn.org",
+            "load.to",
+            "lobsangwangyal.com",
+            "localbitcoins.com",
+            "localdomain.ws",
+            "localpresshk.com",
+            "lockestek.com",
+            "logbot.net",
+            "logiqx.com",
+            "logmein.com",
+            "logos.com.hk",
+            "londonchinese.ca",
+            "longhair.hk",
+            "longmusic.com",
+            "longtermly.net",
+            "longtoes.com",
+            "lookpic.com",
+            "looktoronto.com",
+            "lotsawahouse.org",
+            "lotuslight.org.hk",
+            "lotuslight.org.tw",
+            "loved.hk",
+            "lovetvshow.com",
+            "lpsg.com",
+            "lrfz.com",
+            "lrip.org",
+            "lsd.org.hk",
+            "lsforum.net",
+            "lsm.org",
+            "lsmchinese.org",
+            "lsmkorean.org",
+            "lsmradio.com",
+            "lsmwebcast.com",
+            "lsxszzg.com",
+            "ltn.com.tw",
+            "luckydesigner.space",
+            "luke54.com",
+            "luke54.org",
+            "lupm.org",
+            "lushstories.com",
+            "luxebc.com",
+            "lvhai.org",
+            "lvv2.com",
+            "lyfhk.net",
+            "lzjscript.com",
+            "lzmtnews.org",
+            "m-sport.co.uk",
+            "m-team.cc",
+            "m.me",
+            "macgamestore.com",
+            "macrovpn.com",
+            "macts.com.tw",
+            "mad-ar.ch",
+            "madewithcode.com",
+            "madonna-av.com",
+            "madrau.com",
+            "madthumbs.com",
+            "magic-net.info",
+            "mahabodhi.org",
+            "maiio.net",
+            "mail-archive.com",
+            "mail.ru",
+            "mailchimp.com",
+            "maildns.xyz",
+            "maiplus.com",
+            "maizhong.org",
+            "makemymood.com",
+            "makkahnewspaper.com",
+            "malaysiakini.com",
+            "mamingzhe.com",
+            "manchukuo.net",
+            "mangafox.com",
+            "mangafox.me",
+            "maniash.com",
+            "manicur4ik.ru",
+            "mansion.com",
+            "mansionpoker.com",
+            "manta.com",
+            "manyvoices.news",
+            "maplew.com",
+            "marc.info",
+            "marguerite.su",
+            "martau.com",
+            "martincartoons.com",
+            "martinoei.com",
+            "martsangkagyuofficial.org",
+            "maruta.be",
+            "marxist.com",
+            "marxist.net",
+            "marxists.org",
+            "mash.to",
+            "maskedip.com",
+            "mastodon.cloud",
+            "mastodon.host",
+            "mastodon.social",
+            "mastodon.xyz",
+            "matainja.com",
+            "material.io",
+            "mathable.io",
+            "mathiew-badimon.com",
+            "matome-plus.com",
+            "matome-plus.net",
+            "matrix.org",
+            "matsushimakaede.com",
+            "matters.news",
+            "mattwilcox.net",
+            "maturejp.com",
+            "maxing.jp",
+            "mayimayi.com",
+            "mcadforums.com",
+            "mcaf.ee",
+            "mcfog.com",
+            "mcreasite.com",
+            "md-t.org",
+            "me.me",
+            "meansys.com",
+            "media.org.hk",
+            "mediachinese.com",
+            "mediafire.com",
+            "mediafreakcity.com",
+            "medium.com",
+            "meetav.com",
+            "meetup.com",
+            "mefeedia.com",
+            "meforum.org",
+            "mefound.com",
+            "mega.co.nz",
+            "mega.io",
+            "mega.nz",
+            "megaproxy.com",
+            "megarotic.com",
+            "megavideo.com",
+            "megurineluka.com",
+            "meirixiaochao.com",
+            "meltoday.com",
+            "memehk.com",
+            "memorybbs.com",
+            "memri.org",
+            "memrijttm.org",
+            "mercatox.com",
+            "mercdn.net",
+            "mercyprophet.org",
+            "mergersandinquisitions.org",
+            "meridian-trust.org",
+            "meripet.biz",
+            "meripet.com",
+            "merit-times.com.tw",
+            "meshrep.com",
+            "mesotw.com",
+            "messenger.com",
+            "metacafe.com",
+            "metafilter.com",
+            "metart.com",
+            "metarthunter.com",
+            "meteorshowersonline.com",
+            "metro.taipei",
+            "metrohk.com.hk",
+            "metrolife.ca",
+            "metroradio.com.hk",
+            "mewe.com",
+            "meyou.jp",
+            "meyul.com",
+            "mfxmedia.com",
+            "mgoon.com",
+            "mgstage.com",
+            "mh4u.org",
+            "mhradio.org",
+            "michaelanti.com",
+            "michaelmarketl.com",
+            "microvpn.com",
+            "middle-way.net",
+            "mihk.hk",
+            "mihr.com",
+            "mihua.org",
+            "mikesoltys.com",
+            "mikocon.com",
+            "milph.net",
+            "milsurps.com",
+            "mimiai.net",
+            "mimivip.com",
+            "mimivv.com",
+            "mindrolling.org",
+            "mingdemedia.org",
+            "minghui-a.org",
+            "minghui-b.org",
+            "minghui-school.org",
+            "minghui.or.kr",
+            "minghui.org",
+            "mingjinglishi.com",
+            "mingjingnews.com",
+            "mingjingtimes.com",
+            "mingpao.com",
+            "mingpaocanada.com",
+            "mingpaomonthly.com",
+            "mingpaonews.com",
+            "mingpaony.com",
+            "mingpaosf.com",
+            "mingpaotor.com",
+            "mingpaovan.com",
+            "mingshengbao.com",
+            "minhhue.net",
+            "miniforum.org",
+            "ministrybooks.org",
+            "minzhuhua.net",
+            "minzhuzhanxian.com",
+            "minzhuzhongguo.org",
+            "miroguide.com",
+            "mirrorbooks.com",
+            "mirrormedia.mg",
+            "mist.vip",
+            "mit.edu",
+            "mitao.com.tw",
+            "mitbbs.com",
+            "mitbbsau.com",
+            "mixero.com",
+            "mixi.jp",
+            "mixpod.com",
+            "mixx.com",
+            "mizzmona.com",
+            "mjib.gov.tw",
+            "mk5000.com",
+            "mlcool.com",
+            "mlzs.work",
+            "mm-cg.com",
+            "mmaaxx.com",
+            "mmmca.com",
+            "mnewstv.com",
+            "mobatek.net",
+            "mobile01.com",
+            "mobileways.de",
+            "moby.to",
+            "mobypicture.com",
+            "modernchinastudies.org",
+            "moeaic.gov.tw",
+            "moeerolibrary.com",
+            "moegirl.org",
+            "mofa.gov.tw",
+            "mofaxiehui.com",
+            "mofos.com",
+            "mog.com",
+            "mohu.club",
+            "mohu.ml",
+            "mohu.rocks",
+            "mojim.com",
+            "mol.gov.tw",
+            "molihua.org",
+            "monar.ch",
+            "mondex.org",
+            "money-link.com.tw",
+            "moneyhome.biz",
+            "monitorchina.org",
+            "monitorware.com",
+            "monlamit.org",
+            "monster.com",
+            "moodyz.com",
+            "moonbbs.com",
+            "moonbingo.com",
+            "moptt.tw",
+            "morbell.com",
+            "morningsun.org",
+            "moroneta.com",
+            "mos.ru",
+            "motherless.com",
+            "motiyun.com",
+            "motor4ik.ru",
+            "mousebreaker.com",
+            "movements.org",
+            "moviefap.com",
+            "moztw.org",
+            "mp3buscador.com",
+            "mpettis.com",
+            "mpfinance.com",
+            "mpinews.com",
+            "mponline.hk",
+            "mqxd.org",
+            "mrbasic.com",
+            "mrbonus.com",
+            "mrface.com",
+            "mrslove.com",
+            "mrtweet.com",
+            "msa-it.org",
+            "msguancha.com",
+            "msha.gov",
+            "msn.com",
+            "msn.com.tw",
+            "mswe1.org",
+            "mthruf.com",
+            "mtw.tl",
+            "mubi.com",
+            "muchosucko.com",
+            "mullvad.net",
+            "multiply.com",
+            "multiproxy.org",
+            "multiupload.com",
+            "mummysgold.com",
+            "murmur.tw",
+            "musicade.net",
+            "muslimvideo.com",
+            "muzi.com",
+            "muzi.net",
+            "muzu.tv",
+            "mvdis.gov.tw",
+            "mvg.jp",
+            "mx981.com",
+            "my-formosa.com",
+            "my-private-network.co.uk",
+            "my-proxy.com",
+            "my03.com",
+            "my903.com",
+            "myactimes.com",
+            "myanniu.com",
+            "myaudiocast.com",
+            "myav.com.tw",
+            "mybbs.us",
+            "mybet.com",
+            "myca168.com",
+            "mycanadanow.com",
+            "mychat.to",
+            "mychinamyhome.com",
+            "mychinanet.com",
+            "mychinanews.com",
+            "mychinese.news",
+            "mycnnews.com",
+            "mycould.com",
+            "mydad.info",
+            "myddns.com",
+            "myeasytv.com",
+            "myeclipseide.com",
+            "myforum.com.hk",
+            "myfreecams.com",
+            "myfreepaysite.com",
+            "myfreshnet.com",
+            "myftp.info",
+            "myftp.name",
+            "myiphide.com",
+            "mykomica.org",
+            "mylftv.com",
+            "mymaji.com",
+            "mymediarom.com",
+            "mymoe.moe",
+            "mymom.info",
+            "mymusic.net.tw",
+            "mynetav.net",
+            "mynetav.org",
+            "mynumber.org",
+            "myparagliding.com",
+            "mypicture.info",
+            "mypop3.net",
+            "mypop3.org",
+            "mypopescu.com",
+            "myradio.hk",
+            "myreadingmanga.info",
+            "mysecondarydns.com",
+            "mysinablog.com",
+            "myspace.com",
+            "myspacecdn.com",
+            "mytalkbox.com",
+            "mytizi.com",
+            "mywww.biz",
+            "myz.info",
+            "naacoalition.org",
+            "nabble.com",
+            "naitik.net",
+            "nakido.com",
+            "nakuz.com",
+            "nalandabodhi.org",
+            "nalandawest.org",
+            "namgyal.org",
+            "namgyalmonastery.org",
+            "namsisi.com",
+            "nanyang.com",
+            "nanyangpost.com",
+            "nanzao.com",
+            "naol.ca",
+            "naol.cc",
+            "narod.ru",
+            "nasa.gov",
+            "nat.gov.tw",
+            "nat.moe",
+            "natado.com",
+            "national-lottery.co.uk",
+            "nationalawakening.org",
+            "nationalgeographic.com",
+            "nationalinterest.org",
+            "nationalreview.com",
+            "nationsonline.org",
+            "nationwide.com",
+            "naughtyamerica.com",
+            "naver.jp",
+            "navy.mil",
+            "naweeklytimes.com",
+            "nbc.com",
+            "nbcnews.com",
+            "nbtvpn.com",
+            "nccwatch.org.tw",
+            "nch.com.tw",
+            "nchrd.org",
+            "ncn.org",
+            "ncol.com",
+            "nde.de",
+            "ndi.org",
+            "ndr.de",
+            "ned.org",
+            "nekoslovakia.net",
+            "neo-miracle.com",
+            "neowin.net",
+            "nepusoku.com",
+            "nesnode.com",
+            "net-fits.pro",
+            "netalert.me",
+            "netbig.com",
+            "netbirds.com",
+            "netcolony.com",
+            "netfirms.com",
+            "netflav.com",
+            "netflix.com",
+            "netflix.net",
+            "netme.cc",
+            "netsneak.com",
+            "network54.com",
+            "networkedblogs.com",
+            "networktunnel.net",
+            "neverforget8964.org",
+            "new-3lunch.net",
+            "new-akiba.com",
+            "new96.ca",
+            "newcenturymc.com",
+            "newcenturynews.com",
+            "newchen.com",
+            "newgrounds.com",
+            "newhighlandvision.com",
+            "newipnow.com",
+            "newlandmagazine.com.au",
+            "newnews.ca",
+            "news100.com.tw",
+            "newsancai.com",
+            "newschinacomment.org",
+            "newscn.org",
+            "newsdetox.ca",
+            "newsdh.com",
+            "newsmagazine.asia",
+            "newsmax.com",
+            "newspeak.cc",
+            "newstamago.com",
+            "newstapa.org",
+            "newstarnet.com",
+            "newsweek.com",
+            "newtaiwan.com.tw",
+            "newtalk.tw",
+            "newyorker.com",
+            "newyorktimes.com",
+            "nexon.com",
+            "next11.co.jp",
+            "nextdigital.com.hk",
+            "nextmag.com.tw",
+            "nextmedia.com",
+            "nexton-net.jp",
+            "nexttv.com.tw",
+            "nf.id.au",
+            "nfjtyd.com",
+            "nflxext.com",
+            "nflximg.com",
+            "nflximg.net",
+            "nflxso.net",
+            "nflxvideo.net",
+            "ng.mil",
+            "nga.mil",
+            "ngensis.com",
+            "ngodupdongchung.com",
+            "nhentai.net",
+            "nhi.gov.tw",
+            "nhk-ondemand.jp",
+            "nic.google",
+            "nic.gov",
+            "nicovideo.jp",
+            "nighost.org",
+            "nightlife141.com",
+            "nike.com",
+            "nikkei.com",
+            "ninecommentaries.com",
+            "ning.com",
+            "ninjacloak.com",
+            "ninjaproxy.ninja",
+            "nintendium.com",
+            "ninth.biz",
+            "nitter.cc",
+            "nitter.net",
+            "niu.moe",
+            "niusnews.com",
+            "njactb.org",
+            "njuice.com",
+            "nlfreevpn.com",
+            "nmsl.website",
+            "nnews.eu",
+            "no-ip.com",
+            "no-ip.org",
+            "nobel.se",
+            "nobelprize.org",
+            "nobodycanstop.us",
+            "nodesnoop.com",
+            "nofile.io",
+            "nokogiri.org",
+            "nokola.com",
+            "noodlevpn.com",
+            "norbulingka.org",
+            "nordstrom.com",
+            "nordstromimage.com",
+            "nordstromrack.com",
+            "nordvpn.com",
+            "nottinghampost.com",
+            "novelasia.com",
+            "now.com",
+            "now.im",
+            "nownews.com",
+            "nowtorrents.com",
+            "noxinfluencer.com",
+            "noypf.com",
+            "npa.go.jp",
+            "npa.gov.tw",
+            "npnt.me",
+            "nps.gov",
+            "npsboost.com",
+            "nradio.me",
+            "nrk.no",
+            "ns01.biz",
+            "ns01.info",
+            "ns01.us",
+            "ns02.biz",
+            "ns02.info",
+            "ns02.us",
+            "ns1.name",
+            "ns2.name",
+            "ns3.name",
+            "nsc.gov.tw",
+            "ntbk.gov.tw",
+            "ntbna.gov.tw",
+            "ntbt.gov.tw",
+            "ntd.tv",
+            "ntdtv.ca",
+            "ntdtv.co.kr",
+            "ntdtv.com",
+            "ntdtv.com.tw",
+            "ntdtv.cz",
+            "ntdtv.org",
+            "ntdtv.ru",
+            "ntdtvla.com",
+            "ntrfun.com",
+            "ntsna.gov.tw",
+            "ntu.edu.tw",
+            "nu.nl",
+            "nubiles.net",
+            "nudezz.com",
+            "nuexpo.com",
+            "nukistream.com",
+            "nurgo-software.com",
+            "nusatrip.com",
+            "nutaku.net",
+            "nutsvpn.work",
+            "nuuvem.com",
+            "nuvid.com",
+            "nuzcom.com",
+            "nvdst.com",
+            "nvquan.org",
+            "nvtongzhisheng.org",
+            "nwtca.org",
+            "nyaa.eu",
+            "nyaa.si",
+            "nybooks.com",
+            "nydus.ca",
+            "nylon-angel.com",
+            "nylonstockingsonline.com",
+            "nypost.com",
+            "nyt.com",
+            "nytchina.com",
+            "nytcn.me",
+            "nytco.com",
+            "nyti.ms",
+            "nytimes.com",
+            "nytimg.com",
+            "nytlog.com",
+            "nytstyle.com",
+            "nzchinese.com",
+            "nzchinese.net.nz",
+            "oauth.net",
+            "observechina.net",
+            "obutu.com",
+            "ocaspro.com",
+            "occupytiananmen.com",
+            "oclp.hk",
+            "ocreampies.com",
+            "ocry.com",
+            "october-review.org",
+            "oculus.com",
+            "oculuscdn.com",
+            "odysee.com",
+            "oex.com",
+            "offbeatchina.com",
+            "officeoftibet.com",
+            "ofile.org",
+            "ogaoga.org",
+            "ogate.org",
+            "ohchr.org",
+            "ohmyrss.com",
+            "oikos.com.tw",
+            "oiktv.com",
+            "oizoblog.com",
+            "ok.ru",
+            "okayfreedom.com",
+            "okex.com",
+            "okk.tw",
+            "olabloga.pl",
+            "old-cat.net",
+            "olumpo.com",
+            "olympicwatch.org",
+            "omgili.com",
+            "omni7.jp",
+            "omnitalk.com",
+            "omnitalk.org",
+            "omny.fm",
+            "omy.sg",
+            "on.cc",
+            "on2.com",
+            "onapp.com",
+            "onedumb.com",
+            "onejav.com",
+            "onion.city",
+            "onlinecha.com",
+            "onlineyoutube.com",
+            "onlygayvideo.com",
+            "onlytweets.com",
+            "onmoon.com",
+            "onmoon.net",
+            "onmypc.biz",
+            "onmypc.info",
+            "onmypc.net",
+            "onmypc.org",
+            "onmypc.us",
+            "onthehunt.com",
+            "ontrac.com",
+            "oopsforum.com",
+            "open.com.hk",
+            "openallweb.com",
+            "opendemocracy.net",
+            "opendn.xyz",
+            "openervpn.in",
+            "openid.net",
+            "openleaks.org",
+            "opensource.google",
+            "opentech.fund",
+            "openvpn.net",
+            "openvpn.org",
+            "openwebster.com",
+            "openwrt.org.cn",
+            "opera-mini.net",
+            "opera.com",
+            "opus-gaming.com",
+            "orchidbbs.com",
+            "organcare.org.tw",
+            "organharvestinvestigation.net",
+            "organiccrap.com",
+            "orgasm.com",
+            "orgfree.com",
+            "orient-doll.com",
+            "orientaldaily.com.my",
+            "orn.jp",
+            "orzdream.com",
+            "orzistic.org",
+            "osfoora.com",
+            "otcbtc.com",
+            "otnd.org",
+            "otto.de",
+            "otzo.com",
+            "ourdearamy.com",
+            "ourhobby.com",
+            "oursogo.com",
+            "oursteps.com.au",
+            "oursweb.net",
+            "ourtv.hk",
+            "over-blog.com",
+            "overdaily.org",
+            "overplay.net",
+            "ovi.com",
+            "ovpn.com",
+            "ow.ly",
+            "owind.com",
+            "owl.li",
+            "owltail.com",
+            "oxfordscholarship.com",
+            "oxid.it",
+            "oyax.com",
+            "oyghan.com",
+            "ozchinese.com",
+            "ozvoice.org",
+            "ozxw.com",
+            "ozyoyo.com",
+            "pachosting.com",
+            "pacificpoker.com",
+            "packetix.net",
+            "pacopacomama.com",
+            "padmanet.com",
+            "page.tl",
+            "page2rss.com",
+            "pagodabox.com",
+            "palacemoon.com",
+            "paldengyal.com",
+            "paljorpublications.com",
+            "palmislife.com",
+            "paltalk.com",
+            "pandapow.co",
+            "pandapow.net",
+            "pandavpn-jp.com",
+            "pandavpnpro.com",
+            "pandora.com",
+            "pandora.tv",
+            "panluan.net",
+            "panoramio.com",
+            "pao-pao.net",
+            "paper.li",
+            "paperb.us",
+            "paradisehill.cc",
+            "paradisepoker.com",
+            "parkansky.com",
+            "parler.com",
+            "parse.com",
+            "parsevideo.com",
+            "partycasino.com",
+            "partypoker.com",
+            "passion.com",
+            "passiontimes.hk",
+            "paste.ee",
+            "pastebin.com",
+            "pastie.org",
+            "pathtosharepoint.com",
+            "paxful.com",
+            "pbs.org",
+            "pbwiki.com",
+            "pbworks.com",
+            "pbxes.com",
+            "pbxes.org",
+            "pcanywhere.net",
+            "pcc.gov.tw",
+            "pcdvd.com.tw",
+            "pchome.com.tw",
+            "pcij.org",
+            "pcloud.com",
+            "pcstore.com.tw",
+            "pct.org.tw",
+            "pdetails.com",
+            "pdproxy.com",
+            "peace.ca",
+            "peacefire.org",
+            "peacehall.com",
+            "pearlher.org",
+            "peeasian.com",
+            "peing.net",
+            "pekingduck.org",
+            "pemulihan.or.id",
+            "pen.io",
+            "penchinese.com",
+            "penchinese.net",
+            "pengyulong.com",
+            "penisbot.com",
+            "pentalogic.net",
+            "penthouse.com",
+            "pentoy.hk",
+            "peoplebookcafe.com",
+            "peoplenews.tw",
+            "peopo.org",
+            "percy.in",
+            "perfectgirls.net",
+            "perfectvpn.net",
+            "periscope.tv",
+            "persecutionblog.com",
+            "persiankitty.com",
+            "pfd.org.hk",
+            "phapluan.org",
+            "phayul.com",
+            "philborges.com",
+            "philly.com",
+            "phmsociety.org",
+            "phncdn.com",
+            "phonegap.com",
+            "photodharma.net",
+            "photofocus.com",
+            "phuquocservices.com",
+            "picacomic.com",
+            "picacomiccn.com",
+            "picasaweb.com",
+            "picidae.net",
+            "picturedip.com",
+            "picturesocial.com",
+            "pimg.tw",
+            "pin-cong.com",
+            "pin6.com",
+            "pincong.rocks",
+            "ping.fm",
+            "pinimg.com",
+            "pinkrod.com",
+            "pinoy-n.com",
+            "pinterest.at",
+            "pinterest.ca",
+            "pinterest.co.kr",
+            "pinterest.co.uk",
+            "pinterest.com",
+            "pinterest.com.mx",
+            "pinterest.de",
+            "pinterest.dk",
+            "pinterest.fr",
+            "pinterest.jp",
+            "pinterest.nl",
+            "pinterest.se",
+            "pipii.tv",
+            "piposay.com",
+            "piraattilahti.org",
+            "piring.com",
+            "pixelqi.com",
+            "pixiv.net",
+            "pixnet.in",
+            "pixnet.net",
+            "pk.com",
+            "pki.goog",
+            "placemix.com",
+            "playboy.com",
+            "playboyplus.com",
+            "player.fm",
+            "playno1.com",
+            "playpcesor.com",
+            "plays.com.tw",
+            "plexvpn.pro",
+            "plixi.com",
+            "plm.org.hk",
+            "plunder.com",
+            "plurk.com",
+            "plus.codes",
+            "plus28.com",
+            "plusbb.com",
+            "pmatehunter.com",
+            "pmates.com",
+            "po2b.com",
+            "pobieramy.top",
+            "podbean.com",
+            "podictionary.com",
+            "pokerstars.com",
+            "pokerstars.net",
+            "pokerstrategy.com",
+            "politicalchina.org",
+            "politicalconsultation.org",
+            "politiscales.net",
+            "poloniex.com",
+            "polymer-project.org",
+            "polymerhk.com",
+            "popo.tw",
+            "popvote.hk",
+            "popyard.com",
+            "popyard.org",
+            "porn.com",
+            "porn2.com",
+            "porn5.com",
+            "pornbase.org",
+            "pornerbros.com",
+            "pornhd.com",
+            "pornhost.com",
+            "pornhub.com",
+            "pornhubdeutsch.net",
+            "pornmm.net",
+            "pornoxo.com",
+            "pornrapidshare.com",
+            "pornsharing.com",
+            "pornsocket.com",
+            "pornstarclub.com",
+            "porntube.com",
+            "porntubenews.com",
+            "porntvblog.com",
+            "pornvisit.com",
+            "port25.biz",
+            "portablevpn.nl",
+            "poskotanews.com",
+            "post01.com",
+            "post76.com",
+            "post852.com",
+            "postadult.com",
+            "postimg.org",
+            "potato.im",
+            "potvpn.com",
+            "power.com",
+            "powerapple.com",
+            "powercx.com",
+            "powerphoto.org",
+            "powerpointninja.com",
+            "pp.ru",
+            "prayforchina.net",
+            "premeforwindows7.com",
+            "premproxy.com",
+            "presentationzen.com",
+            "presidentlee.tw",
+            "prestige-av.com",
+            "pride.google",
+            "printfriendly.com",
+            "prism-break.org",
+            "prisoneralert.com",
+            "pritunl.com",
+            "privacybox.de",
+            "private.com",
+            "privateinternetaccess.com",
+            "privatepaste.com",
+            "privatetunnel.com",
+            "privatevpn.com",
+            "procopytips.com",
+            "project-syndicate.org",
+            "prosiben.de",
+            "protonvpn.com",
+            "provideocoalition.com",
+            "provpnaccounts.com",
+            "proxfree.com",
+            "proxifier.com",
+            "proxlet.com",
+            "proxomitron.info",
+            "proxpn.com",
+            "proxyanonimo.es",
+            "proxydns.com",
+            "proxylist.org.uk",
+            "proxynetwork.org.uk",
+            "proxypy.net",
+            "proxyroad.com",
+            "proxytunnel.net",
+            "proyectoclubes.com",
+            "prozz.net",
+            "psblog.name",
+            "pscp.tv",
+            "pshvpn.com",
+            "psiphon.ca",
+            "psiphon3.com",
+            "psiphontoday.com",
+            "pt.im",
+            "pts.org.tw",
+            "ptt.cc",
+            "pttvan.org",
+            "pubu.com.tw",
+            "puffinbrowser.com",
+            "puffstore.com",
+            "pullfolio.com",
+            "punyu.com",
+            "pure18.com",
+            "pureapk.com",
+            "pureconcepts.net",
+            "pureinsight.org",
+            "purepdf.com",
+            "purevpn.com",
+            "purplelotus.org",
+            "pursuestar.com",
+            "pushchinawall.com",
+            "pussthecat.org",
+            "pussyspace.com",
+            "putihome.org",
+            "putlocker.com",
+            "putty.org",
+            "puuko.com",
+            "pwned.com",
+            "pximg.net",
+            "python.com",
+            "python.com.tw",
+            "pythonhackers.com",
+            "pythonic.life",
+            "pytorch.org",
+            "qanote.com",
+            "qgirl.com.tw",
+            "qhigh.com",
+            "qi-gong.me",
+            "qianbai.tw",
+            "qiandao.today",
+            "qiangwaikan.com",
+            "qiangyou.org",
+            "qidian.ca",
+            "qienkuen.org",
+            "qiwen.lu",
+            "qixianglu.cn",
+            "qkshare.com",
+            "qmzdd.com",
+            "qoos.com",
+            "qooza.hk",
+            "qpoe.com",
+            "qq.co.za",
+            "qstatus.com",
+            "qtrac.eu",
+            "qtweeter.com",
+            "quannengshen.org",
+            "quantumbooter.net",
+            "questvisual.com",
+            "quitccp.net",
+            "quitccp.org",
+            "quora.com",
+            "quoracdn.net",
+            "quran.com",
+            "quranexplorer.com",
+            "qusi8.net",
+            "qvodzy.org",
+            "qx.net",
+            "qxbbs.org",
+            "qz.com",
+            "r0.ru",
+            "r18.com",
+            "ra.gg",
+            "radicalparty.org",
+            "radiko.jp",
+            "radio.garden",
+            "radioaustralia.net.au",
+            "radiohilight.net",
+            "radioline.co",
+            "radiotime.com",
+            "radiovaticana.org",
+            "radiovncr.com",
+            "rael.org",
+            "raggedbanner.com",
+            "raidcall.com.tw",
+            "raidtalk.com.tw",
+            "rainbowplan.org",
+            "raindrop.io",
+            "raizoji.or.jp",
+            "ramcity.com.au",
+            "rangwang.biz",
+            "rangzen.com",
+            "rangzen.net",
+            "rangzen.org",
+            "ranxiang.com",
+            "ranyunfei.com",
+            "rapbull.net",
+            "rapidgator.net",
+            "rapidmoviez.com",
+            "rapidvpn.com",
+            "rarbgprx.org",
+            "raremovie.cc",
+            "raremovie.net",
+            "rateyourmusic.com",
+            "rationalwiki.org",
+            "rawgit.com",
+            "rawgithub.com",
+            "raxcdn.com",
+            "razyboard.com",
+            "rcinet.ca",
+            "rd.com",
+            "rdio.com",
+            "read01.com",
+            "read100.com",
+            "readingtimes.com.tw",
+            "readmoo.com",
+            "readydown.com",
+            "realcourage.org",
+            "realitykings.com",
+            "realraptalk.com",
+            "realsexpass.com",
+            "reason.com",
+            "rebatesrule.net",
+            "recaptcha.net",
+            "recordhistory.org",
+            "recovery.org.tw",
+            "recoveryversion.com.tw",
+            "recoveryversion.org",
+            "red-lang.org",
+            "redballoonsolidarity.org",
+            "redbubble.com",
+            "redchinacn.net",
+            "redchinacn.org",
+            "redd.it",
+            "reddit.com",
+            "redditlist.com",
+            "redditmedia.com",
+            "redditstatic.com",
+            "redhotlabs.com",
+            "redtube.com",
+            "referer.us",
+            "reflectivecode.com",
+            "registry.google",
+            "relaxbbs.com",
+            "relay.com.tw",
+            "releaseinternational.org",
+            "religioustolerance.org",
+            "renminbao.com",
+            "renyurenquan.org",
+            "rerouted.org",
+            "research.google",
+            "resilio.com",
+            "resistchina.org",
+            "retweeteffect.com",
+            "retweetist.com",
+            "retweetrank.com",
+            "reuters.com",
+            "reutersmedia.net",
+            "revleft.com",
+            "revocationcheck.com",
+            "revver.com",
+            "rfa.org",
+            "rfachina.com",
+            "rfamobile.org",
+            "rfaweb.org",
+            "rferl.org",
+            "rfi.fr",
+            "rfi.my",
+            "rightbtc.com",
+            "rightster.com",
+            "rigpa.org",
+            "riku.me",
+            "rileyguide.com",
+            "riseup.net",
+            "ritouki.jp",
+            "ritter.vg",
+            "rixcloud.com",
+            "rixcloud.us",
+            "rlwlw.com",
+            "rmjdw.com",
+            "rmjdw132.info",
+            "roadshow.hk",
+            "roboforex.com",
+            "robustnessiskey.com",
+            "rocket-inc.net",
+            "rocketbbs.com",
+            "rocksdb.org",
+            "rojo.com",
+            "rolfoundation.org",
+            "rolia.net",
+            "rolsociety.org",
+            "ronjoneswriter.com",
+            "roodo.com",
+            "rosechina.net",
+            "rotten.com",
+            "rsdlmonitor.com",
+            "rsf-chinese.org",
+            "rsf.org",
+            "rsgamen.org",
+            "rsshub.app",
+            "rssing.com",
+            "rssmeme.com",
+            "rtalabel.org",
+            "rthk.hk",
+            "rthk.org.hk",
+            "rti.org.tw",
+            "rti.tw",
+            "rtycminnesota.org",
+            "ruanyifeng.com",
+            "rukor.org",
+            "rule34.xxx",
+            "runbtx.com",
+            "rushbee.com",
+            "ruten.com.tw",
+            "rutube.ru",
+            "ruyiseek.com",
+            "rxhj.net",
+            "s-cute.com",
+            "s-dragon.org",
+            "s1heng.com",
+            "s1s1s1.com",
+            "s4miniarchive.com",
+            "s8forum.com",
+            "sa.com",
+            "saboom.com",
+            "sacks.com",
+            "sacom.hk",
+            "sadistic-v.com",
+            "sadpanda.us",
+            "safechat.com",
+            "safervpn.com",
+            "safety.google",
+            "saintyculture.com",
+            "saiq.me",
+            "sakuralive.com",
+            "sakya.org",
+            "salvation.org.hk",
+            "samair.ru",
+            "sambhota.org",
+            "sandscotaicentral.com",
+            "sankei.com",
+            "sanmin.com.tw",
+            "sans.edu",
+            "sapikachu.net",
+            "saveliuxiaobo.com",
+            "savemedia.com",
+            "savethedate.foo",
+            "savethesounds.info",
+            "savetibet.de",
+            "savetibet.fr",
+            "savetibet.nl",
+            "savetibet.org",
+            "savetibet.ru",
+            "savetibetstore.org",
+            "saveuighur.org",
+            "savevid.com",
+            "say2.info",
+            "sbme.me",
+            "sbs.com.au",
+            "scasino.com",
+            "schema.org",
+            "sciencemag.org",
+            "sciencenets.com",
+            "scieron.com",
+            "scmp.com",
+            "scmpchinese.com",
+            "scramble.io",
+            "scribd.com",
+            "scriptspot.com",
+            "search.com",
+            "search.xxx",
+            "searchtruth.com",
+            "searx.me",
+            "seatguru.com",
+            "seattlefdc.com",
+            "secretchina.com",
+            "secretgarden.no",
+            "secretsline.biz",
+            "secureservercdn.net",
+            "securetunnel.com",
+            "securityinabox.org",
+            "securitykiss.com",
+            "seed4.me",
+            "seehua.com",
+            "seesmic.com",
+            "seevpn.com",
+            "seezone.net",
+            "sejie.com",
+            "sellclassics.com",
+            "sendsmtp.com",
+            "sendspace.com",
+            "seraph.me",
+            "servehttp.com",
+            "serveuser.com",
+            "serveusers.com",
+            "sesawe.net",
+            "sesawe.org",
+            "sethwklein.net",
+            "setn.com",
+            "settv.com.tw",
+            "setty.com.tw",
+            "sevenload.com",
+            "sex-11.com",
+            "sex.com",
+            "sex3.com",
+            "sex8.cc",
+            "sexandsubmission.com",
+            "sexbot.com",
+            "sexhu.com",
+            "sexhuang.com",
+            "sexidude.com",
+            "sexinsex.net",
+            "sextvx.com",
+            "sexxxy.biz",
+            "sf.net",
+            "sfileydy.com",
+            "sfshibao.com",
+            "sftindia.org",
+            "sftuk.org",
+            "shadeyouvpn.com",
+            "shadow.ma",
+            "shadowsky.xyz",
+            "shadowsocks-r.com",
+            "shadowsocks.asia",
+            "shadowsocks.be",
+            "shadowsocks.com",
+            "shadowsocks.com.hk",
+            "shadowsocks.org",
+            "shadowsocks9.com",
+            "shafaqna.com",
+            "shambalapost.com",
+            "shambhalasun.com",
+            "shangfang.org",
+            "shapeservices.com",
+            "sharebee.com",
+            "sharecool.org",
+            "sharpdaily.com.hk",
+            "sharpdaily.hk",
+            "sharpdaily.tw",
+            "shat-tibet.com",
+            "shattered.io",
+            "sheikyermami.com",
+            "shellfire.de",
+            "shemalez.com",
+            "shenshou.org",
+            "shenyun.com",
+            "shenyunperformingarts.org",
+            "shenyunshop.com",
+            "shenzhoufilm.com",
+            "shenzhouzhengdao.org",
+            "sherabgyaltsen.com",
+            "shiatv.net",
+            "shicheng.org",
+            "shiksha.com",
+            "shinychan.com",
+            "shipcamouflage.com",
+            "shireyishunjian.com",
+            "shitaotv.org",
+            "shixiao.org",
+            "shizhao.org",
+            "shkspr.mobi",
+            "shodanhq.com",
+            "shooshtime.com",
+            "shop2000.com.tw",
+            "shopee.tw",
+            "shopping.com",
+            "showhaotu.com",
+            "showtime.jp",
+            "showwe.tw",
+            "shutterstock.com",
+            "shvoong.com",
+            "shwchurch.org",
+            "shwchurch3.com",
+            "siddharthasintent.org",
+            "sidelinesnews.com",
+            "sidelinessportseatery.com",
+            "sierrafriendsoftibet.org",
+            "signal.org",
+            "sijihuisuo.club",
+            "sijihuisuo.com",
+            "silkbook.com",
+            "simbolostwitter.com",
+            "simplecd.org",
+            "simpleproductivityblog.com",
+            "sina.com",
+            "sina.com.hk",
+            "sina.com.tw",
+            "sinchew.com.my",
+            "singaporepools.com.sg",
+            "singfortibet.com",
+            "singpao.com.hk",
+            "singtao.ca",
+            "singtao.com",
+            "singtaousa.com",
+            "sino-monthly.com",
+            "sinoants.com",
+            "sinoca.com",
+            "sinocast.com",
+            "sinocism.com",
+            "sinoinsider.com",
+            "sinomontreal.ca",
+            "sinonet.ca",
+            "sinopitt.info",
+            "sinoquebec.com",
+            "sipml5.org",
+            "sis.xxx",
+            "sis001.com",
+            "sis001.us",
+            "site2unblock.com",
+            "site90.net",
+            "sitebro.tw",
+            "sitekreator.com",
+            "sitemaps.org",
+            "six-degrees.io",
+            "sixth.biz",
+            "sjrt.org",
+            "sjum.cn",
+            "sketchappsources.com",
+            "skimtube.com",
+            "skk.moe",
+            "skybet.com",
+            "skyking.com.tw",
+            "skykiwi.com",
+            "skynet.be",
+            "skype.com",
+            "skyvegas.com",
+            "skyxvpn.com",
+            "slacker.com",
+            "slandr.net",
+            "slaytizle.com",
+            "sleazydream.com",
+            "slheng.com",
+            "slickvpn.com",
+            "slideshare.net",
+            "slime.com.tw",
+            "slinkset.com",
+            "slutload.com",
+            "slutmoonbeam.com",
+            "slyip.com",
+            "slyip.net",
+            "sm-miracle.com",
+            "smartdnsproxy.com",
+            "smarthide.com",
+            "smartmailcloud.com",
+            "smchbooks.com",
+            "smh.com.au",
+            "smhric.org",
+            "smith.edu",
+            "smyxy.org",
+            "snapchat.com",
+            "snaptu.com",
+            "sndcdn.com",
+            "sneakme.net",
+            "snowlionpub.com",
+            "so-net.net.tw",
+            "sobees.com",
+            "soc.mil",
+            "socialblade.com",
+            "socialwhale.com",
+            "socks-proxy.net",
+            "sockscap64.com",
+            "sockslist.net",
+            "socrec.org",
+            "sod.co.jp",
+            "softether-download.com",
+            "softether.co.jp",
+            "softether.org",
+            "softfamous.com",
+            "softlayer.net",
+            "softnology.biz",
+            "softsmirror.cf",
+            "softwarebychuck.com",
+            "sogclub.com",
+            "sogoo.org",
+            "sogrady.me",
+            "soh.tw",
+            "sohcradio.com",
+            "sohfrance.org",
+            "soifind.com",
+            "sokamonline.com",
+            "sokmil.com",
+            "solidaritetibet.org",
+            "solidfiles.com",
+            "somee.com",
+            "songjianjun.com",
+            "sonicbbs.cc",
+            "sonidodelaesperanza.org",
+            "sopcast.com",
+            "sopcast.org",
+            "sorazone.net",
+            "sorting-algorithms.com",
+            "sos.org",
+            "sosreader.com",
+            "sostibet.org",
+            "sou-tong.org",
+            "soubory.com",
+            "soul-plus.net",
+            "soulcaliburhentai.net",
+            "soumo.info",
+            "soundcloud.com",
+            "soundofhope.kr",
+            "soundofhope.org",
+            "soup.io",
+            "soupofmedia.com",
+            "sourceforge.net",
+            "sourcewadio.com",
+            "south-plus.org",
+            "southnews.com.tw",
+            "sowers.org.hk",
+            "sowiki.net",
+            "soylent.com",
+            "soylentnews.org",
+            "spankbang.com",
+            "spankingtube.com",
+            "spankwire.com",
+            "spb.com",
+            "speakerdeck.com",
+            "speedify.com",
+            "spem.at",
+            "spencertipping.com",
+            "spendee.com",
+            "spicevpn.com",
+            "spideroak.com",
+            "spike.com",
+            "spotflux.com",
+            "spotify.com",
+            "spreadshirt.es",
+            "spring4u.info",
+            "springboardplatform.com",
+            "sprite.org",
+            "sproutcore.com",
+            "sproxy.info",
+            "squirly.info",
+            "squirrelvpn.com",
+            "srocket.us",
+            "ss-link.com",
+            "ssglobal.co",
+            "ssglobal.me",
+            "ssh91.com",
+            "ssl443.org",
+            "sspanel.net",
+            "sspro.ml",
+            "ssr.tools",
+            "ssrshare.com",
+            "sss.camp",
+            "sstm.moe",
+            "sstmlt.moe",
+            "sstmlt.net",
+            "stackoverflow.com",
+            "stage64.hk",
+            "standupfortibet.org",
+            "standwithhk.org",
+            "stanford.edu",
+            "starfishfx.com",
+            "starp2p.com",
+            "startpage.com",
+            "startuplivingchina.com",
+            "stat.gov.tw",
+            "state.gov",
+            "static-economist.com",
+            "staticflickr.com",
+            "statueofdemocracy.org",
+            "stboy.net",
+            "stc.com.sa",
+            "steamcommunity.com",
+            "steampowered.com",
+            "steel-storm.com",
+            "steemit.com",
+            "steganos.com",
+            "steganos.net",
+            "stepchina.com",
+            "stephaniered.com",
+            "stgloballink.com",
+            "stheadline.com",
+            "sthoo.com",
+            "stickam.com",
+            "stickeraction.com",
+            "stileproject.com",
+            "sto.cc",
+            "stoporganharvesting.org",
+            "stoptibetcrisis.net",
+            "storagenewsletter.com",
+            "stories.google",
+            "storify.com",
+            "storm.mg",
+            "stormmediagroup.com",
+            "stoweboyd.com",
+            "straitstimes.com",
+            "stranabg.com",
+            "straplessdildo.com",
+            "streamable.com",
+            "streamate.com",
+            "streamingthe.net",
+            "streema.com",
+            "streetvoice.com",
+            "strikingly.com",
+            "strongvpn.com",
+            "strongwindpress.com",
+            "student.tw",
+            "studentsforafreetibet.org",
+            "stumbleupon.com",
+            "stupidvideos.com",
+            "successfn.com",
+            "sueddeutsche.de",
+            "sugarsync.com",
+            "sugobbs.com",
+            "sugumiru18.com",
+            "suissl.com",
+            "sulian.me",
+            "summify.com",
+            "sumrando.com",
+            "sun1911.com",
+            "sundayguardianlive.com",
+            "sunmedia.ca",
+            "sunporno.com",
+            "sunskyforum.com",
+            "sunta.com.tw",
+            "sunvpn.net",
+            "suoluo.org",
+            "supchina.com",
+            "superfreevpn.com",
+            "superokayama.com",
+            "superpages.com",
+            "supervpn.net",
+            "superzooi.com",
+            "suppig.net",
+            "suprememastertv.com",
+            "surfeasy.com",
+            "surfeasy.com.au",
+            "surfshark.com",
+            "suroot.com",
+            "surrenderat20.net",
+            "sustainability.google",
+            "svsfx.com",
+            "swagbucks.com",
+            "swissinfo.ch",
+            "swissvpn.net",
+            "switch1.jp",
+            "switchvpn.net",
+            "sydneytoday.com",
+            "sylfoundation.org",
+            "syncback.com",
+            "synergyse.com",
+            "sysresccd.org",
+            "sytes.net",
+            "syx86.cn",
+            "syx86.com",
+            "szbbs.net",
+            "szetowah.org.hk",
+            "t-g.com",
+            "t.co",
+            "t.me",
+            "t35.com",
+            "t66y.com",
+            "t91y.com",
+            "taa-usa.org",
+            "taaze.tw",
+            "tablesgenerator.com",
+            "tabtter.jp",
+            "tacem.org",
+            "taconet.com.tw",
+            "taedp.org.tw",
+            "tafm.org",
+            "tagwa.org.au",
+            "tagwalk.com",
+            "tahr.org.tw",
+            "taipei.gov.tw",
+            "taipeisociety.org",
+            "taiwan-sex.com",
+            "taiwanbible.com",
+            "taiwancon.com",
+            "taiwandaily.net",
+            "taiwandc.org",
+            "taiwanhot.net",
+            "taiwanjobs.gov.tw",
+            "taiwanjustice.com",
+            "taiwanjustice.net",
+            "taiwankiss.com",
+            "taiwannation.com",
+            "taiwannation.com.tw",
+            "taiwanncf.org.tw",
+            "taiwannews.com.tw",
+            "taiwanonline.cc",
+            "taiwantp.net",
+            "taiwantt.org.tw",
+            "taiwanus.net",
+            "taiwanyes.com",
+            "talk853.com",
+            "talkboxapp.com",
+            "talkcc.com",
+            "talkonly.net",
+            "tamiaode.tk",
+            "tampabay.com",
+            "tanc.org",
+            "tangben.com",
+            "tangren.us",
+            "taoism.net",
+            "taolun.info",
+            "tapanwap.com",
+            "tapatalk.com",
+            "taragana.com",
+            "target.com",
+            "tascn.com.au",
+            "taup.net",
+            "taup.org.tw",
+            "taweet.com",
+            "tbcollege.org",
+            "tbi.org.hk",
+            "tbicn.org",
+            "tbjyt.org",
+            "tbpic.info",
+            "tbrc.org",
+            "tbs-rainbow.org",
+            "tbsec.org",
+            "tbsmalaysia.org",
+            "tbsn.org",
+            "tbsseattle.org",
+            "tbssqh.org",
+            "tbswd.org",
+            "tbtemple.org.uk",
+            "tbthouston.org",
+            "tccwonline.org",
+            "tcewf.org",
+            "tchrd.org",
+            "tcnynj.org",
+            "tcpspeed.co",
+            "tcpspeed.com",
+            "tcsofbc.org",
+            "tcsovi.org",
+            "tdesktop.com",
+            "tdm.com.mo",
+            "teachparentstech.org",
+            "teamamericany.com",
+            "technews.tw",
+            "techspot.com",
+            "techviz.net",
+            "teck.in",
+            "teco-hk.org",
+            "teco-mo.org",
+            "teddysun.com",
+            "teeniefuck.net",
+            "teensinasia.com",
+            "tehrantimes.com",
+            "telecomspace.com",
+            "telegra.ph",
+            "telegram.dog",
+            "telegram.me",
+            "telegram.org",
+            "telegramdownload.com",
+            "telegraph.co.uk",
+            "telesco.pe",
+            "tellme.pw",
+            "tenacy.com",
+            "tensorflow.org",
+            "tenzinpalmo.com",
+            "tew.org",
+            "textnow.me",
+            "tfhub.dev",
+            "tfiflve.com",
+            "thaicn.com",
+            "thb.gov.tw",
+            "theatlantic.com",
+            "theatrum-belli.com",
+            "theaustralian.com.au",
+            "thebcomplex.com",
+            "theblaze.com",
+            "theblemish.com",
+            "thebobs.com",
+            "thebodyshop-usa.com",
+            "thechinabeat.org",
+            "thechinacollection.org",
+            "thechinastory.org",
+            "theconversation.com",
+            "thedalailamamovie.com",
+            "thediplomat.com",
+            "thedw.us",
+            "thefacebook.com",
+            "thefrontier.hk",
+            "thegay.com",
+            "thegioitinhoc.vn",
+            "thegly.com",
+            "theguardian.com",
+            "thehots.info",
+            "thehousenews.com",
+            "thehun.net",
+            "theinitium.com",
+            "thenewslens.com",
+            "thepiratebay.org",
+            "theporndude.com",
+            "theportalwiki.com",
+            "theprint.in",
+            "thereallove.kr",
+            "therock.net.nz",
+            "thesaturdaypaper.com.au",
+            "thestandnews.com",
+            "thetibetcenter.org",
+            "thetibetconnection.org",
+            "thetibetmuseum.org",
+            "thetibetpost.com",
+            "thetinhat.com",
+            "thetrotskymovie.com",
+            "thevivekspot.com",
+            "thewgo.org",
+            "theync.com",
+            "thinkgeek.com",
+            "thinkingtaiwan.com",
+            "thinkwithgoogle.com",
+            "thisav.com",
+            "thlib.org",
+            "thomasbernhard.org",
+            "thongdreams.com",
+            "threatchaos.com",
+            "throughnightsfire.com",
+            "thumbzilla.com",
+            "thywords.com",
+            "thywords.com.tw",
+            "tiananmenduizhi.com",
+            "tiananmenmother.org",
+            "tiananmenuniv.com",
+            "tiananmenuniv.net",
+            "tiandixing.org",
+            "tianhuayuan.com",
+            "tianlawoffice.com",
+            "tianti.io",
+            "tiantibooks.org",
+            "tianyantong.org.cn",
+            "tianzhu.org",
+            "tibet-envoy.eu",
+            "tibet-foundation.org",
+            "tibet-house-trust.co.uk",
+            "tibet-initiative.de",
+            "tibet-munich.de",
+            "tibet.a.se",
+            "tibet.at",
+            "tibet.ca",
+            "tibet.com",
+            "tibet.fr",
+            "tibet.net",
+            "tibet.nu",
+            "tibet.org",
+            "tibet.org.tw",
+            "tibet.sk",
+            "tibet.to",
+            "tibet3rdpole.org",
+            "tibetaction.net",
+            "tibetaid.org",
+            "tibetalk.com",
+            "tibetan-alliance.org",
+            "tibetan.fr",
+            "tibetanaidproject.org",
+            "tibetanarts.org",
+            "tibetanbuddhistinstitute.org",
+            "tibetancommunity.org",
+            "tibetancommunityuk.net",
+            "tibetanculture.org",
+            "tibetanfeministcollective.org",
+            "tibetanjournal.com",
+            "tibetanlanguage.org",
+            "tibetanliberation.org",
+            "tibetanpaintings.com",
+            "tibetanphotoproject.com",
+            "tibetanpoliticalreview.org",
+            "tibetanreview.net",
+            "tibetansports.org",
+            "tibetanwomen.org",
+            "tibetanyouth.org",
+            "tibetanyouthcongress.org",
+            "tibetcharity.dk",
+            "tibetcharity.in",
+            "tibetchild.org",
+            "tibetcity.com",
+            "tibetcollection.com",
+            "tibetcorps.org",
+            "tibetexpress.net",
+            "tibetfocus.com",
+            "tibetfund.org",
+            "tibetgermany.com",
+            "tibetgermany.de",
+            "tibethaus.com",
+            "tibetheritagefund.org",
+            "tibethouse.jp",
+            "tibethouse.org",
+            "tibethouse.us",
+            "tibetinfonet.net",
+            "tibetjustice.org",
+            "tibetkomite.dk",
+            "tibetmuseum.org",
+            "tibetnetwork.org",
+            "tibetoffice.ch",
+            "tibetoffice.com.au",
+            "tibetoffice.eu",
+            "tibetoffice.org",
+            "tibetonline.com",
+            "tibetonline.tv",
+            "tibetoralhistory.org",
+            "tibetpolicy.eu",
+            "tibetrelieffund.co.uk",
+            "tibetsites.com",
+            "tibetsociety.com",
+            "tibetsun.com",
+            "tibetsupportgroup.org",
+            "tibetswiss.ch",
+            "tibettelegraph.com",
+            "tibettimes.net",
+            "tibetwrites.org",
+            "ticket.com.tw",
+            "tigervpn.com",
+            "tiltbrush.com",
+            "timdir.com",
+            "time.com",
+            "timesnownews.com",
+            "timsah.com",
+            "timtales.com",
+            "tinc-vpn.org",
+            "tiney.com",
+            "tineye.com",
+            "tintuc101.com",
+            "tiny.cc",
+            "tinychat.com",
+            "tinypaste.com",
+            "tipas.net",
+            "tipo.gov.tw",
+            "tistory.com",
+            "tkcs-collins.com",
+            "tl.gd",
+            "tma.co.jp",
+            "tmagazine.com",
+            "tmdfish.com",
+            "tmi.me",
+            "tmpp.org",
+            "tnaflix.com",
+            "tngrnow.com",
+            "tngrnow.net",
+            "tnp.org",
+            "to-porno.com",
+            "togetter.com",
+            "toh.info",
+            "tokyo-247.com",
+            "tokyo-hot.com",
+            "tokyo-porn-tube.com",
+            "tokyocn.com",
+            "tomonews.net",
+            "tongil.or.kr",
+            "tono-oka.jp",
+            "tonyyan.net",
+            "toodoc.com",
+            "toonel.net",
+            "top.tv",
+            "top10vpn.com",
+            "top81.ws",
+            "topbtc.com",
+            "topnews.in",
+            "toppornsites.com",
+            "topshareware.com",
+            "topsy.com",
+            "toptip.ca",
+            "tora.to",
+            "torcn.com",
+            "torguard.net",
+            "torlock.com",
+            "torproject.org",
+            "torrentkitty.tv",
+            "torrentprivacy.com",
+            "torrentproject.se",
+            "torrenty.org",
+            "torrentz.eu",
+            "torvpn.com",
+            "totalvpn.com",
+            "toutiaoabc.com",
+            "towngain.com",
+            "toypark.in",
+            "toythieves.com",
+            "toytractorshow.com",
+            "tparents.org",
+            "tpi.org.tw",
+            "tracfone.com",
+            "traffichaus.com",
+            "translate.google",
+            "transparency.org",
+            "treemall.com.tw",
+            "trendsmap.com",
+            "trialofccp.org",
+            "trickip.net",
+            "trickip.org",
+            "trimondi.de",
+            "trouw.nl",
+            "trt.net.tr",
+            "trtc.com.tw",
+            "truebuddha-md.org",
+            "trulyergonomic.com",
+            "truthontour.org",
+            "truveo.com",
+            "tryheart.jp",
+            "tsctv.net",
+            "tsemtulku.com",
+            "tsquare.tv",
+            "tsu.org.tw",
+            "tsunagarumon.com",
+            "tt1069.com",
+            "tttan.com",
+            "ttv.com.tw",
+            "ttvnw.net",
+            "tu8964.com",
+            "tubaholic.com",
+            "tube.com",
+            "tube8.com",
+            "tube911.com",
+            "tubecup.com",
+            "tubegals.com",
+            "tubeislam.com",
+            "tubepornclassic.com",
+            "tubestack.com",
+            "tubewolf.com",
+            "tuibeitu.net",
+            "tuidang.net",
+            "tuidang.org",
+            "tuidang.se",
+            "tuitui.info",
+            "tuitwit.com",
+            "tumblr.com",
+            "tumutanzi.com",
+            "tumview.com",
+            "tunein.com",
+            "tunnelbear.com",
+            "tunnelr.com",
+            "tunsafe.com",
+            "turansam.org",
+            "turbobit.net",
+            "turbohide.com",
+            "turbotwitter.com",
+            "turkistantimes.com",
+            "turntable.fm",
+            "tushycash.com",
+            "tutanota.com",
+            "tuvpn.com",
+            "tuzaijidi.com",
+            "tv.com",
+            "tv.google",
+            "tvants.com",
+            "tvb.com",
+            "tvboxnow.com",
+            "tvbs.com.tw",
+            "tvider.com",
+            "tvmost.com.hk",
+            "tvplayvideos.com",
+            "tvunetworks.com",
+            "tw-blog.com",
+            "tw-npo.org",
+            "tw01.org",
+            "twaitter.com",
+            "twapperkeeper.com",
+            "twaud.io",
+            "twavi.com",
+            "twbbs.net.tw",
+            "twbbs.org",
+            "twbbs.tw",
+            "twblogger.com",
+            "tweepguide.com",
+            "tweeplike.me",
+            "tweepmag.com",
+            "tweepml.org",
+            "tweetbackup.com",
+            "tweetboard.com",
+            "tweetboner.biz",
+            "tweetcs.com",
+            "tweetdeck.com",
+            "tweetedtimes.com",
+            "tweetmylast.fm",
+            "tweetphoto.com",
+            "tweetrans.com",
+            "tweetree.com",
+            "tweettunnel.com",
+            "tweetwally.com",
+            "tweetymail.com",
+            "tweez.net",
+            "twelve.today",
+            "twerkingbutt.com",
+            "twftp.org",
+            "twgreatdaily.com",
+            "twibase.com",
+            "twibble.de",
+            "twibbon.com",
+            "twibs.com",
+            "twicountry.org",
+            "twicsy.com",
+            "twiends.com",
+            "twifan.com",
+            "twiffo.com",
+            "twiggit.org",
+            "twilightsex.com",
+            "twilio.com",
+            "twilog.org",
+            "twimbow.com",
+            "twimg.com",
+            "twindexx.com",
+            "twip.me",
+            "twipple.jp",
+            "twishort.com",
+            "twistar.cc",
+            "twister.net.co",
+            "twisterio.com",
+            "twisternow.com",
+            "twistory.net",
+            "twit2d.com",
+            "twitbrowser.net",
+            "twitcause.com",
+            "twitch.tv",
+            "twitchcdn.net",
+            "twitgether.com",
+            "twitgoo.com",
+            "twitiq.com",
+            "twitlonger.com",
+            "twitmania.com",
+            "twitoaster.com",
+            "twitonmsn.com",
+            "twitpic.com",
+            "twitstat.com",
+            "twittbot.net",
+            "twitter.com",
+            "twitter.jp",
+            "twitter4j.org",
+            "twittercounter.com",
+            "twitterfeed.com",
+            "twittergadget.com",
+            "twitterkr.com",
+            "twittermail.com",
+            "twitterrific.com",
+            "twittertim.es",
+            "twitthat.com",
+            "twitturk.com",
+            "twitturly.com",
+            "twitvid.com",
+            "twitzap.com",
+            "twiyia.com",
+            "twnorth.org.tw",
+            "twreporter.org",
+            "twskype.com",
+            "twstar.net",
+            "twt.tl",
+            "twtkr.com",
+            "twtrland.com",
+            "twttr.com",
+            "twurl.nl",
+            "twyac.org",
+            "txxx.com",
+            "tycool.com",
+            "typepad.com",
+            "u15.info",
+            "u9un.com",
+            "ub0.cc",
+            "ubddns.org",
+            "uberproxy.net",
+            "uc-japan.org",
+            "ucam.org",
+            "ucanews.com",
+            "ucdc1998.org",
+            "uchicago.edu",
+            "uderzo.it",
+            "udn.com",
+            "udn.com.tw",
+            "udnbkk.com",
+            "uforadio.com.tw",
+            "ufreevpn.com",
+            "ugo.com",
+            "uhdwallpapers.org",
+            "uhrp.org",
+            "uighur.nl",
+            "uighurbiz.net",
+            "uk.to",
+            "ukcdp.co.uk",
+            "ukliferadio.co.uk",
+            "uku.im",
+            "ulike.net",
+            "ulop.net",
+            "ultravpn.fr",
+            "ultraxs.com",
+            "umich.edu",
+            "unblock-us.com",
+            "unblockdmm.com",
+            "unblocker.yt",
+            "unblocksit.es",
+            "uncyclomedia.org",
+            "uncyclopedia.hk",
+            "uncyclopedia.tw",
+            "underwoodammo.com",
+            "unholyknight.com",
+            "uni.cc",
+            "unicode.org",
+            "unification.net",
+            "unification.org.tw",
+            "unirule.cloud",
+            "unitedsocialpress.com",
+            "unix100.com",
+            "unknownspace.org",
+            "unodedos.com",
+            "unpo.org",
+            "unseen.is",
+            "unstable.icu",
+            "untraceable.us",
+            "uocn.org",
+            "updatestar.com",
+            "upghsbc.com",
+            "upholdjustice.org",
+            "upload4u.info",
+            "uploaded.net",
+            "uploaded.to",
+            "uploadstation.com",
+            "upmedia.mg",
+            "upornia.com",
+            "uproxy.org",
+            "uptodown.com",
+            "upwill.org",
+            "ur7s.com",
+            "uraban.me",
+            "urbandictionary.com",
+            "urbansurvival.com",
+            "urchin.com",
+            "url.com.tw",
+            "url.tw",
+            "urlborg.com",
+            "urlparser.com",
+            "us.to",
+            "usacn.com",
+            "usaip.eu",
+            "usc.edu",
+            "usembassy.gov",
+            "usfk.mil",
+            "usma.edu",
+            "usmc.mil",
+            "usocctn.com",
+            "uspto.gov",
+            "ustibetcommittee.org",
+            "ustream.tv",
+            "usunitednews.com",
+            "usus.cc",
+            "utopianpal.com",
+            "uu-gg.com",
+            "uukanshu.com",
+            "uvwxyz.xyz",
+            "uwants.com",
+            "uwants.net",
+            "uyghur-j.org",
+            "uyghur.co.uk",
+            "uyghuramerican.org",
+            "uyghurbiz.org",
+            "uyghurcanadiansociety.org",
+            "uyghurcongress.org",
+            "uyghurensemble.co.uk",
+            "uyghurpen.org",
+            "uyghurpress.com",
+            "uyghurstudies.org",
+            "uygur.org",
+            "uymaarip.com",
+            "v2ex.com",
+            "v2fly.org",
+            "v2ray.com",
+            "v2raycn.com",
+            "v2raytech.com",
+            "valeursactuelles.com",
+            "van001.com",
+            "van698.com",
+            "vanemu.cn",
+            "vanilla-jp.com",
+            "vanpeople.com",
+            "vansky.com",
+            "vaticannews.va",
+            "vatn.org",
+            "vcf-online.org",
+            "vcfbuilder.org",
+            "vegasred.com",
+            "velkaepocha.sk",
+            "venbbs.com",
+            "venchina.com",
+            "venetianmacao.com",
+            "ventureswell.com",
+            "veoh.com",
+            "verizon.net",
+            "vermonttibet.org",
+            "versavpn.com",
+            "verybs.com",
+            "vevo.com",
+            "vft.com.tw",
+            "viber.com",
+            "vica.info",
+            "victimsofcommunism.org",
+            "vid.me",
+            "vidble.com",
+            "videobam.com",
+            "videodetective.com",
+            "videomega.tv",
+            "videomo.com",
+            "videopediaworld.com",
+            "videopress.com",
+            "vidinfo.org",
+            "vietdaikynguyen.com",
+            "vijayatemple.org",
+            "vilavpn.com",
+            "vimeo.com",
+            "vimperator.org",
+            "vincnd.com",
+            "vine.co",
+            "vinniev.com",
+            "vip-enterprise.com",
+            "virginia.edu",
+            "virtualrealporn.com",
+            "visibletweets.com",
+            "visiontimes.com",
+            "vital247.org",
+            "viu.com",
+            "viu.tv",
+            "vivahentai4u.net",
+            "vivatube.com",
+            "vivthomas.com",
+            "vizvaz.com",
+            "vjav.com",
+            "vjmedia.com.hk",
+            "vllcs.org",
+            "vmixcore.com",
+            "vmpsoft.com",
+            "vnet.link",
+            "voa.mobi",
+            "voacambodia.com",
+            "voacantonese.com",
+            "voachinese.com",
+            "voachineseblog.com",
+            "voagd.com",
+            "voaindonesia.com",
+            "voanews.com",
+            "voatibetan.com",
+            "voatibetanenglish.com",
+            "vocativ.com",
+            "vocn.tv",
+            "vocus.cc",
+            "voicettank.org",
+            "vot.org",
+            "vovo2000.com",
+            "voxer.com",
+            "voy.com",
+            "vpn.ac",
+            "vpn4all.com",
+            "vpnaccount.org",
+            "vpnaccounts.com",
+            "vpnbook.com",
+            "vpncomparison.org",
+            "vpncoupons.com",
+            "vpncup.com",
+            "vpndada.com",
+            "vpnfan.com",
+            "vpnfire.com",
+            "vpnfires.biz",
+            "vpnforgame.net",
+            "vpngate.jp",
+            "vpngate.net",
+            "vpngratis.net",
+            "vpnhq.com",
+            "vpnhub.com",
+            "vpninja.net",
+            "vpnintouch.com",
+            "vpnintouch.net",
+            "vpnjack.com",
+            "vpnmaster.com",
+            "vpnmentor.com",
+            "vpnpick.com",
+            "vpnpop.com",
+            "vpnpronet.com",
+            "vpnreactor.com",
+            "vpnreviewz.com",
+            "vpnsecure.me",
+            "vpnshazam.com",
+            "vpnshieldapp.com",
+            "vpnsp.com",
+            "vpntraffic.com",
+            "vpntunnel.com",
+            "vpnuk.info",
+            "vpnunlimitedapp.com",
+            "vpnvip.com",
+            "vpnworldwide.com",
+            "vporn.com",
+            "vpser.net",
+            "vraiesagesse.net",
+            "vrmtr.com",
+            "vrsmash.com",
+            "vs.com",
+            "vtunnel.com",
+            "vuku.cc",
+            "vultryhw.com",
+            "vzw.com",
+            "w3.org",
+            "w3schools.com",
+            "waffle1999.com",
+            "wahas.com",
+            "waigaobu.com",
+            "waikeung.org",
+            "wailaike.net",
+            "waiwaier.com",
+            "wallmama.com",
+            "wallornot.org",
+            "wallpapercasa.com",
+            "wallproxy.com",
+            "wallsttv.com",
+            "waltermartin.com",
+            "waltermartin.org",
+            "wan-press.org",
+            "wanderinghorse.net",
+            "wangafu.net",
+            "wangjinbo.org",
+            "wanglixiong.com",
+            "wango.org",
+            "wangruoshui.net",
+            "wangruowang.org",
+            "want-daily.com",
+            "wanz-factory.com",
+            "wapedia.mobi",
+            "warehouse333.com",
+            "warroom.org",
+            "waselpro.com",
+            "washeng.net",
+            "washingtonpost.com",
+            "watch8x.com",
+            "watchinese.com",
+            "watchmygf.net",
+            "watchout.tw",
+            "wattpad.com",
+            "wav.tv",
+            "waveprotocol.org",
+            "waymo.com",
+            "wda.gov.tw",
+            "wdf5.com",
+            "wearehairy.com",
+            "wearn.com",
+            "weather.com.hk",
+            "web.dev",
+            "web2project.net",
+            "webbang.net",
+            "webevader.org",
+            "webfreer.com",
+            "webjb.org",
+            "weblagu.com",
+            "webmproject.org",
+            "webpack.de",
+            "webrtc.org",
+            "webrush.net",
+            "webs-tv.net",
+            "websitepulse.com",
+            "websnapr.com",
+            "webwarper.net",
+            "webworkerdaily.com",
+            "wechatlawsuit.com",
+            "weekmag.info",
+            "wefightcensorship.org",
+            "wefong.com",
+            "weiboleak.com",
+            "weihuo.org",
+            "weijingsheng.org",
+            "weiming.info",
+            "weiquanwang.org",
+            "weisuo.ws",
+            "welovecock.com",
+            "welt.de",
+            "wemigrate.org",
+            "wengewang.com",
+            "wengewang.org",
+            "wenhui.ch",
+            "wenweipo.com",
+            "wenxuecity.com",
+            "wenyunchao.com",
+            "wenzhao.ca",
+            "westca.com",
+            "westernshugdensociety.org",
+            "westernwolves.com",
+            "westkit.net",
+            "westpoint.edu",
+            "wetplace.com",
+            "wetpussygames.com",
+            "wexiaobo.org",
+            "wezhiyong.org",
+            "wezone.net",
+            "wforum.com",
+            "wha.la",
+            "whatblocked.com",
+            "whatbrowser.org",
+            "whatsapp.com",
+            "whatsapp.net",
+            "whatsonweibo.com",
+            "wheatseeds.org",
+            "wheelockslatin.com",
+            "whereiswerner.com",
+            "wheretowatch.com",
+            "whippedass.com",
+            "whispersystems.org",
+            "whodns.xyz",
+            "whoer.net",
+            "whotalking.com",
+            "whylover.com",
+            "whyx.org",
+            "widevine.com",
+            "wikaba.com",
+            "wikia.com",
+            "wikileaks-forum.com",
+            "wikileaks.ch",
+            "wikileaks.com",
+            "wikileaks.de",
+            "wikileaks.eu",
+            "wikileaks.lu",
+            "wikileaks.org",
+            "wikileaks.pl",
+            "wikilivres.info",
+            "wikimapia.org",
+            "wikimedia.org",
+            "wikinews.org",
+            "wikipedia.org",
+            "wikiquote.org",
+            "wikisource.org",
+            "wikiwand.com",
+            "wikiwiki.jp",
+            "wildammo.com",
+            "williamhill.com",
+            "willw.net",
+            "windowsphoneme.com",
+            "windscribe.com",
+            "windy.com",
+            "wingamestore.com",
+            "wingy.site",
+            "winning11.com",
+            "winwhispers.info",
+            "wionews.com",
+            "wire.com",
+            "wiredbytes.com",
+            "wiredpen.com",
+            "wireguard.com",
+            "wisdompubs.org",
+            "wisevid.com",
+            "wistia.com",
+            "withgoogle.com",
+            "withyoutube.com",
+            "witnessleeteaching.com",
+            "witopia.net",
+            "wizcrafts.net",
+            "wjbk.org",
+            "wn.com",
+            "wnacg.com",
+            "wnacg.org",
+            "wo.tc",
+            "woeser.com",
+            "woesermiddle-way.net",
+            "wokar.org",
+            "wolfax.com",
+            "wombo.ai",
+            "woolyss.com",
+            "woopie.jp",
+            "woopie.tv",
+            "wordpress.com",
+            "workatruna.com",
+            "workerdemo.org.hk",
+            "workerempowerment.org",
+            "workersthebig.net",
+            "workflow.is",
+            "worldcat.org",
+            "worldjournal.com",
+            "worldvpn.net",
+            "wow-life.net",
+            "wow.com",
+            "wowgirls.com",
+            "wowlegacy.ml",
+            "wowporn.com",
+            "wowrk.com",
+            "woxinghuiguo.com",
+            "woyaolian.org",
+            "wozy.in",
+            "wp.com",
+            "wpoforum.com",
+            "wqyd.org",
+            "wrchina.org",
+            "wretch.cc",
+            "wsj.com",
+            "wsj.net",
+            "wsjhk.com",
+            "wtbn.org",
+            "wtfpeople.com",
+            "wuerkaixi.com",
+            "wufafangwen.com",
+            "wufi.org.tw",
+            "wuguoguang.com",
+            "wujie.net",
+            "wujieliulan.com",
+            "wukangrui.net",
+            "wuw.red",
+            "wuyanblog.com",
+            "wwe.com",
+            "wwitv.com",
+            "www1.biz",
+            "wwwhost.biz",
+            "wzyboy.im",
+            "x-art.com",
+            "x-berry.com",
+            "x-wall.org",
+            "x.co",
+            "x.company",
+            "x1949x.com",
+            "x24hr.com",
+            "x365x.com",
+            "xanga.com",
+            "xbabe.com",
+            "xbookcn.com",
+            "xbtce.com",
+            "xcafe.in",
+            "xcity.jp",
+            "xcritic.com",
+            "xda-developers.com",
+            "xerotica.com",
+            "xfiles.to",
+            "xfinity.com",
+            "xgmyd.com",
+            "xhamster.com",
+            "xianba.net",
+            "xianchawang.net",
+            "xianjian.tw",
+            "xianqiao.net",
+            "xiaobaiwu.com",
+            "xiaochuncnjp.com",
+            "xiaod.in",
+            "xiaohexie.com",
+            "xiaolan.me",
+            "xiaoma.org",
+            "xiaxiaoqiang.net",
+            "xiezhua.com",
+            "xihua.es",
+            "xinbao.de",
+            "xing.com",
+            "xinhuanet.org",
+            "xinmiao.com.hk",
+            "xinsheng.net",
+            "xinshijue.com",
+            "xinyubbs.net",
+            "xiongpian.com",
+            "xiuren.org",
+            "xixicui.icu",
+            "xizang-zhiye.org",
+            "xjp.cc",
+            "xjtravelguide.com",
+            "xkiwi.tk",
+            "xlfmtalk.com",
+            "xlfmwz.info",
+            "xm.com",
+            "xml-training-guide.com",
+            "xmovies.com",
+            "xn--4gq171p.com",
+            "xn--czq75pvv1aj5c.org",
+            "xn--i2ru8q2qg.com",
+            "xn--ngstr-lra8j.com",
+            "xn--oiq.cc",
+            "xn--p8j9a0d9c9a.xn--q9jyb4c",
+            "xnxx.com",
+            "xpdo.net",
+            "xpud.org",
+            "xrentdvd.com",
+            "xsden.info",
+            "xskywalker.com",
+            "xskywalker.net",
+            "xtube.com",
+            "xuchao.net",
+            "xuchao.org",
+            "xuehua.us",
+            "xuite.net",
+            "xuzhiyong.net",
+            "xvbelink.com",
+            "xvideo.cc",
+            "xvideos-cdn.com",
+            "xvideos.com",
+            "xvideos.es",
+            "xvinlink.com",
+            "xxbbx.com",
+            "xxlmovies.com",
+            "xxuz.com",
+            "xxx.com",
+            "xxx.xxx",
+            "xxxfuckmom.com",
+            "xxxx.com.au",
+            "xxxy.biz",
+            "xxxy.info",
+            "xxxymovies.com",
+            "xys.org",
+            "xysblogs.org",
+            "xyy69.com",
+            "xyy69.info",
+            "y2mate.com",
+            "yahoo.co.jp",
+            "yahoo.com",
+            "yahoo.com.hk",
+            "yahoo.com.tw",
+            "yahoo.net",
+            "yakbutterblues.com",
+            "yam.com",
+            "yam.org.tw",
+            "yande.re",
+            "yandex.com",
+            "yanghengjun.com",
+            "yangjianli.com",
+            "yasni.co.uk",
+            "yayabay.com",
+            "ycombinator.com",
+            "ydy.com",
+            "yeahteentube.com",
+            "yecl.net",
+            "yeelou.com",
+            "yeeyi.com",
+            "yegle.net",
+            "yes-news.com",
+            "yes.xxx",
+            "yes123.com.tw",
+            "yesasia.com",
+            "yesasia.com.hk",
+            "yespornplease.com",
+            "yeyeclub.com",
+            "ygto.com",
+            "yhcw.net",
+            "yibada.com",
+            "yibaochina.com",
+            "yidio.com",
+            "yigeni.com",
+            "yilubbs.com",
+            "yimg.com",
+            "yingsuoss.com",
+            "yinlei.org",
+            "yipub.com",
+            "yiyechat.com",
+            "yizhihongxing.com",
+            "yobit.net",
+            "yobt.com",
+            "yobt.tv",
+            "yogichen.org",
+            "yolasite.com",
+            "yomiuri.co.jp",
+            "yong.hu",
+            "yorkbbs.ca",
+            "you-get.org",
+            "youdontcare.com",
+            "youjizz.com",
+            "youmaker.com",
+            "youngpornvideos.com",
+            "youngspiration.hk",
+            "youpai.org",
+            "youporn.com",
+            "youporngay.com",
+            "your-freedom.net",
+            "yourepeat.com",
+            "yourlisten.com",
+            "yourlust.com",
+            "yourprivatevpn.com",
+            "yourtrap.com",
+            "yousendit.com",
+            "youshun12.com",
+            "youthforfreechina.org",
+            "youthnetradio.org",
+            "youthwant.com.tw",
+            "youtu.be",
+            "youtube-nocookie.com",
+            "youtube.com",
+            "youtubecn.com",
+            "youtubeeducation.com",
+            "youtubegaming.com",
+            "youtubekids.com",
+            "youversion.com",
+            "youwin.com",
+            "youxu.info",
+            "yt.be",
+            "ytht.net",
+            "ytimg.com",
+            "ytn.co.kr",
+            "yuanming.net",
+            "yuanzhengtang.org",
+            "yulghun.com",
+            "yunchao.net",
+            "yuntipub.com",
+            "yuvutu.com",
+            "yvesgeleyn.com",
+            "ywpw.com",
+            "yx51.net",
+            "yyii.org",
+            "yyjlymb.xyz",
+            "yzzk.com",
+            "zacebook.com",
+            "zalmos.com",
+            "zannel.com",
+            "zaobao.com",
+            "zaobao.com.sg",
+            "zaozon.com",
+            "zapto.org",
+            "zattoo.com",
+            "zb.com",
+            "zdnet.com.tw",
+            "zello.com",
+            "zengjinyan.org",
+            "zenmate.com",
+            "zerohedge.com",
+            "zeronet.io",
+            "zeutch.com",
+            "zfreet.com",
+            "zgsddh.com",
+            "zgzcjj.net",
+            "zhanbin.net",
+            "zhangboli.net",
+            "zhangtianliang.com",
+            "zhanlve.org",
+            "zhenghui.org",
+            "zhengjian.org",
+            "zhengwunet.org",
+            "zhenlibu.info",
+            "zhenlibu1984.com",
+            "zhenxiang.biz",
+            "zhinengluyou.com",
+            "zhongguo.ca",
+            "zhongguorenquan.org",
+            "zhongguotese.net",
+            "zhongmeng.org",
+            "zhoushuguang.com",
+            "zhreader.com",
+            "zhuangbi.me",
+            "zhuanxing.cn",
+            "zhuatieba.com",
+            "zhuichaguoji.org",
+            "zi.media",
+            "zi5.me",
+            "ziddu.com",
+            "zillionk.com",
+            "zim.vn",
+            "zinio.com",
+            "ziporn.com",
+            "zippyshare.com",
+            "zkaip.com",
+            "zkiz.com",
+            "zmw.cn",
+            "zodgame.us",
+            "zoho.com",
+            "zomobo.net",
+            "zonaeuropa.com",
+            "zonghexinwen.com",
+            "zonghexinwen.net",
+            "zoogvpn.com",
+            "zootool.com",
+            "zoozle.net",
+            "zophar.net",
+            "zorrovpn.com",
+            "zozotown.com",
+            "zpn.im",
+            "zspeeder.me",
+            "zsrhao.com",
+            "zuo.la",
+            "zuobiao.me",
+            "zuola.com",
+            "zvereff.com",
+            "zynaima.com",
+            "zynamics.com",
+            "zyns.com",
+            "zyxel.com",
+            "zyzc9.com",
+            "zzcartoon.com",
+            "zzcloud.me",
+            "zzux.com"
+        ]
+    ]
+];
+
+var lastRule = '';
+
+function FindProxyForURL(url, host) {
+    for (var i = 0; i < rules.length; i++) {
+        ret = testHost(host, i);
+        if (ret != undefined)
+            return ret;
     }
-});
+    return 'DIRECT';
+}
+
+function testHost(host, index) {
+    for (var i = 0; i < rules[index].length; i++) {
+        for (var j = 0; j < rules[index][i].length; j++) {
+            lastRule = rules[index][i][j];
+            if (host == lastRule || host.endsWith('.' + lastRule))
+                return i % 2 == 0 ? 'DIRECT' : proxy;
+        }
+    }
+    lastRule = '';
+}
+
+// REF: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith
+if (!String.prototype.endsWith) {
+    String.prototype.endsWith = function (searchString, position) {
+        var subjectString = this.toString();
+        if (typeof position !== 'number' || !isFinite(position) || Math.floor(position) !== position || position > subjectString.length) {
+            position = subjectString.length;
+        }
+        position -= searchString.length;
+        var lastIndex = subjectString.indexOf(searchString, position);
+        return lastIndex !== -1 && lastIndex === position;
+    };
+}
