@@ -3,7 +3,7 @@
  * GFWList Last-Modified: 2021-08-12 01:07:10
  */
 
-var proxy = 'PROXY 127.0.0.1:1080';
+var proxy = 'PROXY 192.168.2.8:7890';
 var rules = [
     [
         [],
